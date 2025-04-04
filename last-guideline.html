@@ -1,0 +1,637 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>局所麻酔薬中毒（LAST）対応ガイド</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    :root {
+      --primary-color: #1a5276; /* メインカラー - 濃い青 */
+      --secondary-color: #3498db; /* サブカラー - 明るい青 */
+      --accent-color: #e74c3c; /* アクセントカラー - 赤 */
+      --light-bg: #f8f9fa; /* 明るい背景色 */
+      --dark-bg: #343a40; /* 暗い背景色 */
+      --text-color: #333; /* 基本テキスト色 */
+      --light-text: #f8f9fa; /* 明るいテキスト色 */
+    }
+    
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    
+    body {
+      font-family: 'Hiragino Kaku Gothic Pro', 'Meiryo', sans-serif;
+      line-height: 1.6;
+      color: var(--text-color);
+      background-color: var(--light-bg);
+    }
+    
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+    
+    header {
+      background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+      color: var(--light-text);
+      padding: 60px 0 80px;
+      text-align: center;
+      clip-path: polygon(0 0, 100% 0, 100% 85%, 0 100%);
+      margin-bottom: 40px;
+    }
+    
+    .header-content {
+      max-width: 800px;
+      margin: 0 auto;
+    }
+    
+    h1 {
+      font-size: 2.5rem;
+      margin-bottom: 20px;
+      line-height: 1.2;
+    }
+    
+    .subtitle {
+      font-size: 1.2rem;
+      margin-bottom: 30px;
+      opacity: 0.9;
+    }
+    
+    .intro {
+      background-color: white;
+      border-radius: 10px;
+      padding: 30px;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+      margin-bottom: 40px;
+    }
+    
+    .intro p {
+      margin-bottom: 15px;
+    }
+    
+    .grid-container {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+      gap: 30px;
+      margin-bottom: 40px;
+    }
+    
+    .card {
+      background-color: white;
+      border-radius: 10px;
+      overflow: hidden;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+      transition: transform 0.3s, box-shadow 0.3s;
+      height: 100%;
+    }
+    
+    .card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+    }
+    
+    .card-header {
+      background-color: var(--primary-color);
+      color: white;
+      padding: 15px 20px;
+      position: relative;
+    }
+    
+    .card-number {
+      position: absolute;
+      top: 50%;
+      right: 20px;
+      transform: translateY(-50%);
+      font-size: 2.5rem;
+      font-weight: bold;
+      opacity: 0.5;
+      color: white;
+      text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+    }
+    
+    .icon-header {
+      display: flex;
+      align-items: center;
+    }
+    
+    .icon {
+      background: #2980b9;
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-right: 15px;
+      font-size: 1.5rem;
+      box-shadow: 0 3px 6px rgba(0, 0, 0, 0.2);
+      color: white;
+    }
+    
+    .card-title {
+      font-size: 1.3rem;
+      margin-bottom: 0;
+      color: white;
+      font-weight: bold;
+      text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.3);
+    }
+    
+    .card-content {
+      padding: 20px;
+    }
+    
+    .card-content ul, .card-content ol {
+      list-style-type: none;
+      padding-left: 0;
+    }
+    
+    .card-content li {
+      margin-bottom: 10px;
+      position: relative;
+      padding-left: 25px;
+    }
+    
+    .card-content li:before {
+      content: "";
+      position: absolute;
+      left: 0;
+      top: 8px;
+      width: 10px;
+      height: 10px;
+      background-color: var(--secondary-color);
+      border-radius: 50%;
+    }
+    
+    .emergency li:before {
+      background-color: var(--accent-color);
+    }
+    
+    .cycle-section {
+      background-color: white;
+      border-radius: 10px;
+      padding: 30px;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+      margin-bottom: 40px;
+    }
+    
+    .cycle-container {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      margin-top: 30px;
+    }
+    
+    .cycle-item {
+      text-align: center;
+      width: 200px;
+      margin: 0 20px 30px;
+      position: relative;
+    }
+    
+    .cycle-item:not(:last-child):after {
+      content: "\f054";
+      font-family: "Font Awesome 6 Free";
+      font-weight: 900;
+      position: absolute;
+      right: -25px;
+      top: 40px;
+      font-size: 1.5rem;
+      color: var(--secondary-color);
+    }
+    
+    @media (max-width: 768px) {
+      .cycle-item:not(:last-child):after {
+        content: "\f078";
+        right: 90px;
+        top: auto;
+        bottom: -25px;
+      }
+    }
+    
+    .cycle-icon {
+      background-color: #2980b9;
+      color: white;
+      width: 80px;
+      height: 80px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 15px;
+      font-size: 2rem;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    }
+    
+    .cycle-title {
+      font-weight: bold;
+      color: var(--primary-color);
+    }
+    
+    .symptom-row {
+      display: flex;
+      flex-wrap: wrap;
+      margin-bottom: 20px;
+    }
+    
+    .symptom-box {
+      flex: 1;
+      min-width: 250px;
+      background: white;
+      margin: 10px;
+      padding: 15px;
+      border-radius: 10px;
+      box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+    }
+    
+    .symptom-box h3 {
+      color: var(--primary-color);
+      margin-bottom: 10px;
+      border-bottom: 2px solid var(--secondary-color);
+      padding-bottom: 5px;
+    }
+    
+    .danger {
+      background-color: rgba(231, 76, 60, 0.1);
+    }
+    
+    .danger h3 {
+      color: var(--accent-color);
+      border-bottom-color: var(--accent-color);
+    }
+    
+    .warning {
+      background-color: rgba(241, 196, 15, 0.1);
+    }
+    
+    .table-container {
+      overflow-x: auto;
+      margin: 20px 0;
+    }
+    
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-bottom: 20px;
+    }
+    
+    th {
+      background-color: var(--primary-color);
+      color: white;
+      padding: 12px 15px;
+      text-align: left;
+      font-weight: bold;
+    }
+    
+    td {
+      padding: 10px 15px;
+      border-bottom: 1px solid #ddd;
+    }
+    
+    tr:nth-child(even) {
+      background-color: rgba(52, 152, 219, 0.05);
+    }
+    
+    tr:hover {
+      background-color: rgba(52, 152, 219, 0.1);
+    }
+    
+    .conclusion {
+      background-color: white;
+      border-radius: 10px;
+      padding: 30px;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+      margin-bottom: 40px;
+    }
+    
+    footer {
+      background-color: var(--dark-bg);
+      color: var(--light-text);
+      padding: 30px 0;
+      text-align: center;
+    }
+    
+    .source-info {
+      font-size: 0.9rem;
+      opacity: 0.8;
+    }
+    
+    .highlight {
+      background: linear-gradient(transparent 60%, rgba(52, 152, 219, 0.3) 40%);
+      font-weight: bold;
+    }
+    
+    .emergency-highlight {
+      background: linear-gradient(transparent 60%, rgba(231, 76, 60, 0.3) 40%);
+      font-weight: bold;
+    }
+    
+    .mb-3 {
+      margin-bottom: 15px;
+    }
+    
+    h2 {
+      color: var(--primary-color);
+      margin: 20px 0;
+      border-bottom: 2px solid var(--primary-color);
+      padding-bottom: 10px;
+    }
+    
+    h3 {
+      color: var(--primary-color);
+      margin: 15px 0;
+    }
+    
+    .alert-box {
+      background-color: rgba(231, 76, 60, 0.1);
+      border-left: 5px solid var(--accent-color);
+      padding: 15px;
+      margin: 20px 0;
+      border-radius: 5px;
+    }
+    
+    .alert-box h3 {
+      color: var(--accent-color);
+      margin-top: 0;
+    }
+    
+    .steps {
+      counter-reset: step-counter;
+    }
+    
+    .steps li {
+      counter-increment: step-counter;
+    }
+    
+    .steps li:before {
+      content: counter(step-counter);
+      width: 24px;
+      height: 24px;
+      background-color: var(--primary-color);
+      color: white;
+      border-radius: 50%;
+      text-align: center;
+      line-height: 24px;
+      font-size: 14px;
+      top: 4px;
+    }
+    
+    @media (max-width: 768px) {
+      h1 {
+        font-size: 2rem;
+      }
+      
+      .grid-container {
+        grid-template-columns: 1fr;
+      }
+      
+      header {
+        padding: 40px 0 60px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="container">
+      <div class="header-content">
+        <h1>局所麻酔薬中毒（LAST）対応ガイド</h1>
+        <div class="subtitle">日本麻酔科学会 局所麻酔薬中毒への対応プラクティカルガイド（2017年）に基づく</div>
+      </div>
+    </div>
+  </header>
+  
+  <div class="container">
+    <section class="intro">
+      <h2><i class="fas fa-info-circle"></i> 局所麻酔薬中毒（LAST）とは</h2>
+      <p>局所麻酔薬が血管内に誤注入される、あるいは過量に投与されるなどして血中濃度が上昇し、中枢神経系・心血管系を中心に重篤な毒性症状を引き起こす状態です。<span class="highlight">すべての局所麻酔使用場面で発生しうるため、予防と早期発見・対応が極めて重要</span>とされています。</p>
+    </section>
+    
+    <div class="grid-container">
+      <div class="card">
+        <div class="card-header">
+          <div class="icon-header">
+            <div class="icon">
+              <i class="fas fa-exclamation-triangle"></i>
+            </div>
+            <h3 class="card-title">原因・発生機序</h3>
+          </div>
+          <div class="card-number">2</div>
+        </div>
+        <div class="card-content">
+          <ul>
+            <li><span class="highlight">過剰投与</span>：患者の体重や状態を無視した大量投与、最大投与量の管理不足など</li>
+            <li><span class="highlight">血管内誤注入</span>：針先やカテーテルが血管内へ迷入、アスピレーション（逆血の確認）やテストドーズを怠った場合</li>
+            <li><span class="highlight">組織からの吸収過多</span>：広範囲ブロックや高濃度・大量使用による緩徐な血中濃度上昇</li>
+            <li><span class="highlight">代謝・排泄機能低下</span>：肝機能障害や心不全などで局所麻酔薬の代謝・クリアランスが低下、血中タンパク低下のために"有効成分"が増加</li>
+          </ul>
+        </div>
+      </div>
+      
+      <div class="card">
+        <div class="card-header">
+          <div class="icon-header">
+            <div class="icon">
+              <i class="fas fa-user-md"></i>
+            </div>
+            <h3 class="card-title">症状と特徴</h3>
+          </div>
+          <div class="card-number">3</div>
+        </div>
+        <div class="card-content">
+          <h3>中枢神経系症状</h3>
+          <ul>
+            <li><span class="highlight">興奮症状（初期）</span>：口周囲のしびれ、舌のしびれ、金属味、耳鳴り、めまい、不安感、振戦、けいれん など</li>
+            <li><span class="highlight">抑制症状（進行）</span>：意識レベル低下、昏睡、呼吸抑制</li>
+          </ul>
+          
+          <h3>心血管系症状</h3>
+          <ul>
+            <li><span class="highlight">初期</span>：高血圧、頻脈、不整脈（期外収縮 など）</li>
+            <li><span class="highlight">進行</span>：徐脈、伝導障害、低血圧、循環虚脱、心静止</li>
+          </ul>
+          
+          <div class="alert-box">
+            <h3>注意！</h3>
+            <p>多くは投与後すぐ（1分以内〜5分以内）に症状が出現する「即時型」ですが、遅延例もあるため、<span class="emergency-highlight">少なくとも投与後30分間は継続観察</span>が必要です。</p>
+            <p>先行する中枢神経症状なく、突然の循環虚脱・心停止で発症する例もあります。全身麻酔や深鎮静下では初期症状が隠れて気付きにくいことに注意してください。</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <section class="cycle-section">
+      <h2><i class="fas fa-shield-alt"></i> 予防策（本ガイドラインより）</h2>
+      
+      <div class="cycle-container">
+        <div class="cycle-item">
+          <div class="cycle-icon">
+            <i class="fas fa-user-check"></i>
+          </div>
+          <div class="cycle-title">患者背景の把握</div>
+        </div>
+        
+        <div class="cycle-item">
+          <div class="cycle-icon">
+            <i class="fas fa-syringe"></i>
+          </div>
+          <div class="cycle-title">投与量の最小化</div>
+        </div>
+        
+        <div class="cycle-item">
+          <div class="cycle-icon">
+            <i class="fas fa-vial"></i>
+          </div>
+          <div class="cycle-title">分割投与・吸引テスト</div>
+        </div>
+        
+        <div class="cycle-item">
+          <div class="cycle-icon">
+            <i class="fas fa-heartbeat"></i>
+          </div>
+          <div class="cycle-title">適切なモニタリング</div>
+        </div>
+      </div>
+      
+      <div class="symptom-row">
+        <div class="symptom-box">
+          <h3>患者背景の把握</h3>
+          <ul>
+            <li>肝障害・心不全・低アルブミン血症の有無</li>
+            <li>高齢者・小児などはリスクが増大</li>
+          </ul>
+        </div>
+        
+        <div class="symptom-box">
+          <h3>投与量の制限・最小化</h3>
+          <ul>
+            <li>最大耐容量を"上限"ではなく"必ずそれ未満"の目安と考える</li>
+            <li>ハイリスク患者はさらに厳重に制限</li>
+          </ul>
+        </div>
+      </div>
+      
+      <div class="symptom-row">
+        <div class="symptom-box">
+          <h3>少量ずつ分割投与</h3>
+          <ul>
+            <li>3～5 mLごとに注入→患者状態を観察→問題なければ続行</li>
+            <li>吸引テスト・テストドーズの実施</li>
+            <li>可能であれば超音波ガイド下手技の活用</li>
+          </ul>
+        </div>
+        
+        <div class="symptom-box">
+          <h3>モニタリング</h3>
+          <ul>
+            <li>心電図、SpO₂、血圧の監視(5分ごとを原則)</li>
+            <li>酸素投与と静脈路の確保</li>
+            <li>投与中・投与後30分は観察を推奨</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+    
+    <section class="cycle-section">
+      <h2><i class="fas fa-first-aid"></i> 診断と治療・対応</h2>
+      
+      <div class="symptom-row">
+        <div class="symptom-box">
+          <h3>早期発見のポイント</h3>
+          <ul>
+            <li>口唇のしびれや金属味、耳鳴りなどが最初に表れることが多い</li>
+            <li>声かけが大切（深鎮静や全麻下の場合はバイタル変化に注目）</li>
+            <li>突然の不整脈・心停止で始まることもある</li>
+          </ul>
+        </div>
+        
+        <div class="symptom-box danger">
+          <h3>初期対応（ABCs優先）</h3>
+          <ol class="steps">
+            <li><span class="emergency-highlight">局所麻酔薬投与の中断</span></li>
+            <li>周囲への応援要請（医師、他職種）</li>
+            <li>気道確保、100%酸素投与</li>
+            <li>循環管理（けいれん時はベンゾジアゼピン系薬剤）</li>
+            <li>蘇生準備（ACLS開始）</li>
+          </ol>
+        </div>
+      </div>
+      
+      <div class="alert-box">
+        <h3>脂肪乳剤投与（Lipid Rescue）</h3>
+        <p>本ガイドラインで特に重要視される「20%脂肪乳剤の投与」の手順（成人の場合の一例）</p>
+        <ol class="steps">
+          <li><span class="emergency-highlight">ボーラス投与：1.5 mL/kg を約1分で投与</span></li>
+          <li>続けて0.25 mL/kg/分で持続投与</li>
+          <li>5分経過して循環状態が改善しない場合：再度ボーラス1.5 mL/kgを投与し、持続投与を0.5 mL/kg/分に上げる</li>
+          <li>状態に応じて最大3回ボーラス投与が可能</li>
+          <li>循環が回復しても10分間は持続投与を継続</li>
+          <li>総投与量は概ね10〜12 mL/kgを上限の目安に</li>
+        </ol>
+        <p><strong>注意点：</strong>けいれんにプロポフォールを使う場合は少量に留める（大量投与は心抑制強化）、不整脈にリドカインは使用しない</p>
+      </div>
+    </section>
+    
+    <div class="grid-container">
+      <div class="card">
+        <div class="card-header">
+          <div class="icon-header">
+            <div class="icon">
+              <i class="fas fa-user-nurse"></i>
+            </div>
+            <h3 class="card-title">看護師の役割とポイント</h3>
+          </div>
+          <div class="card-number">7</div>
+        </div>
+        <div class="card-content">
+          <ul class="emergency">
+            <li><span class="highlight">投与準備・ダブルチェック</span>：最大投与量や濃度、投与速度・方法を医師とともに確認</li>
+            <li><span class="highlight">モニタリングと声かけ</span>：口唇しびれなど訴えがあれば即報告</li>
+            <li><span class="highlight">異常の早期発見・迅速報告</span>：LASTが疑われる兆候があれば投与中止、医師に報告</li>
+            <li><span class="highlight">蘇生体制のサポート</span>：脂肪乳剤、気道確保器具、吸引装置などの準備</li>
+            <li><span class="highlight">チーム連携</span>：手術室、ICU、救急部門などと迅速に連携して対応</li>
+          </ul>
+        </div>
+      </div>
+      
+      <div class="card">
+        <div class="card-header">
+          <div class="icon-header">
+            <div class="icon">
+              <i class="fas fa-clipboard-check"></i>
+            </div>
+            <h3 class="card-title">まとめ</h3>
+          </div>
+          <div class="card-number">8</div>
+        </div>
+        <div class="card-content">
+          <ul>
+            <li>LASTは稀だが、一旦生じると重篤化するリスクが高い</li>
+            <li><span class="highlight">予防・早期発見・迅速な対応</span>が重要</li>
+            <li>本ガイドライン（2017年）は、基本薬理から予防策、診断、脂肪乳剤を含む治療プロトコルを提示</li>
+            <li>看護師は<span class="highlight">モニタリングや薬剤投与確認・声かけの徹底</span>で患者安全に貢献</li>
+            <li>急変時は<span class="emergency-highlight">局所麻酔薬の中止→ABCsの確保→脂肪乳剤などの特異的治療</span>へと段階的かつ迅速に行動</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    
+    <section class="conclusion">
+      <h2><i class="fas fa-book-medical"></i> 結論</h2>
+      <p>「日本麻酔科学会 局所麻酔薬中毒への対応プラクティカルガイド（2017年）」に基づき、局所麻酔薬中毒（LAST）に関する要点をまとめました。日々の臨床現場では、ぜひ投与前のチェックとモニタリングの徹底を行い、もしもの際にはチームで協力して迅速に対応してください。</p>
+      <p>本ガイドは看護師の方々が臨床で活用しやすいように再整理したものです。実際の臨床では各施設のプロトコルに従い、医師の指示のもとで対応してください。</p>
+    </section>
+  </div>
+  
+  <footer>
+    <div class="container">
+      <div class="source-info">
+        参考資料：日本麻酔科学会 局所麻酔薬中毒への対応プラクティカルガイド（2017年）
+      </div>
+    </div>
+  </footer>
+</body>
+</html>
