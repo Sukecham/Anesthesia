@@ -1,0 +1,483 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>喉頭痙攣（Laryngospasm）の医学的解説</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    :root {
+      --primary-color: #1a5276; /* メインカラー - 濃い青 */
+      --secondary-color: #3498db; /* サブカラー - 明るい青 */
+      --accent-color: #e74c3c; /* アクセントカラー - 赤 */
+      --light-bg: #f8f9fa; /* 明るい背景色 */
+      --dark-bg: #343a40; /* 暗い背景色 */
+      --text-color: #333; /* 基本テキスト色 */
+      --light-text: #f8f9fa; /* 明るいテキスト色 */
+    }
+    
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    
+    body {
+      font-family: 'Hiragino Kaku Gothic Pro', 'Meiryo', sans-serif;
+      line-height: 1.6;
+      color: var(--text-color);
+      background-color: var(--light-bg);
+    }
+    
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+    
+    header {
+      background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+      color: var(--light-text);
+      padding: 60px 0 80px;
+      text-align: center;
+      clip-path: polygon(0 0, 100% 0, 100% 85%, 0 100%);
+      margin-bottom: 40px;
+    }
+    
+    .header-content {
+      max-width: 800px;
+      margin: 0 auto;
+    }
+    
+    h1 {
+      font-size: 2.5rem;
+      margin-bottom: 20px;
+      line-height: 1.2;
+    }
+    
+    .subtitle {
+      font-size: 1.2rem;
+      margin-bottom: 30px;
+      opacity: 0.9;
+    }
+    
+    section {
+      background-color: white;
+      border-radius: 10px;
+      padding: 30px;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+      margin-bottom: 40px;
+    }
+    
+    h2 {
+      color: var(--primary-color);
+      margin: 20px 0;
+      border-bottom: 2px solid var(--primary-color);
+      padding-bottom: 10px;
+    }
+    
+    h3 {
+      color: var(--primary-color);
+      margin: 15px 0;
+    }
+    
+    p {
+      margin-bottom: 15px;
+    }
+    
+    .grid-container {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+      gap: 30px;
+      margin-bottom: 40px;
+    }
+    
+    .card {
+      background-color: white;
+      border-radius: 10px;
+      overflow: hidden;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+      transition: transform 0.3s, box-shadow 0.3s;
+    }
+    
+    .card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+    }
+    
+    .card-header {
+      background-color: var(--primary-color);
+      color: white;
+      padding: 15px 20px;
+      position: relative;
+    }
+    
+    .card-number {
+      position: absolute;
+      top: 50%;
+      right: 20px;
+      transform: translateY(-50%);
+      font-size: 2.5rem;
+      font-weight: bold;
+      opacity: 0.5;
+      color: white;
+      text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+    }
+    
+    .icon-header {
+      display: flex;
+      align-items: center;
+    }
+    
+    .icon {
+      background: #2980b9;
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-right: 15px;
+      font-size: 1.5rem;
+      box-shadow: 0 3px 6px rgba(0, 0, 0, 0.2);
+      color: white;
+    }
+    
+    .card-title {
+      font-size: 1.3rem;
+      margin-bottom: 0;
+      color: white;
+      font-weight: bold;
+      text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.3);
+    }
+    
+    .card-content {
+      padding: 20px;
+    }
+    
+    ul {
+      list-style-type: none;
+      padding-left: 0;
+    }
+    
+    li {
+      margin-bottom: 10px;
+      position: relative;
+      padding-left: 25px;
+    }
+    
+    li:before {
+      content: "";
+      position: absolute;
+      left: 0;
+      top: 8px;
+      width: 10px;
+      height: 10px;
+      background-color: var(--secondary-color);
+      border-radius: 50%;
+    }
+    
+    .cycle-section {
+      background-color: white;
+      border-radius: 10px;
+      padding: 30px;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+      margin-bottom: 40px;
+    }
+    
+    .cycle-container {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      margin-top: 30px;
+    }
+    
+    .cycle-item {
+      text-align: center;
+      width: 200px;
+      margin: 0 20px 30px;
+      position: relative;
+    }
+    
+    .cycle-item:not(:last-child):after {
+      content: "\f054";
+      font-family: "Font Awesome 6 Free";
+      font-weight: 900;
+      position: absolute;
+      right: -25px;
+      top: 40px;
+      font-size: 1.5rem;
+      color: var(--secondary-color);
+    }
+    
+    @media (max-width: 768px) {
+      .cycle-item:not(:last-child):after {
+        content: "\f078";
+        right: 90px;
+        top: auto;
+        bottom: -25px;
+      }
+    }
+    
+    .cycle-icon {
+      background-color: #2980b9;
+      color: white;
+      width: 80px;
+      height: 80px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 15px;
+      font-size: 2rem;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    }
+    
+    .cycle-title {
+      font-weight: bold;
+      color: var(--primary-color);
+    }
+    
+    .highlight {
+      background: linear-gradient(transparent 60%, rgba(52, 152, 219, 0.3) 40%);
+      font-weight: bold;
+    }
+    
+    .mb-3 {
+      margin-bottom: 15px;
+    }
+    
+    footer {
+      background-color: var(--dark-bg);
+      color: var(--light-text);
+      padding: 30px 0;
+      text-align: center;
+    }
+    
+    .source-info {
+      font-size: 0.9rem;
+      opacity: 0.8;
+    }
+    
+    @media (max-width: 768px) {
+      h1 {
+        font-size: 2rem;
+      }
+      
+      .grid-container {
+        grid-template-columns: 1fr;
+      }
+      
+      header {
+        padding: 40px 0 60px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="container">
+      <div class="header-content">
+        <h1>喉頭痙攣（Laryngospasm）</h1>
+        <div class="subtitle">麻酔領域における重要な合併症：メカニズムと管理</div>
+      </div>
+    </div>
+  </header>
+  
+  <div class="container">
+    <section class="intro">
+      <h2>喉頭痙攣とは</h2>
+      <p>
+        喉頭痙攣とは、声門（声帯を含む喉頭開口部）の平滑筋ではなく、<span class="highlight">輪状甲状筋や声帯筋などの横紋筋が反射的・過度に収縮して声門が閉塞</span>し、空気の通過が一時的に制限または完全に遮断される現象です。特に麻酔領域では、抜管時や覚醒時に生じやすく、呼吸管理上の重大な合併症となり得ます。
+      </p>
+    </section>
+    
+    <section>
+      <h2>1. 喉頭痙攣のメカニズム</h2>
+      
+      <h3>反射弓と神経支配</h3>
+      <ul>
+        <li>喉頭の感覚神経支配は主に<span class="highlight">上喉頭神経（迷走神経の分枝）</span>が担っています。咽頭や喉頭が刺激を受けると、この上喉頭神経を介して求心性に刺激が伝わり、延髄の孤束核を経て運動神経へとシグナルが渡ります。</li>
+        <li>運動神経は<span class="highlight">反回神経（迷走神経の分枝）</span>などが主体となり、喉頭筋を支配します。強い刺激が入ると、声帯閉鎖筋の筋収縮が引き起こされ、瞬間的に声門が閉鎖されます。</li>
+        <li>この声門閉鎖自体は、誤嚥などを防ぐための生体防御反応です。しかし、何らかの原因で過度に反応すると持続的痙攣状態となり、換気が著しく障害されることになります。</li>
+      </ul>
+      
+      <h3>刺激の種類</h3>
+      <ul>
+        <li>口腔内や咽頭、喉頭への機械的刺激：気管チューブや挿管時の操作、抜管時のチューブ抜去刺激、分泌物の貯留など</li>
+        <li>化学的刺激：吸入麻酔薬の刺激、胃内容物の逆流（胃酸）など</li>
+        <li>侵襲的操作：気管支鏡検査や抜管直後の吸引時 など</li>
+      </ul>
+      
+      <h3>時期的特徴</h3>
+      <p>
+        手術麻酔領域での喉頭痙攣は、麻酔導入時よりも<span class="highlight">覚醒時や抜管時のほうがリスクが高い</span>です。理由としては、浅麻酔状態で気道刺激を受けると、覚醒反射が残存していて喉頭反射が惹起されやすくなるためです。
+      </p>
+    </section>
+    
+    <section>
+      <h2>2. なぜ小児で喉頭痙攣が多いのか</h2>
+      
+      <h3>解剖学的・生理学的特徴</h3>
+      <ul>
+        <li><span class="highlight">気道径が小さい</span>：同じ程度の浮腫や痙攣があっても、小児では気道閉塞が成人より顕著になります。</li>
+        <li><span class="highlight">喉頭の位置が高位</span>：小児の喉頭は成人よりも高い位置（C3〜C4あたり）にあり、刺激を受けやすいとされています。</li>
+        <li>喉頭軟骨や声帯の柔軟性：小児の声門部はまだ未発達のため、刺激に対して過敏に反応する傾向があります。</li>
+      </ul>
+      
+      <h3>神経反射の過敏性</h3>
+      <ul>
+        <li>小児は成人に比べて交感神経と副交感神経のバランスが未熟であり、<span class="highlight">気道保護反射が過剰に働きやすい</span>といわれています。</li>
+        <li>特に浅い麻酔や覚醒期には喉頭反射が鋭敏に残りやすく、咽頭刺激やチューブ操作への反応が強く起こります。</li>
+      </ul>
+      
+      <h3>協力の難しさ</h3>
+      <p>
+        小児は不安や恐怖が強く、術後に泣いたり暴れたりしやすいです。泣いたり咳嗽が起きると、気道内圧が変動して更なる喉頭刺激を誘発する恐れがあります。
+      </p>
+    </section>
+    
+    <div class="grid-container">
+      <div class="card">
+        <div class="card-header">
+          <div class="icon-header">
+            <div class="icon">
+              <i class="fas fa-exclamation-triangle"></i>
+            </div>
+            <h3 class="card-title">リスクファクター</h3>
+          </div>
+          <div class="card-number">3</div>
+        </div>
+        <div class="card-content">
+          <ul>
+            <li><span class="highlight">浅い麻酔・浅い鎮静状態</span>での気道刺激</li>
+            <li>分泌物の貯留（口腔内や咽頭内に唾液、血液、嘔吐物などが残っている場合）</li>
+            <li>気道感染・上気道炎（風邪などに伴う気道粘膜の過敏性亢進）</li>
+            <li>喫煙歴（成人の場合）</li>
+            <li>若年者（特に小児）</li>
+            <li>逆流（GERDなどにより胃酸逆流のリスクが高い場合）</li>
+            <li>全身状態不良（貧血、脱水などで全身コンディションが悪い時）</li>
+          </ul>
+        </div>
+      </div>
+      
+      <div class="card">
+        <div class="card-header">
+          <div class="icon-header">
+            <div class="icon">
+              <i class="fas fa-stethoscope"></i>
+            </div>
+            <h3 class="card-title">臨床症状と診断</h3>
+          </div>
+          <div class="card-number">4</div>
+        </div>
+        <div class="card-content">
+          <h3>症状</h3>
+          <ul>
+            <li><span class="highlight">吸気性喘鳴（ストライダー）</span>：声門部が閉塞するため、鋭い"ヒュー"という吸気音が聞こえる場合がある</li>
+            <li>呼吸努力の増大：胸骨上窩や肋間が大きく陥凹する</li>
+            <li>チアノーゼ：重度になると酸素化が保てず皮膚や粘膜がチアノーゼを呈する</li>
+            <li>無呼吸：完全閉鎖になると気道が通らず呼吸運動も見られない</li>
+          </ul>
+          
+          <h3>鑑別</h3>
+          <ul>
+            <li>気管チューブの閉塞や誤挿管、チューブの咬み込み</li>
+            <li>気道異物や血栓などの機械的閉塞</li>
+            <li>喉頭浮腫</li>
+            <li>気管支痙攣（閉塞の主座が気管支、呼気性喘鳴が強い）</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    
+    <section class="cycle-section">
+      <h2>5. 喉頭痙攣の予防策</h2>
+      <p class="mb-3">喉頭痙攣を予防するためには、以下のサイクルを意識した対応が重要です。</p>
+      
+      <div class="cycle-container">
+        <div class="cycle-item">
+          <div class="cycle-icon">
+            <i class="fas fa-procedures"></i>
+          </div>
+          <div class="cycle-title">深い麻酔維持・十分な鎮静</div>
+        </div>
+        
+        <div class="cycle-item">
+          <div class="cycle-icon">
+            <i class="fas fa-pump-medical"></i>
+          </div>
+          <div class="cycle-title">気道分泌物・残留物の除去</div>
+        </div>
+        
+        <div class="cycle-item">
+          <div class="cycle-icon">
+            <i class="fas fa-calendar-alt"></i>
+          </div>
+          <div class="cycle-title">上気道炎の場合は手術延期検討</div>
+        </div>
+        
+        <div class="cycle-item">
+          <div class="cycle-icon">
+            <i class="fas fa-syringe"></i>
+          </div>
+          <div class="cycle-title">局所麻酔薬の適切な使用</div>
+        </div>
+      </div>
+      
+      <ul>
+        <li>気道操作時（吸引やチューブ抜去時）に浅麻酔状態を避ける。特に小児では「深抜管（Deep Extubation）」が安全とされる場合もあるが、換気が安定しないようなケースでは慎重な判断が必要。</li>
+        <li>吸引を適切に行い、気道内に分泌物を残さない。ただし、吸引自体が強い刺激となるため、十分な鎮静下または完全に覚醒して協力的な状態で行う。</li>
+        <li>小児では特に、上気道炎症状がある場合には喉頭粘膜が過敏になっており、喉頭痙攣リスクが高まる。そのため、予定手術であれば症状が回復するまで延期を考慮する。</li>
+        <li>喉頭・気管チューブや咽頭に対する局所麻酔を適切に行うことで、気道刺激を軽減する。例えば、リドカインスプレーの噴霧など。</li>
+        <li>自発呼吸がしっかりして、呼名に反応するなど覚醒が十分な段階で抜管を行う「Awake Extubation」も選択肢となる。</li>
+        <li>術後の不穏が激しい小児に対しては、親の付き添いや適切な鎮静を提供することで、泣いたり暴れたりすることに伴う刺激を抑える。</li>
+      </ul>
+    </section>
+    
+    <section>
+      <h2>6. 喉頭痙攣が起きた場合の対処</h2>
+      
+      <h3>速やかな気道開通確保</h3>
+      <ul>
+        <li><span class="highlight">100%酸素投与</span>：マスクをしっかり当て正圧換気を試みる。</li>
+        <li>軽度の喉頭痙攣ならば、しっかりとした陽圧をかけることで声門が開くことがある。</li>
+        <li>チンリフトや下顎挙上などで気道を確保し、舌根落ちなどを防ぐ。</li>
+      </ul>
+      
+      <h3>持続する場合は筋弛緩薬の使用</h3>
+      <ul>
+        <li>持続性や重度の場合は、<span class="highlight">短時間作用性の筋弛緩薬（サクシニルコリン 0.5〜1 mg/kg など）</span>を投与し、気管挿管またはマスク換気により酸素化を図る。</li>
+      </ul>
+      
+      <h3>深度調整・追加麻酔</h3>
+      <ul>
+        <li>麻酔が浅い場合は、吸入麻酔を深めるか、プロポフォールなどを追加投与することにより痙攣を抑制する場合がある。</li>
+      </ul>
+      
+      <h3>二次的な合併症の予防</h3>
+      <ul>
+        <li>喉頭痙攣により低酸素や高二酸化炭素血症にならないよう、迅速かつ的確に対応する。</li>
+      </ul>
+    </section>
+    
+    <section class="conclusion">
+      <h2>7. まとめ</h2>
+      <ul>
+        <li>喉頭痙攣は気道保護反射が過剰に働いて声門が閉鎖し、呼吸が一時的または完全に阻害される状態です。特に麻酔の導入時、抜管時、覚醒時にしばしば起こり、重篤な場合は低酸素に陥るリスクがあります。</li>
+        <li>小児では気道解剖の特性や反射の過敏性から、<span class="highlight">喉頭痙攣が起こりやすい</span>とされます。</li>
+        <li>予防策としては、手技時の十分な麻酔深度、不要な刺激（分泌物・吸引・誤挿管など）の回避、術後不穏を抑える環境づくり、上気道炎時の手術延期などが重要です。</li>
+        <li>いったん喉頭痙攣が起きた場合には、速やかに100%酸素を用いた陽圧換気を試み、改善が得られなければ短時間作用性の筋弛緩薬の使用を検討するなど、迅速な対応が必要となります。</li>
+      </ul>
+    </section>
+  </div>
+  
+  <footer>
+    <div class="container">
+      <div class="source-info">
+        © 2025 医学教育リソース - 麻酔科学領域
+      </div>
+    </div>
+  </footer>
+</body>
+</html>
