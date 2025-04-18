@@ -1,0 +1,502 @@
+import React, { useState, useEffect } from 'react';
+import { PieChart, Pie, Cell, BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer, LineChart, Line } from 'recharts';
+import { AlertTriangle, ThumbsUp, Clock, Eye, User, FileText, Award, Activity, CheckCircle, AlertCircle } from 'lucide-react';
+
+const POVOCDashboard = () => {
+  // POVOCスコア計算のための状態管理
+  const [age, setAge] = useState(false);
+  const [surgeryTime, setSurgeryTime] = useState(false);
+  const [strabismus, setStrabismus] = useState(false);
+  const [history, setHistory] = useState(false);
+  const [score, setScore] = useState(0);
+  const [riskPercentage, setRiskPercentage] = useState(9);
+  const [riskLevel, setRiskLevel] = useState("低");
+  const [activeTab, setActiveTab] = useState('overview');
+
+  // スコアと発生率のデータ
+  const riskData = [
+    { score: 0, rate: 9, label: '低リスク' },
+    { score: 1, rate: 10, label: '低リスク' },
+    { score: 2, rate: 30, label: '中リスク' },
+    { score: 3, rate: 55, label: '高リスク' },
+    { score: 4, rate: 70, label: '高リスク' }
+  ];
+
+  // 比較スコアデータ
+  const comparisonData = [
+    { name: 'POVOC', auc: 0.72, simplicity: 90, usage: 85 },
+    { name: 'VPOP', auc: 0.75, simplicity: 70, usage: 60 },
+    { name: 'Apfel', auc: 0.71, simplicity: 80, usage: 40 }
+  ];
+
+  // スコア別対策データ
+  const preventionData = [
+    { score: '0-1点', level: '低リスク', prevention: '無投与または単剤', drugs: ['オンダンセトロン 0.1 mg/kg'] },
+    { score: '2点', level: '中リスク', prevention: '2剤併用', drugs: ['デキサメタゾン 0.15 mg/kg', 'オンダンセトロン 0.1 mg/kg'] },
+    { score: '3-4点', level: '高リスク', prevention: '多剤併用+麻酔法変更', drugs: ['デキサメタゾン', 'オンダンセトロン', 'NK1拮抗薬/ドロペリドール', 'TIVA（全静脈麻酔）への変更'] }
+  ];
+
+  // 色の定義
+  const COLORS = ['#0088FE', '#00C49F', '#FFBB28', '#FF8042', '#8884d8'];
+  const RISK_COLORS = {
+    低: '#00C49F',
+    中: '#FFBB28',
+    高: '#FF8042'
+  };
+
+  // スコアに基づくリスク評価の更新
+  useEffect(() => {
+    // スコアの計算
+    const newScore = (age ? 1 : 0) + (surgeryTime ? 1 : 0) + (strabismus ? 1 : 0) + (history ? 1 : 0);
+    setScore(newScore);
+    
+    // リスク％の設定
+    const riskRate = riskData.find(item => item.score === newScore)?.rate || 0;
+    setRiskPercentage(riskRate);
+    
+    // リスクレベルの設定
+    let newRiskLevel = "低";
+    if (newScore >= 3) {
+      newRiskLevel = "高";
+    } else if (newScore === 2) {
+      newRiskLevel = "中";
+    }
+    setRiskLevel(newRiskLevel);
+  }, [age, surgeryTime, strabismus, history]);
+
+  // リスク発生率のグラフデータ
+  const riskChartData = riskData.map(item => ({
+    name: `${item.score}点`,
+    発生率: item.rate
+  }));
+
+  // 円グラフデータ
+  const pieData = [
+    { name: 'リスク', value: riskPercentage },
+    { name: '安全', value: 100 - riskPercentage }
+  ];
+
+  // アコーディオンコンポーネント
+  const Accordion = ({ title, children, icon }) => {
+    const [isOpen, setIsOpen] = useState(false);
+    
+    return (
+      <div className="mb-4 border rounded-lg">
+        <div 
+          className="flex justify-between items-center p-4 cursor-pointer bg-gray-50 rounded-t-lg"
+          onClick={() => setIsOpen(!isOpen)}
+        >
+          <div className="flex items-center">
+            {icon}
+            <h3 className="text-lg font-medium ml-2">{title}</h3>
+          </div>
+          <span>{isOpen ? '▲' : '▼'}</span>
+        </div>
+        {isOpen && (
+          <div className="p-4 bg-white rounded-b-lg">
+            {children}
+          </div>
+        )}
+      </div>
+    );
+  };
+
+  // リスク因子セクション
+  const RiskFactorsSection = () => (
+    <div className="mt-6 bg-white p-6 rounded-lg shadow">
+      <h2 className="text-xl font-bold mb-4 flex items-center">
+        <AlertTriangle className="mr-2 text-yellow-500" size={24} />
+        POVOCリスク因子評価
+      </h2>
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <div className="border p-4 rounded-lg hover:bg-blue-50 transition duration-200">
+          <div className="flex items-center justify-between">
+            <div className="flex items-center">
+              <User className="mr-2 text-blue-500" size={20} />
+              <span className="font-medium">年齢 ≥3 歳</span>
+            </div>
+            <div className="relative inline-block w-12 align-middle select-none">
+              <input 
+                type="checkbox" 
+                id="age" 
+                className="sr-only"
+                checked={age}
+                onChange={() => setAge(!age)}
+              />
+              <label 
+                htmlFor="age" 
+                className={`block h-6 overflow-hidden rounded-full cursor-pointer transition-colors duration-200 ease-in ${age ? 'bg-blue-500' : 'bg-gray-300'}`}
+              >
+                <span 
+                  className={`block h-6 w-6 rounded-full bg-white shadow transform transition-transform duration-200 ease-in ${age ? 'translate-x-6' : 'translate-x-0'}`} 
+                />
+              </label>
+            </div>
+          </div>
+        </div>
+        <div className="border p-4 rounded-lg hover:bg-blue-50 transition duration-200">
+          <div className="flex items-center justify-between">
+            <div className="flex items-center">
+              <Clock className="mr-2 text-blue-500" size={20} />
+              <span className="font-medium">手術時間 &gt;30 分</span>
+            </div>
+            <div className="relative inline-block w-12 align-middle select-none">
+              <input 
+                type="checkbox" 
+                id="surgeryTime" 
+                className="sr-only"
+                checked={surgeryTime}
+                onChange={() => setSurgeryTime(!surgeryTime)}
+              />
+              <label 
+                htmlFor="surgeryTime" 
+                className={`block h-6 overflow-hidden rounded-full cursor-pointer transition-colors duration-200 ease-in ${surgeryTime ? 'bg-blue-500' : 'bg-gray-300'}`}
+              >
+                <span 
+                  className={`block h-6 w-6 rounded-full bg-white shadow transform transition-transform duration-200 ease-in ${surgeryTime ? 'translate-x-6' : 'translate-x-0'}`} 
+                />
+              </label>
+            </div>
+          </div>
+        </div>
+        <div className="border p-4 rounded-lg hover:bg-blue-50 transition duration-200">
+          <div className="flex items-center justify-between">
+            <div className="flex items-center">
+              <Eye className="mr-2 text-blue-500" size={20} />
+              <span className="font-medium">斜視手術</span>
+            </div>
+            <div className="relative inline-block w-12 align-middle select-none">
+              <input 
+                type="checkbox" 
+                id="strabismus" 
+                className="sr-only"
+                checked={strabismus}
+                onChange={() => setStrabismus(!strabismus)}
+              />
+              <label 
+                htmlFor="strabismus" 
+                className={`block h-6 overflow-hidden rounded-full cursor-pointer transition-colors duration-200 ease-in ${strabismus ? 'bg-blue-500' : 'bg-gray-300'}`}
+              >
+                <span 
+                  className={`block h-6 w-6 rounded-full bg-white shadow transform transition-transform duration-200 ease-in ${strabismus ? 'translate-x-6' : 'translate-x-0'}`} 
+                />
+              </label>
+            </div>
+          </div>
+        </div>
+        <div className="border p-4 rounded-lg hover:bg-blue-50 transition duration-200">
+          <div className="flex items-center justify-between">
+            <div className="flex items-center">
+              <FileText className="mr-2 text-blue-500" size={20} />
+              <span className="font-medium">本人/家族の嘔吐既往</span>
+            </div>
+            <div className="relative inline-block w-12 align-middle select-none">
+              <input 
+                type="checkbox" 
+                id="history" 
+                className="sr-only"
+                checked={history}
+                onChange={() => setHistory(!history)}
+              />
+              <label 
+                htmlFor="history" 
+                className={`block h-6 overflow-hidden rounded-full cursor-pointer transition-colors duration-200 ease-in ${history ? 'bg-blue-500' : 'bg-gray-300'}`}
+              >
+                <span 
+                  className={`block h-6 w-6 rounded-full bg-white shadow transform transition-transform duration-200 ease-in ${history ? 'translate-x-6' : 'translate-x-0'}`} 
+                />
+              </label>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+
+  // リスク結果セクション
+  const RiskResultSection = () => (
+    <div className="mt-6 bg-white p-6 rounded-lg shadow">
+      <h2 className="text-xl font-bold mb-4 flex items-center">
+        <Activity className="mr-2 text-red-500" size={24} />
+        リスク評価結果
+      </h2>
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+        <div className="border rounded-lg p-4 text-center">
+          <div className="text-5xl font-bold" style={{ color: RISK_COLORS[riskLevel] }}>{score}</div>
+          <div className="mt-2 text-gray-600">合計スコア</div>
+        </div>
+        <div className="border rounded-lg p-4 text-center flex flex-col items-center justify-center">
+          <div className="w-24 h-24 mb-2">
+            <ResponsiveContainer width="100%" height="100%">
+              <PieChart>
+                <Pie
+                  data={pieData}
+                  cx="50%"
+                  cy="50%"
+                  innerRadius={30}
+                  outerRadius={40}
+                  paddingAngle={5}
+                  dataKey="value"
+                  startAngle={90}
+                  endAngle={-270}
+                >
+                  <Cell key={`cell-0`} fill={RISK_COLORS[riskLevel]} />
+                  <Cell key={`cell-1`} fill="#E0E0E0" />
+                </Pie>
+              </PieChart>
+            </ResponsiveContainer>
+          </div>
+          <div className="text-2xl font-bold" style={{ color: RISK_COLORS[riskLevel] }}>{riskPercentage}%</div>
+          <div className="mt-1 text-gray-600">嘔吐発生率</div>
+        </div>
+        <div className="border rounded-lg p-4 text-center">
+          <div 
+            className="text-2xl font-bold py-2 px-4 rounded-full inline-block" 
+            style={{ backgroundColor: RISK_COLORS[riskLevel], color: 'white' }}
+          >
+            {riskLevel}リスク
+          </div>
+          <div className="mt-3 text-gray-600">リスクレベル</div>
+        </div>
+      </div>
+    </div>
+  );
+
+  // 対策推奨セクション
+  const PreventionSection = () => {
+    const currentPrevention = preventionData.find(item => {
+      if (score <= 1) return item.score === '0-1点';
+      if (score === 2) return item.score === '2点';
+      return item.score === '3-4点';
+    });
+
+    return (
+      <div className="mt-6 bg-white p-6 rounded-lg shadow">
+        <h2 className="text-xl font-bold mb-4 flex items-center">
+          <ThumbsUp className="mr-2 text-green-500" size={24} />
+          推奨対策
+        </h2>
+        <div className="p-4 rounded-lg border-2" style={{ borderColor: RISK_COLORS[riskLevel] }}>
+          <div className="flex items-center mb-3">
+            <div 
+              className="text-lg font-bold py-1 px-3 rounded-full mr-3" 
+              style={{ backgroundColor: RISK_COLORS[riskLevel], color: 'white' }}
+            >
+              {currentPrevention?.score}
+            </div>
+            <div className="text-xl font-medium">{currentPrevention?.prevention}</div>
+          </div>
+          <div className="ml-2">
+            <h4 className="font-medium mb-2">推奨薬剤・対策:</h4>
+            <ul className="list-disc pl-5">
+              {currentPrevention?.drugs.map((drug, index) => (
+                <li key={index} className="mb-1">{drug}</li>
+              ))}
+            </ul>
+          </div>
+        </div>
+      </div>
+    );
+  };
+
+  // リスク発生率グラフ
+  const RiskRateChart = () => (
+    <div className="mt-6 bg-white p-6 rounded-lg shadow">
+      <h2 className="text-xl font-bold mb-4">POVOCスコア別嘔吐発生率</h2>
+      <div className="h-64">
+        <ResponsiveContainer width="100%" height="100%">
+          <BarChart
+            data={riskChartData}
+            margin={{ top: 5, right: 30, left: 20, bottom: 5 }}
+          >
+            <CartesianGrid strokeDasharray="3 3" />
+            <XAxis dataKey="name" />
+            <YAxis label={{ value: '発生率 (%)', angle: -90, position: 'insideLeft' }} />
+            <Tooltip />
+            <Legend />
+            <Bar dataKey="発生率" fill="#8884d8">
+              {riskChartData.map((entry, index) => (
+                <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
+              ))}
+            </Bar>
+          </BarChart>
+        </ResponsiveContainer>
+      </div>
+    </div>
+  );
+
+  // スコア比較セクション
+  const ComparisonChart = () => (
+    <div className="mt-6 bg-white p-6 rounded-lg shadow">
+      <h2 className="text-xl font-bold mb-4">リスクスコア比較</h2>
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-4">
+        {comparisonData.map((item, index) => (
+          <div key={index} className="border p-4 rounded-lg">
+            <h3 className="text-lg font-bold mb-2">{item.name}スコア</h3>
+            <div className="flex items-center mb-1">
+              <div className="w-24 font-medium">精度 (AUC):</div>
+              <div className="flex-1 bg-gray-200 rounded-full h-4">
+                <div 
+                  className="bg-blue-600 h-4 rounded-full" 
+                  style={{ width: `${item.auc * 100}%` }}
+                ></div>
+              </div>
+              <div className="ml-2 font-medium">{item.auc}</div>
+            </div>
+            <div className="flex items-center mb-1">
+              <div className="w-24 font-medium">簡便性:</div>
+              <div className="flex-1 bg-gray-200 rounded-full h-4">
+                <div 
+                  className="bg-green-500 h-4 rounded-full" 
+                  style={{ width: `${item.simplicity}%` }}
+                ></div>
+              </div>
+              <div className="ml-2 font-medium">{item.simplicity}%</div>
+            </div>
+            <div className="flex items-center">
+              <div className="w-24 font-medium">使用頻度:</div>
+              <div className="flex-1 bg-gray-200 rounded-full h-4">
+                <div 
+                  className="bg-yellow-500 h-4 rounded-full" 
+                  style={{ width: `${item.usage}%` }}
+                ></div>
+              </div>
+              <div className="ml-2 font-medium">{item.usage}%</div>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+
+  // クリニカルパールセクション
+  const ClinicalPearlsSection = () => (
+    <div className="mt-6 bg-white p-6 rounded-lg shadow">
+      <h2 className="text-xl font-bold mb-4 flex items-center">
+        <Award className="mr-2 text-purple-500" size={24} />
+        クリニカルパール
+      </h2>
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <div className="border p-4 rounded-lg hover:bg-blue-50 transition duration-200">
+          <div className="flex items-start mb-2">
+            <CheckCircle className="mr-2 text-green-500 mt-1 flex-shrink-0" size={20} />
+            <p>嘔吐単独をエンドポイントにしている点が特徴（小児は嘔吐優位）</p>
+          </div>
+        </div>
+        <div className="border p-4 rounded-lg hover:bg-blue-50 transition duration-200">
+          <div className="flex items-start mb-2">
+            <CheckCircle className="mr-2 text-green-500 mt-1 flex-shrink-0" size={20} />
+            <p>斜視手術は&quot;迷走神経刺激&quot;で突出高リスク──術式固有対策（TIVA＋局所ブロック）が有効</p>
+          </div>
+        </div>
+        <div className="border p-4 rounded-lg hover:bg-blue-50 transition duration-200">
+          <div className="flex items-start mb-2">
+            <CheckCircle className="mr-2 text-green-500 mt-1 flex-shrink-0" size={20} />
+            <p>家族歴は遺伝的素因＋経験による恐怖が混在するため、問診で漏らさない工夫が重要</p>
+          </div>
+        </div>
+        <div className="border p-4 rounded-lg hover:bg-blue-50 transition duration-200">
+          <div className="flex items-start mb-2">
+            <CheckCircle className="mr-2 text-green-500 mt-1 flex-shrink-0" size={20} />
+            <p>ERAS®小児版や4th Consensus 2020はPOVOC ≥ 2点を&quot;多剤併用開始ライン&quot;として採用</p>
+          </div>
+        </div>
+      </div>
+      <div className="mt-4 p-4 border-l-4 border-blue-500 bg-blue-50 rounded">
+        <div className="flex items-start">
+          <AlertCircle className="mr-2 text-blue-500 mt-1 flex-shrink-0" size={20} />
+          <p className="text-lg">
+            <span className="font-bold">要点：</span>POVOCは「4つの Yes/No を聞くだけ」で小児嘔吐リスクを7割精度で層別化でき、国際ガイドラインでも正式に採用されています。小児の PONV 対策では Apfelの代わりに POVOC を入口スクリーニングとして使用するのが推奨です。
+          </p>
+        </div>
+      </div>
+    </div>
+  );
+
+  // タブの切り替え
+  const renderTabContent = () => {
+    switch(activeTab) {
+      case 'overview':
+        return (
+          <>
+            <RiskFactorsSection />
+            <RiskResultSection />
+            <PreventionSection />
+          </>
+        );
+      case 'charts':
+        return (
+          <>
+            <RiskRateChart />
+            <ComparisonChart />
+          </>
+        );
+      case 'clinical':
+        return <ClinicalPearlsSection />;
+      default:
+        return null;
+    }
+  };
+
+  return (
+    <div className="min-h-screen bg-gray-100 p-4">
+      <div className="max-w-6xl mx-auto">
+        <div className="bg-gradient-to-r from-blue-600 to-purple-600 rounded-lg shadow p-6 text-white mb-6">
+          <div className="flex flex-col md:flex-row justify-between items-center">
+            <div>
+              <h1 className="text-3xl font-bold">POVOCスコア</h1>
+              <p className="text-xl mt-2">小児術後嘔吐リスク評価ツール</p>
+            </div>
+            <div className="mt-4 md:mt-0">
+              <div className="flex items-center">
+                <div className="bg-white/20 rounded-lg px-4 py-2">
+                  <div className="text-sm">開発者</div>
+                  <div className="font-medium">Eberhart LHJ ら（独・ミュンヘン）</div>
+                </div>
+                <div className="bg-white/20 rounded-lg px-4 py-2 ml-4">
+                  <div className="text-sm">判別能</div>
+                  <div className="font-medium">AUC 0.72-0.73</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {/* タブナビゲーション */}
+        <div className="bg-white rounded-lg shadow p-2 mb-6">
+          <div className="flex">
+            <button
+              className={`flex-1 py-2 px-4 rounded ${activeTab === 'overview' ? 'bg-blue-100 text-blue-700' : ''}`}
+              onClick={() => setActiveTab('overview')}
+            >
+              基本評価
+            </button>
+            <button
+              className={`flex-1 py-2 px-4 rounded ${activeTab === 'charts' ? 'bg-blue-100 text-blue-700' : ''}`}
+              onClick={() => setActiveTab('charts')}
+            >
+              データと比較
+            </button>
+            <button
+              className={`flex-1 py-2 px-4 rounded ${activeTab === 'clinical' ? 'bg-blue-100 text-blue-700' : ''}`}
+              onClick={() => setActiveTab('clinical')}
+            >
+              臨床パール
+            </button>
+          </div>
+        </div>
+
+        {/* タブコンテンツ */}
+        {renderTabContent()}
+
+        {/* フッター情報 */}
+        <div className="mt-6 bg-white p-4 rounded-lg shadow text-center text-gray-600 text-sm">
+          <p>参考文献: Eberhart LHJ et al. Anesth Analg 2004 99:1630-37, 4th Consensus Guidelines 2020</p>
+          <p className="mt-1">© 2025 POVOCスコア評価ダッシュボード - 医療専門家向け情報提供</p>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+export default POVOCDashboard;
