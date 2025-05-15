@@ -1,0 +1,678 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>手術室看護師の術前術後訪問の意義と内容</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    :root {
+      --primary-color: #1e5f74; /* メインカラー - 深い青緑 */
+      --secondary-color: #3a9188; /* サブカラー - 青緑 */
+      --accent-color: #e76f51; /* アクセントカラー - サーモンピンク */
+      --light-bg: #f8f9fa; /* 明るい背景色 */
+      --dark-bg: #2c3e50; /* 暗い背景色 */
+      --text-color: #333; /* 基本テキスト色 */
+      --light-text: #f8f9fa; /* 明るいテキスト色 */
+    }
+    
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    
+    body {
+      font-family: 'Hiragino Kaku Gothic Pro', 'Meiryo', sans-serif;
+      line-height: 1.6;
+      color: var(--text-color);
+      background-color: var(--light-bg);
+    }
+    
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+    
+    header {
+      background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+      color: var(--light-text);
+      padding: 60px 0 80px;
+      text-align: center;
+      clip-path: polygon(0 0, 100% 0, 100% 85%, 0 100%);
+      margin-bottom: 40px;
+    }
+    
+    .header-content {
+      max-width: 800px;
+      margin: 0 auto;
+    }
+    
+    h1 {
+      font-size: 2.5rem;
+      margin-bottom: 20px;
+      line-height: 1.2;
+    }
+    
+    .subtitle {
+      font-size: 1.2rem;
+      margin-bottom: 30px;
+      opacity: 0.9;
+    }
+    
+    .intro {
+      background-color: white;
+      border-radius: 10px;
+      padding: 30px;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+      margin-bottom: 40px;
+    }
+    
+    .intro p {
+      margin-bottom: 15px;
+    }
+    
+    .grid-container {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+      gap: 30px;
+      margin-bottom: 40px;
+    }
+    
+    .card {
+      background-color: white;
+      border-radius: 10px;
+      overflow: hidden;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+      transition: transform 0.3s, box-shadow 0.3s;
+    }
+    
+    .card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+    }
+    
+    .card-header {
+      background-color: var(--primary-color);
+      color: white;
+      padding: 15px 20px;
+      position: relative;
+    }
+    
+    .card-number {
+      position: absolute;
+      top: 50%;
+      right: 20px;
+      transform: translateY(-50%);
+      font-size: 2.5rem;
+      font-weight: bold;
+      opacity: 0.5;
+      color: white;
+      text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+    }
+    
+    .icon-header {
+      display: flex;
+      align-items: center;
+    }
+    
+    .icon {
+      background: #3a9188;
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-right: 15px;
+      font-size: 1.5rem;
+      box-shadow: 0 3px 6px rgba(0, 0, 0, 0.2);
+      color: white;
+    }
+    
+    .card-title {
+      font-size: 1.3rem;
+      margin-bottom: 0;
+      color: white;
+      font-weight: bold;
+      text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.3);
+    }
+    
+    .card-content {
+      padding: 20px;
+    }
+    
+    .card-content ul {
+      list-style-type: none;
+      padding-left: 0;
+    }
+    
+    .card-content li {
+      margin-bottom: 10px;
+      position: relative;
+      padding-left: 25px;
+    }
+    
+    .card-content li:before {
+      content: "";
+      position: absolute;
+      left: 0;
+      top: 8px;
+      width: 10px;
+      height: 10px;
+      background-color: var(--secondary-color);
+      border-radius: 50%;
+    }
+    
+    .cycle-section {
+      background-color: white;
+      border-radius: 10px;
+      padding: 30px;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+      margin-bottom: 40px;
+    }
+    
+    .cycle-container {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      margin-top: 30px;
+    }
+    
+    .cycle-item {
+      text-align: center;
+      width: 200px;
+      margin: 0 20px 30px;
+      position: relative;
+    }
+    
+    .cycle-item:not(:last-child):after {
+      content: "\f054";
+      font-family: "Font Awesome 6 Free";
+      font-weight: 900;
+      position: absolute;
+      right: -25px;
+      top: 40px;
+      font-size: 1.5rem;
+      color: var(--secondary-color);
+    }
+    
+    @media (max-width: 768px) {
+      .cycle-item:not(:last-child):after {
+        content: "\f078";
+        right: 90px;
+        top: auto;
+        bottom: -25px;
+      }
+    }
+    
+    .cycle-icon {
+      background-color: var(--secondary-color);
+      color: white;
+      width: 80px;
+      height: 80px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 15px;
+      font-size: 2rem;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    }
+    
+    .cycle-title {
+      font-weight: bold;
+      color: var(--primary-color);
+    }
+    
+    .conclusion {
+      background-color: white;
+      border-radius: 10px;
+      padding: 30px;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+      margin-bottom: 40px;
+    }
+    
+    footer {
+      background-color: var(--dark-bg);
+      color: var(--light-text);
+      padding: 30px 0;
+      text-align: center;
+    }
+    
+    .source-info {
+      font-size: 0.9rem;
+      opacity: 0.8;
+    }
+    
+    .highlight {
+      background: linear-gradient(transparent 60%, rgba(58, 145, 136, 0.3) 40%);
+      font-weight: bold;
+    }
+    
+    .mb-3 {
+      margin-bottom: 15px;
+    }
+    
+    h2 {
+      color: var(--primary-color);
+      margin: 20px 0;
+      border-bottom: 2px solid var(--primary-color);
+      padding-bottom: 10px;
+    }
+    
+    h3 {
+      color: var(--primary-color);
+      margin: 15px 0;
+    }
+
+    .section {
+      background-color: white;
+      border-radius: 10px;
+      padding: 30px;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+      margin-bottom: 40px;
+    }
+
+    .columns {
+      display: flex;
+      flex-wrap: wrap;
+      margin: 0 -15px;
+    }
+
+    .column {
+      flex: 1;
+      padding: 0 15px;
+      min-width: 300px;
+    }
+
+    .compare-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 20px 0;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+      border-radius: 8px;
+      overflow: hidden;
+    }
+
+    .compare-table th {
+      background-color: var(--primary-color);
+      color: white;
+      text-align: left;
+      padding: 12px 15px;
+    }
+
+    .compare-table tr:nth-child(even) {
+      background-color: rgba(30, 95, 116, 0.05);
+    }
+
+    .compare-table td {
+      padding: 10px 15px;
+      border-bottom: 1px solid #eee;
+    }
+
+    .compare-table tr:last-child td {
+      border-bottom: none;
+    }
+
+    .quote {
+      font-style: italic;
+      border-left: 4px solid var(--secondary-color);
+      padding-left: 20px;
+      margin: 20px 0;
+      color: #555;
+    }
+
+    .feature-box {
+      display: flex;
+      align-items: flex-start;
+      margin-bottom: 25px;
+    }
+
+    .feature-icon {
+      flex-shrink: 0;
+      width: 60px;
+      height: 60px;
+      background-color: var(--secondary-color);
+      color: white;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-right: 20px;
+      font-size: 1.8rem;
+      box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    }
+
+    .feature-content {
+      flex-grow: 1;
+    }
+
+    .feature-title {
+      font-weight: bold;
+      font-size: 1.1rem;
+      margin-bottom: 5px;
+      color: var(--primary-color);
+    }
+    
+    @media (max-width: 768px) {
+      h1 {
+        font-size: 2rem;
+      }
+      
+      .grid-container {
+        grid-template-columns: 1fr;
+      }
+      
+      header {
+        padding: 40px 0 60px;
+      }
+
+      .column {
+        flex: 100%;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="container">
+      <div class="header-content">
+        <h1>手術室看護師の術前術後訪問の意義と内容</h1>
+        <div class="subtitle">周術期看護を充実させる継続的ケアのアプローチ</div>
+      </div>
+    </div>
+  </header>
+  
+  <div class="container">
+    <section class="intro">
+      <h2>はじめに</h2>
+      <p>手術を受ける患者さんにとって、手術は身体的・精神的に大きな負担となる重大なイベントです。手術室看護師は、手術中のケアだけでなく、<span class="highlight">術前から術後までの継続的なケア</span>を通じて患者さんの回復を支援する重要な役割を担っています。</p>
+      <p>手術室看護師による術前術後訪問は、患者さんの不安軽減、情報収集、合併症予防、そして看護の質向上に貢献する重要な実践です。本ページでは、術前術後訪問の意義とその具体的な内容について詳しく解説します。</p>
+    </section>
+    
+    <div class="grid-container">
+      <div class="card">
+        <div class="card-header">
+          <div class="icon-header">
+            <div class="icon">
+              <i class="fas fa-stethoscope"></i>
+            </div>
+            <h3 class="card-title">術前訪問の目的</h3>
+          </div>
+          <div class="card-number">1</div>
+        </div>
+        <div class="card-content">
+          <ul>
+            <li><span class="highlight">患者の不安軽減</span>と心理的準備の支援</li>
+            <li>手術に関する疑問や不安の解消</li>
+            <li>術中看護に必要な<span class="highlight">情報収集</span>と術式や麻酔方法の確認</li>
+            <li>手術室環境の説明と心理的準備の援助</li>
+            <li>合併症リスクの評価と予防策の検討</li>
+            <li>個別性のある<span class="highlight">術中看護計画</span>の立案</li>
+          </ul>
+        </div>
+      </div>
+      
+      <div class="card">
+        <div class="card-header">
+          <div class="icon-header">
+            <div class="icon">
+              <i class="fas fa-user-nurse"></i>
+            </div>
+            <h3 class="card-title">術後訪問の目的</h3>
+          </div>
+          <div class="card-number">2</div>
+        </div>
+        <div class="card-content">
+          <ul>
+            <li>術中看護の<span class="highlight">評価とフィードバック</span>の収集</li>
+            <li>早期合併症の発見と適切な対応</li>
+            <li>術後の痛みやストレスの<span class="highlight">評価と緩和</span></li>
+            <li>患者の体験や感想の傾聴</li>
+            <li>看護実践の質の評価と向上</li>
+            <li>術中に実施したケアの効果確認</li>
+            <li>継続的な<span class="highlight">看護支援</span>の提供と調整</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    
+    <section class="cycle-section">
+      <h2>術前術後訪問プロセス</h2>
+      <p class="mb-3">手術室看護師による術前術後訪問は、<span class="highlight">周術期看護の質を高める循環的なプロセス</span>として位置づけられています。各段階における看護師の関わりが、患者さんの手術体験全体を支える重要な要素となります。</p>
+      
+      <div class="cycle-container">
+        <div class="cycle-item">
+          <div class="cycle-icon">
+            <i class="fas fa-clipboard-list"></i>
+          </div>
+          <div class="cycle-title">術前アセスメント</div>
+        </div>
+        
+        <div class="cycle-item">
+          <div class="cycle-icon">
+            <i class="fas fa-procedures"></i>
+          </div>
+          <div class="cycle-title">術中看護実践</div>
+        </div>
+        
+        <div class="cycle-item">
+          <div class="cycle-icon">
+            <i class="fas fa-heartbeat"></i>
+          </div>
+          <div class="cycle-title">術後評価</div>
+        </div>
+        
+        <div class="cycle-item">
+          <div class="cycle-icon">
+            <i class="fas fa-sync-alt"></i>
+          </div>
+          <div class="cycle-title">看護の改善</div>
+        </div>
+      </div>
+      
+      <p>このサイクルを通じて、<span class="highlight">情報の一貫性と看護ケアの継続性</span>が確保され、患者さん中心の質の高い周術期看護が実現されます。</p>
+    </section>
+
+    <section class="section">
+      <h2>術前訪問の具体的内容</h2>
+      
+      <div class="feature-box">
+        <div class="feature-icon">
+          <i class="fas fa-comments"></i>
+        </div>
+        <div class="feature-content">
+          <div class="feature-title">患者面談と情報収集</div>
+          <p>手術に関する患者の理解度、不安の程度、過去の手術経験、アレルギー歴、基礎疾患、服薬状況など、<span class="highlight">術中看護に必要な情報</span>を収集します。患者・家族とのコミュニケーションを通じて信頼関係を構築し、手術に対する不安や疑問を表出できる環境を整えます。</p>
+        </div>
+      </div>
+
+      <div class="feature-box">
+        <div class="feature-icon">
+          <i class="fas fa-book-medical"></i>
+        </div>
+        <div class="feature-content">
+          <div class="feature-title">診療録のレビュー</div>
+          <p>患者の病歴、術前検査結果、手術計画、麻酔方法などの医療情報を確認します。特に<span class="highlight">合併症リスク</span>に関わる情報（循環器疾患、呼吸器疾患、糖尿病、腎機能障害など）や特別な配慮が必要な事項を把握します。</p>
+        </div>
+      </div>
+
+      <div class="feature-box">
+        <div class="feature-icon">
+          <i class="fas fa-notes-medical"></i>
+        </div>
+        <div class="feature-content">
+          <div class="feature-title">身体アセスメント</div>
+          <p>皮膚の状態、静脈の状態、関節可動域、既存の創傷やドレーン、体格や体位制限などを評価します。これらの情報は、<span class="highlight">適切な体位の選択</span>、褥瘡予防、手術アプローチの検討などに活用されます。</p>
+        </div>
+      </div>
+
+      <div class="feature-box">
+        <div class="feature-icon">
+          <i class="fas fa-info-circle"></i>
+        </div>
+        <div class="feature-content">
+          <div class="feature-title">手術や麻酔に関する説明</div>
+          <p>手術室の環境、入室から退室までの流れ、麻酔導入時の感覚、使用する医療機器、術後の状態などについて、<span class="highlight">患者の理解度に合わせた情報提供</span>を行います。正確で分かりやすい説明は、不安軽減と心理的準備を助けます。</p>
+        </div>
+      </div>
+
+      <div class="feature-box">
+        <div class="feature-icon">
+          <i class="fas fa-pen-fancy"></i>
+        </div>
+        <div class="feature-content">
+          <div class="feature-title">看護計画の立案</div>
+          <p>収集した情報をもとに、個別性のある術中看護計画を立案します。特に<span class="highlight">リスク管理</span>、体位の工夫、特別な配慮事項、術中モニタリングの重点項目などを具体化します。</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <h2>術後訪問の具体的内容</h2>
+      
+      <div class="feature-box">
+        <div class="feature-icon">
+          <i class="fas fa-check-circle"></i>
+        </div>
+        <div class="feature-content">
+          <div class="feature-title">術後状態の評価</div>
+          <p>バイタルサイン、疼痛の程度、創部の状態、ドレーンの状況、麻酔からの回復状態などを評価します。特に<span class="highlight">手術や麻酔に関連した合併症</span>の早期発見に注意を払います。</p>
+        </div>
+      </div>
+
+      <div class="feature-box">
+        <div class="feature-icon">
+          <i class="fas fa-clipboard-check"></i>
+        </div>
+        <div class="feature-content">
+          <div class="feature-title">術中看護の評価</div>
+          <p>術中に実施した看護ケア（体位の工夫、保温、皮膚保護など）の効果を評価します。特に<span class="highlight">褥瘡予防対策</span>や神経損傷予防対策の効果確認は重要です。</p>
+        </div>
+      </div>
+
+      <div class="feature-box">
+        <div class="feature-icon">
+          <i class="fas fa-comments"></i>
+        </div>
+        <div class="feature-content">
+          <div class="feature-title">患者の体験の傾聴</div>
+          <p>手術に関する患者の体験、感想、不安、疑問などを傾聴します。これにより<span class="highlight">患者の心理的ケア</span>を行うとともに、手術室看護の質改善のための貴重なフィードバックを得ることができます。</p>
+        </div>
+      </div>
+
+      <div class="feature-box">
+        <div class="feature-icon">
+          <i class="fas fa-exchange-alt"></i>
+        </div>
+        <div class="feature-content">
+          <div class="feature-title">病棟看護師との情報共有</div>
+          <p>術中の状況や特記事項、術後の注意点などを病棟看護師と共有します。これにより<span class="highlight">継続的なケア</span>が可能となり、手術室から病棟へのスムーズな移行を支援します。</p>
+        </div>
+      </div>
+
+      <div class="feature-box">
+        <div class="feature-icon">
+          <i class="fas fa-file-medical-alt"></i>
+        </div>
+        <div class="feature-content">
+          <div class="feature-title">記録と報告</div>
+          <p>術後訪問で得られた情報や評価結果を記録し、必要に応じてカンファレンスで共有します。これは<span class="highlight">看護実践の振り返り</span>と質向上のための重要なプロセスです。</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <h2>術前術後訪問の効果と意義</h2>
+      
+      <div class="columns">
+        <div class="column">
+          <h3>患者にとっての効果</h3>
+          <ul>
+            <li>手術に対する<span class="highlight">不安・恐怖の軽減</span></li>
+            <li>手術に関する正確な情報の獲得と理解</li>
+            <li>安心感と信頼関係の構築</li>
+            <li>周術期合併症の早期発見と対応</li>
+            <li>術後回復の促進と<span class="highlight">QOLの向上</span></li>
+            <li>手術体験に対する満足度の向上</li>
+          </ul>
+        </div>
+        
+        <div class="column">
+          <h3>看護師にとっての効果</h3>
+          <ul>
+            <li>個別性のある<span class="highlight">質の高い看護の提供</span></li>
+            <li>専門的知識と技術の向上</li>
+            <li>看護実践の振り返りと改善</li>
+            <li>患者との関係性の強化</li>
+            <li>職業的満足感と<span class="highlight">自己効力感の向上</span></li>
+            <li>多職種連携の促進</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="quote">
+        「術前術後訪問は、手術室看護師が『見えない患者』から『見える患者』へと視点を転換し、手術という一時点だけでなく、連続した時間の中で患者を理解するための重要な機会である」
+      </div>
+
+      <p>手術室看護師による術前術後訪問は、単なる情報収集や評価の機会ではなく、<span class="highlight">継続的な周術期看護を実現するための中核的な実践</span>です。この実践により、手術室という閉鎖的な空間での看護が、患者の入院から退院までの継続的なケアの一部として位置づけられます。</p>
+    </section>
+
+    <section class="section">
+      <h2>術前術後訪問の実施状況と課題</h2>
+      
+      <p>術前術後訪問の重要性は広く認識されていますが、実際の臨床現場ではさまざまな要因により、その実施が十分でない場合があります。</p>
+
+      <table class="compare-table">
+        <tr>
+          <th>課題</th>
+          <th>対策</th>
+        </tr>
+        <tr>
+          <td>人員不足と時間的制約</td>
+          <td>業務の効率化、訪問スケジュールの組織的な調整、優先順位の明確化</td>
+        </tr>
+        <tr>
+          <td>訪問の目的や方法の標準化の不足</td>
+          <td>明確なガイドラインやチェックリストの作成、スタッフ教育</td>
+        </tr>
+        <tr>
+          <td>他部門との連携不足</td>
+          <td>カンファレンスの活用、電子カルテの活用、連携体制の構築</td>
+        </tr>
+        <tr>
+          <td>評価方法の不明確さ</td>
+          <td>評価指標の設定、定期的なレビュー、フィードバックシステムの構築</td>
+        </tr>
+        <tr>
+          <td>患者の在院日数の短縮</td>
+          <td>効率的な訪問方法の開発、遠隔フォローアップの検討</td>
+        </tr>
+      </table>
+
+      <p>これらの課題を解決し、<span class="highlight">効果的な術前術後訪問を実現するため</span>には、組織的な取り組みと看護師個人の意識向上が必要です。術前術後訪問を手術室看護の重要な一部として位置づけ、そのための時間と資源を確保することが重要となります。</p>
+    </section>
+
+    <div class="grid-container">
+      <div class="card">
+        <div class="card-header">
+          <div class="icon-header">
+            <div class="icon">
+              <i class="fas fa-clipboard-list"></i>
+            </div>
+            <h3 class="card-title">術前訪問チェックリスト</h3>
+          </div>
+        </div>
+        <div class="card-content">
+          <ul>
+            <li>患者背景（年齢、性別、職業、家族構成）</li>
+            <li>既往歴・現病歴・手術歴</li>
+            <li>アレルギー・副作用歴</li>
+            <li>服薬状況（抗凝固薬など）</li>
+            <li><span class="highlight">手術・麻酔に対する理解度</span></li>
+            <li>不安の程度と内容</li>
+            <li>身体的特徴（体格、関節可動域）</li>
+            <li>皮膚の状態（脆弱性、既存の創傷）</li>
+            <li><span class="highlight">静脈の状態とアクセス</span></li>
