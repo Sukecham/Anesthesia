@@ -1,0 +1,38 @@
+---
+---
+
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<title>Document List</title>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<style>
+  body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,
+       Helvetica,Arial,sans-serif;margin:0;background:#f6f8fa;color:#24292f}
+  header{padding:1.5rem 1rem;text-align:center;background:#24292f;color:#fff}
+  h1{margin:0;font-size:1.6rem}
+  main{max-width:900px;margin:2rem auto;padding:0 1rem}
+  ul{list-style:none;padding:0;margin:0;display:grid;gap:1rem;
+     grid-template-columns:repeat(auto-fill,minmax(240px,1fr))}
+  li{background:#fff;border:1px solid #d0d7de;border-radius:6px;
+     padding:1rem;box-shadow:0 1px 3px rgba(140,149,159,.15);
+     transition:.15s transform}
+  li:hover{transform:translateY(-4px)}
+  a{color:#0969da;text-decoration:none;font-weight:600;font-size:1.05rem}
+  a:hover{text-decoration:underline}
+</style>
+</head>
+<body>
+<header><h1>⭐️手術室看護師用ラーニングファイル一覧📕</h1></header>
+<main>
+  <ul>
+  {% for file in site.static_files %}
+    {% if file.extname == ".html" and file.path != "/index.html" %}
+      <li><a href="{{ file.path | remove_first: '/' }}">{{ file.name }}</a></li>
+    {% endif %}
+  {% endfor %}
+  </ul>
+</main>
+</body>
+</html>
