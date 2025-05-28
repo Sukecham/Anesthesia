@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<title>麻酔導入パラメータ自動計算</title>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<style>
+:root{--bg:#f2f6fa;--card:#fff;--accent:#0064b1;--accent-light:#e7f1ff;
+      --txt:#222;--sub:#555;--value-bg:#2c3e50;--value-text:#fff;
+      --drug-bg:#34495e;--drug-text:#ecf0f1;font-size:16px;}
+*{box-sizing:border-box;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Noto Sans JP",sans-serif}
+body{margin:0;padding:2rem;background:var(--bg);color:var(--txt)}
+h1{margin:0 0 1.2rem;font-size:1.6rem;text-align:center;color:var(--accent)}
+h2{font-size:1.2rem;margin:1.4rem 0 .6rem;color:var(--accent)}
+.card{background:var(--card);padding:1.8rem 1.6rem;border-radius:12px;
+      box-shadow:0 6px 18px rgba(0,0,0,.05);margin-bottom:1.8rem}
+label{display:block;font-size:.9rem;color:var(--sub);margin-bottom:.25rem}
+input,select{width:100%;padding:.65rem .75rem;font-size:1rem;border:1px solid #ccc;
+             border-radius:6px;margin-bottom:1rem}
+.table{width:100%;border-collapse:collapse;margin-top:.4rem;border-radius:8px;overflow:hidden}
+.table th,.table td{padding:.65rem .6rem;text-align:right;border:none}
+.table th{text-align:left;color:var(--txt);font-weight:600;background:#f8f9fa}
+.table td{background:var(--value-bg);color:var(--value-text);font-weight:700;font-size:1.05em}
+.table tr:nth-child(even) td{background:#34495e}
+.drug-header{background:var(--drug-bg)!important;color:var(--drug-text)!important;
+             text-align:center!important;font-weight:700!important;font-size:1.1em!important}
+.badge{display:inline-block;padding:.2rem .65rem;font-size:.8em;font-weight:600;
+       border-radius:20px;background:#27ae60;color:#fff;margin-left:.45rem}
+.note{font-size:.75rem;color:var(--sub);margin-top:.8rem}
+.footer{font-size:.7rem;color:var(--sub);text-align:center;margin-top:2rem}
+@media(max-width:500px){:root{font-size:15px}}
+</style>
+</head>
+<body>
+  <h1>術前パラメータ Auto-Calculator</h1>
+
+  <div class="card">
+    <label for="height">身長 (cm)</label>
+    <input id="height" type="number" min="80" max="250" placeholder="170">
+
+    <label for="weight">体重 (kg)</label>
+    <input id="weight" type="number" min="10" max="300" placeholder="65">
+
+    <label for="sex">性別</label>
+    <select id="sex">
+      <option value="M">男性</option>
+      <option value="F">女性</option>
+    </select>
+  </div>
+
+  <div id="output" class="card" style="display:none"></div>
+
+  <p class="footer">© 2025 Sukesan&nbsp;Anesthesia&nbsp;Toolkit | 数値は目安です。臨床判断と併用してください。</p>
+
+<script>
+const $=q=>document.querySelector(q);
+["#height","#weight","#sex"].forEach(id=>$(id).addEventListener("input",calc));
+
+function calc(){
+  const h=parseFloat($("#height").value);
+  const w=parseFloat($("#weight").value);
+  const sex=$("#sex").value;
+  if(!h||!w){$("#output").style.display="none";return;}
+
+  const h_m=h/100, bmi=w/(h_m*h_m);
+  const ibw = (sex==="M") ? 50+0.91*(h-152.4) : 45.5+0.91*(h-152.4);
+  const lbw = (sex==="M") ? (9270*w)/(6680+216*bmi) : (9270*w)/(8780+244*bmi);
+  const adjbw = ibw + 0.4*(w-ibw);
+  const bsa = Math.sqrt(h*w/3600);
+  const vt6=Math.round(6*ibw), vt8=Math.round(8*ibw);
+  const rocInd=(0.6*ibw).toFixed(1);
+  const rocInf=Math.round(7*lbw);
+  const rocRSI08=(0.8*adjbw).toFixed(1);
+  const rocRSI1=(1.0*adjbw).toFixed(1);
+  const ketaHigh=(1.0*lbw).toFixed(1);
+  const ketaLow=(0.5*lbw).toFixed(1);
+  const fentMin=(1.0*lbw).toFixed(1);
+  const fentMax=(2.0*lbw).toFixed(1);
+  const remiInd=(0.5*lbw).toFixed(1);
+  const propBolus=(2.0*lbw).toFixed(1);
+  const suga2=(2*w).toFixed(1), suga4=(4*w).toFixed(1), suga16=(16*w).toFixed(1);
+  const cat=bmi<18.5?"低体重":bmi<25?"正常":bmi<30?"過体重":"肥満";
+  const isObese=bmi>=30;
+
+  $("#output").innerHTML=`
+    <h2>身体指標<span class="badge">${cat}</span></h2>
+    <table class="table">
+      <tr><th>BMI</th><td>${bmi.toFixed(1)}</td></tr>
+      <tr><th>BSA (Mosteller)</th><td>${bsa.toFixed(2)} m²</td></tr>
+      <tr><th>Ideal / PBW</th><td>${ibw.toFixed(1)} kg</td></tr>
+      <tr><th>Lean Body Weight</th><td>${lbw.toFixed(1)} kg</td></tr>
+      ${isObese?`<tr><th>Adjusted Body Weight</th><td>${adjbw.toFixed(1)} kg</td></tr>`:""}
+    </table>
+
+    <h2>換気設定案</h2>
+    <table class="table">
+      <tr><th>VT 6 mL kg-¹ (PBW)</th><td>${vt6} mL</td></tr>
+      <tr><th>VT 8 mL kg-¹ (PBW)</th><td>${vt8} mL</td></tr>
+      <tr><th>推奨 PEEP</th><td>5 cmH₂O</td></tr>
+    </table>
+
+    <h2>薬剤投与量</h2>
+    <table class="table">
+      <tr><th colspan="2" class="drug-header">ロクロニウム</th></tr>
+      <tr><th>導入 0.6 mg kg-¹ (PBW)</th><td>${rocInd} mg</td></tr>
+      ${isObese?`
+        <tr><th>RSI 0.8 mg kg-¹ (AdjBW)</th><td>${rocRSI08} mg</td></tr>
+        <tr><th>RSI 1.0 mg kg-¹ (AdjBW)</th><td>${rocRSI1} mg</td></tr>`:""}
+      <tr><th>維持 7 µg kg-¹ min-¹ (LBW)</th><td>${rocInf} µg min-¹</td></tr>
+
+      <tr><th colspan="2" class="drug-header">ケタミン</th></tr>
+      <tr><th>標準 1.0 mg kg-¹ (LBW)</th><td>${ketaHigh} mg</td></tr>
+      <tr><th>高齢/精神疾患 0.5 mg kg-¹</th><td>${ketaLow} mg</td></tr>
+
+      <tr><th colspan="2" class="drug-header">フェンタニル</th></tr>
+      <tr><th>1–2 µg kg-¹ (LBW)</th><td>${fentMin}–${fentMax} µg</td></tr>
+
+      <tr><th colspan="2" class="drug-header">レミフェンタニル</th></tr>
+      <tr><th>導入 0.5 µg kg-¹ (LBW)</th><td>${remiInd} µg</td></tr>
+
+      <tr><th colspan="2" class="drug-header">プロポフォール (非TCI参考)</th></tr>
+      <tr><th>設定体重 (LBW)</th><td>${lbw.toFixed(1)} kg</td></tr>
+      <tr><th>ボーラス 2 mg kg-¹ (LBW)</th><td>${propBolus} mg</td></tr>
+
+      <tr><th colspan="2" class="drug-header">Sugammadex</th></tr>
+      <tr><th>2 mg kg-¹ (T₂再出現)</th><td>${suga2} mg</td></tr>
+      <tr><th>4 mg kg-¹ (PTC 1–2)</th><td>${suga4} mg</td></tr>
+      <tr><th>16 mg kg-¹ (即時リバーサル)</th><td>${suga16} mg</td></tr>
+    </table>
+
+    <p class="note">※ 肥満でない場合は AdjBW とそれを用いた RSI 用量を省略しています。</p>
+  `;
+  $("#output").style.display="block";
+}
+</script>
+</body>
+</html>
