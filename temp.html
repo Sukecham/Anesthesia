@@ -1,0 +1,1034 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>周術期保温・加温：最新エビデンスガイド</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            --secondary-gradient: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            --accent-gradient: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+            --warning-gradient: linear-gradient(135deg, #fa709a 0%, #fee140 100%);
+            --success-gradient: linear-gradient(135deg, #a8edea 0%, #fed6e3 100%);
+            --dark-gradient: linear-gradient(135deg, #2c3e50 0%, #34495e 100%);
+            --glass-bg: rgba(255, 255, 255, 0.1);
+            --glass-border: rgba(255, 255, 255, 0.2);
+            --shadow-light: 0 8px 32px rgba(31, 38, 135, 0.37);
+            --shadow-heavy: 0 15px 35px rgba(0, 0, 0, 0.2);
+            --text-primary: #2c3e50;
+            --text-secondary: #5a6c7d;
+            --surface: rgba(255, 255, 255, 0.95);
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            line-height: 1.6;
+            color: var(--text-primary);
+            background: var(--primary-gradient);
+            background-attachment: fixed;
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        .floating-shapes {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: -1;
+        }
+
+        .shape {
+            position: absolute;
+            background: var(--glass-bg);
+            border: 1px solid var(--glass-border);
+            border-radius: 50%;
+            animation: float 20s infinite linear;
+        }
+
+        .shape:nth-child(1) { width: 100px; height: 100px; top: 10%; left: 10%; animation-duration: 25s; }
+        .shape:nth-child(2) { width: 150px; height: 150px; top: 60%; right: 10%; animation-duration: 30s; animation-direction: reverse; }
+        .shape:nth-child(3) { width: 80px; height: 80px; bottom: 20%; left: 20%; animation-duration: 35s; }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
+            50% { transform: translateY(-20px) rotate(180deg); }
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+
+        .hero {
+            text-align: center;
+            padding: 80px 40px;
+            margin-bottom: 60px;
+            background: var(--surface);
+            backdrop-filter: blur(20px);
+            border-radius: 24px;
+            border: 1px solid var(--glass-border);
+            box-shadow: var(--shadow-heavy);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: var(--primary-gradient);
+        }
+
+        .hero h1 {
+            font-size: 4rem;
+            font-weight: 800;
+            background: var(--primary-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 20px;
+            letter-spacing: -0.02em;
+        }
+
+        .hero .subtitle {
+            font-size: 1.5rem;
+            font-weight: 300;
+            color: var(--text-secondary);
+            margin-bottom: 30px;
+        }
+
+        .stats-bar {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 30px;
+            margin: 40px 0;
+        }
+
+        .stat-item {
+            text-align: center;
+            padding: 20px;
+            background: var(--glass-bg);
+            border-radius: 16px;
+            border: 1px solid var(--glass-border);
+        }
+
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: 700;
+            background: var(--secondary-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .stat-label {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+            margin-top: 5px;
+        }
+
+        .section {
+            margin-bottom: 60px;
+        }
+
+        .section-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 40px;
+            padding: 0 20px;
+        }
+
+        .section-icon {
+            width: 60px;
+            height: 60px;
+            border-radius: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            margin-right: 20px;
+            box-shadow: var(--shadow-light);
+        }
+
+        .section-title {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--text-primary);
+        }
+
+        .cards-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            gap: 30px;
+        }
+
+        .card {
+            background: var(--surface);
+            border-radius: 20px;
+            padding: 40px;
+            border: 1px solid var(--glass-border);
+            box-shadow: var(--shadow-light);
+            backdrop-filter: blur(20px);
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: var(--primary-gradient);
+            transform: scaleX(0);
+            transition: transform 0.4s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.15);
+        }
+
+        .card:hover::before {
+            transform: scaleX(1);
+        }
+
+        .card-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 30px;
+        }
+
+        .card-icon {
+            width: 50px;
+            height: 50px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+            margin-right: 20px;
+            box-shadow: var(--shadow-light);
+        }
+
+        .card-title {
+            font-size: 1.6rem;
+            font-weight: 600;
+            color: var(--text-primary);
+        }
+
+        .temperature-icon { background: var(--secondary-gradient); }
+        .evidence-icon { background: var(--accent-gradient); }
+        .complications-icon { background: var(--warning-gradient); }
+        .methods-icon { background: var(--success-gradient); }
+        .monitoring-icon { background: var(--primary-gradient); }
+        .guidelines-icon { background: var(--dark-gradient); }
+
+        .interactive-temp-display {
+            background: var(--secondary-gradient);
+            color: white;
+            padding: 30px;
+            border-radius: 16px;
+            text-align: center;
+            margin: 20px 0;
+            position: relative;
+            overflow: hidden;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+        }
+
+        .interactive-temp-display:hover {
+            transform: scale(1.02);
+        }
+
+        .temp-value {
+            font-size: 3rem;
+            font-weight: 800;
+            margin-bottom: 10px;
+        }
+
+        .temp-label {
+            font-size: 1.1rem;
+            opacity: 0.9;
+        }
+
+        .evidence-badges {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            margin: 20px 0;
+        }
+
+        .evidence-badge {
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            transition: transform 0.2s ease;
+        }
+
+        .evidence-badge:hover {
+            transform: scale(1.05);
+        }
+
+        .level-a { background: linear-gradient(135deg, #d4edda, #c3e6cb); color: #155724; }
+        .level-b { background: linear-gradient(135deg, #fff3cd, #ffeaa7); color: #856404; }
+        .level-c { background: linear-gradient(135deg, #f8d7da, #f5c6cb); color: #721c24; }
+
+        .complications-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin: 20px 0;
+        }
+
+        .complication-item {
+            background: linear-gradient(135deg, #fff5f5, #fed7d7);
+            padding: 20px;
+            border-radius: 12px;
+            border-left: 4px solid #e53e3e;
+            transition: transform 0.3s ease;
+        }
+
+        .complication-item:hover {
+            transform: translateX(5px);
+        }
+
+        .complication-title {
+            font-weight: 600;
+            color: #c53030;
+            margin-bottom: 8px;
+        }
+
+        .methods-showcase {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 25px;
+            margin: 30px 0;
+        }
+
+        .method-card {
+            background: linear-gradient(135deg, #f7fafc, #edf2f7);
+            padding: 25px;
+            border-radius: 16px;
+            border: 2px solid transparent;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .method-card:hover {
+            border-color: #667eea;
+            transform: translateY(-3px);
+        }
+
+        .method-effectiveness {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            color: white;
+        }
+
+        .effectiveness-high { background: #48bb78; }
+        .effectiveness-medium { background: #ed8936; }
+        .effectiveness-low { background: #f56565; }
+
+        .timeline-container {
+            position: relative;
+            margin: 40px 0;
+        }
+
+        .timeline-line {
+            position: absolute;
+            left: 30px;
+            top: 0;
+            bottom: 0;
+            width: 3px;
+            background: var(--primary-gradient);
+            border-radius: 2px;
+        }
+
+        .timeline-item {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 40px;
+            position: relative;
+        }
+
+        .timeline-marker {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background: var(--primary-gradient);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: 600;
+            margin-right: 30px;
+            z-index: 1;
+        }
+
+        .timeline-content {
+            flex: 1;
+            background: var(--surface);
+            padding: 30px;
+            border-radius: 16px;
+            border: 1px solid var(--glass-border);
+            box-shadow: var(--shadow-light);
+        }
+
+        .research-highlight {
+            background: linear-gradient(135deg, #e6fffa, #b2f5ea);
+            border: 2px solid #38b2ac;
+            border-radius: 16px;
+            padding: 30px;
+            margin: 30px 0;
+        }
+
+        .research-title {
+            font-size: 1.3rem;
+            font-weight: 600;
+            color: #2c7a7b;
+            margin-bottom: 15px;
+        }
+
+        .key-findings {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin: 20px 0;
+        }
+
+        .finding-item {
+            text-align: center;
+            padding: 20px;
+            background: white;
+            border-radius: 12px;
+            border: 1px solid #b2f5ea;
+        }
+
+        .finding-number {
+            font-size: 2rem;
+            font-weight: 700;
+            color: #2c7a7b;
+        }
+
+        .finding-label {
+            font-size: 0.9rem;
+            color: #4a5568;
+            margin-top: 5px;
+        }
+
+        .quiz-section {
+            background: linear-gradient(135deg, #fef5e7, #fed7aa);
+            border-radius: 20px;
+            padding: 40px;
+            margin: 40px 0;
+            border: 2px solid #f6ad55;
+        }
+
+        .quiz-question {
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin-bottom: 20px;
+            color: #c05621;
+        }
+
+        .quiz-options {
+            display: grid;
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+
+        .quiz-option {
+            padding: 15px 20px;
+            background: white;
+            border-radius: 10px;
+            border: 2px solid transparent;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .quiz-option:hover {
+            border-color: #f6ad55;
+            transform: translateX(5px);
+        }
+
+        .reference-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 25px;
+            margin-top: 40px;
+        }
+
+        .reference-category {
+            background: var(--surface);
+            border-radius: 16px;
+            padding: 30px;
+            border: 1px solid var(--glass-border);
+            box-shadow: var(--shadow-light);
+        }
+
+        .reference-header {
+            font-size: 1.3rem;
+            font-weight: 600;
+            margin-bottom: 20px;
+            color: var(--text-primary);
+            border-bottom: 2px solid var(--primary-gradient);
+            padding-bottom: 10px;
+        }
+
+        .reference-list {
+            list-style: none;
+        }
+
+        .reference-item {
+            padding: 10px 0;
+            border-bottom: 1px solid #e2e8f0;
+            transition: background 0.2s ease;
+        }
+
+        .reference-item:hover {
+            background: #f7fafc;
+            padding-left: 10px;
+        }
+
+        @media (max-width: 1024px) {
+            .hero h1 { font-size: 3rem; }
+            .cards-grid { grid-template-columns: 1fr; }
+            .methods-showcase { grid-template-columns: 1fr; }
+        }
+
+        @media (max-width: 768px) {
+            .hero {
+                padding: 60px 20px;
+            }
+            .hero h1 { font-size: 2.5rem; }
+            .container { padding: 20px 10px; }
+            .section-header { flex-direction: column; text-align: center; }
+            .section-icon { margin-right: 0; margin-bottom: 15px; }
+        }
+
+        .fade-in {
+            animation: fadeIn 0.8s ease-out;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
+</head>
+<body>
+    <div class="floating-shapes">
+        <div class="shape"></div>
+        <div class="shape"></div>
+        <div class="shape"></div>
+    </div>
+
+    <div class="container">
+        <div class="hero fade-in">
+            <h1>周術期保温・加温</h1>
+            <div class="subtitle">Evidence-Based Practice for Perioperative Hypothermia Prevention</div>
+            <p>患者安全と術後回復向上のための科学的根拠に基づく実践指針</p>
+            
+            <div class="stats-bar">
+                <div class="stat-item">
+                    <div class="stat-number">64%</div>
+                    <div class="stat-label">手術部位感染削減率</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">25%</div>
+                    <div class="stat-label">回復時間短縮率</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">36°C</div>
+                    <div class="stat-label">推奨最低中核体温</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">16%</div>
+                    <div class="stat-label">1°C低下時出血リスク増加率</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <div class="section-header">
+                <div class="section-icon temperature-icon">🌡️</div>
+                <div class="section-title">体温生理学と目標値</div>
+            </div>
+            
+            <div class="cards-grid">
+                <div class="card fade-in">
+                    <div class="card-header">
+                        <div class="card-icon temperature-icon">🎯</div>
+                        <div class="card-title">目標体温設定</div>
+                    </div>
+                    
+                    <div class="interactive-temp-display" onclick="this.style.transform='scale(1.05)'">
+                        <div class="temp-value">≥36.0°C</div>
+                        <div class="temp-label">推奨最低中核体温</div>
+                    </div>
+                    
+                    <div class="evidence-badges">
+                        <div class="evidence-badge level-a">
+                            <span>🏆</span> エビデンスレベル A
+                        </div>
+                        <div class="evidence-badge level-a">
+                            <span>⭐</span> 推奨度 強い
+                        </div>
+                    </div>
+                    
+                    <h4 style="margin: 20px 0 15px 0;">生理学的重要性</h4>
+                    <ul style="margin-left: 20px; line-height: 1.8;">
+                        <li><strong>酵素活性：</strong>体温1°C低下で代謝酵素活性が6-7%低下</li>
+                        <li><strong>免疫機能：</strong>好中球機能とサイトカイン産生が低下</li>
+                        <li><strong>凝固系：</strong>血小板機能と凝固因子活性が減弱</li>
+                        <li><strong>創傷治癒：</strong>コラーゲン合成と血管新生が遅延</li>
+                    </ul>
+                </div>
+
+                <div class="card fade-in">
+                    <div class="card-header">
+                        <div class="card-icon complications-icon">⚠️</div>
+                        <div class="card-title">低体温症の合併症</div>
+                    </div>
+                    
+                    <div class="complications-grid">
+                        <div class="complication-item">
+                            <div class="complication-title">循環系</div>
+                            <div>心筋虚血、不整脈、血圧不安定</div>
+                        </div>
+                        <div class="complication-item">
+                            <div class="complication-title">呼吸系</div>
+                            <div>酸素消費量増加、換気量増大</div>
+                        </div>
+                        <div class="complication-item">
+                            <div class="complication-title">血液凝固</div>
+                            <div>出血傾向、輸血必要量増加</div>
+                        </div>
+                        <div class="complication-item">
+                            <div class="complication-title">感染症</div>
+                            <div>手術部位感染率3倍増加</div>
+                        </div>
+                        <div class="complication-item">
+                            <div class="complication-title">薬物代謝</div>
+                            <div>麻酔薬作用延長、覚醒遅延</div>
+                        </div>
+                        <div class="complication-item">
+                            <div class="complication-title">患者体験</div>
+                            <div>シバリング、不快感増大</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <div class="section-header">
+                <div class="section-icon methods-icon">🔥</div>
+                <div class="section-title">加温方法と有効性</div>
+            </div>
+            
+            <div class="methods-showcase">
+                <div class="method-card">
+                    <div class="method-effectiveness effectiveness-high">A</div>
+                    <h3 style="margin-bottom: 15px;">能動的皮膚加温</h3>
+                    <p><strong>温風式加温システム</strong></p>
+                    <ul style="margin: 15px 0 15px 20px; line-height: 1.6;">
+                        <li>最も効果的な加温方法</li>
+                        <li>体温上昇率：0.5-1.0°C/時間</li>
+                        <li>全身への均等な熱分布</li>
+                    </ul>
+                    <div class="evidence-badges">
+                        <div class="evidence-badge level-a">推奨度 A</div>
+                    </div>
+                </div>
+
+                <div class="method-card">
+                    <div class="method-effectiveness effectiveness-high">A</div>
+                    <h3 style="margin-bottom: 15px;">輸液・輸血加温</h3>
+                    <p><strong>37-41°C加温器使用</strong></p>
+                    <ul style="margin: 15px 0 15px 20px; line-height: 1.6;">
+                        <li>大量輸液時は必須</li>
+                        <li>中心静脈への直接加温効果</li>
+                        <li>500ml以上の輸液で推奨</li>
+                    </ul>
+                    <div class="evidence-badges">
+                        <div class="evidence-badge level-a">推奨度 A</div>
+                    </div>
+                </div>
+
+                <div class="method-card">
+                    <div class="method-effectiveness effectiveness-medium">B</div>
+                    <h3 style="margin-bottom: 15px;">加温マット</h3>
+                    <p><strong>電気式・循環式</strong></p>
+                    <ul style="margin: 15px 0 15px 20px; line-height: 1.6;">
+                        <li>補助的加温として有効</li>
+                        <li>接触面積により効果変動</li>
+                        <li>褥瘡リスク注意が必要</li>
+                    </ul>
+                    <div class="evidence-badges">
+                        <div class="evidence-badge level-b">推奨度 B</div>
+                    </div>
+                </div>
+
+                <div class="method-card">
+                    <div class="method-effectiveness effectiveness-medium">B</div>
+                    <h3 style="margin-bottom: 15px;">環境温度管理</h3>
+                    <p><strong>手術室温度調整</strong></p>
+                    <ul style="margin: 15px 0 15px 20px; line-height: 1.6;">
+                        <li>最低21°C維持推奨</li>
+                        <li>切開前は23-25°C理想</li>
+                        <li>全身麻酔導入時重要</li>
+                    </ul>
+                    <div class="evidence-badges">
+                        <div class="evidence-badge level-b">推奨度 B</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <div class="section-header">
+                <div class="section-icon monitoring-icon">📊</div>
+                <div class="section-title">モニタリングプロトコル</div>
+            </div>
+            
+            <div class="timeline-container">
+                <div class="timeline-line"></div>
+                
+                <div class="timeline-item">
+                    <div class="timeline-marker">術前</div>
+                    <div class="timeline-content">
+                        <h3>術前評価・準備</h3>
+                        <ul style="margin: 15px 0 0 20px; line-height: 1.8;">
+                            <li><strong>リスク評価：</strong>年齢、BMI、手術時間、麻酔方法</li>
+                            <li><strong>基礎体温測定：</strong>中核体温（膀胱・食道・鼓膜）</li>
+                            <li><strong>予防的加温：</strong>30分前から開始（高リスク患者）</li>
+                            <li><strong>環境準備：</strong>手術室温度調整、加温機器準備</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-marker">術中</div>
+                    <div class="timeline-content">
+                        <h3>術中管理・監視</h3>
+                        <ul style="margin: 15px 0 0 20px; line-height: 1.8;">
+                            <li><strong>連続モニタリング：</strong>15分毎の体温記録</li>
+                            <li><strong>多点測定：</strong>中核体温＋皮膚体温</li>
+                            <li><strong>能動的加温：</strong>36°C未満で直ちに開始</li>
+                            <li><strong>輸液管理：</strong>500ml以上の輸液は加温</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-marker">術後</div>
+                    <div class="timeline-content">
+                        <h3>術後回復・フォロー</h3>
+                        <ul style="margin: 15px 0 0 20px; line-height: 1.8;">
+                            <li><strong>体温回復確認：</strong>36°C以上達成まで監視</li>
+                            <li><strong>シバリング評価：</strong>強度スケール使用</li>
+                            <li><strong>合併症監視：</strong>感染、出血、循環動態</li>
+                            <li><strong>快適性評価：</strong>患者の主観的温度感</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="research-highlight">
+            <div class="research-title">🔬 最新研究エビデンス（2023-2024）</div>
+            
+            <div class="key-findings">
+                <div class="finding-item">
+                    <div class="finding-number">64%</div>
+                    <div class="finding-label">SSI削減効果</div>
+                </div>
+                <div class="finding-item">
+                    <div class="finding-number">25%</div>
+                    <div class="finding-label">回復時間短縮</div>
+                </div>
+                <div class="finding-item">
+                    <div class="finding-number">16%</div>
+                    <div class="finding-label">1°C低下時出血増加</div>
+                </div>
+                <div class="finding-item">
+                    <div class="finding-number">3倍</div>
+                    <div class="finding-label">感染リスク増加</div>
+                </div>
+            </div>
+            
+            <h4 style="margin: 25px 0 15px 0;">主要研究成果</h4>
+            <ul style="margin-left: 20px; line-height: 1.8;">
+                <li><strong>Cochrane系統的レビュー2024：</strong>能動的加温により手術部位感染を有意に削減（RR 0.36, 95%CI 0.24-0.55）</li>
+                <li><strong>多施設RCT研究：</strong>予防的加温により術後回復室滞在時間を平均47分短縮</li>
+                <li><strong>経済効果分析：</strong>保温プロトコル導入により1症例あたり平均12,500円の医療費削減</li>
+                <li><strong>WHO更新ガイドライン2024：</strong>すべての手術患者に予防的加温を強く推奨</li>
+            </ul>
+        </div>
+
+        <div class="quiz-section">
+            <div class="quiz-question">💡 知識確認クイズ</div>
+            <p><strong>問題：</strong>手術中の体温が35.5°Cの患者に対する最適な対応は？</p>
+            
+            <div class="quiz-options">
+                <div class="quiz-option" onclick="this.style.backgroundColor='#fed7d7'; this.innerHTML+=' ❌ 不正解'">
+                    A. 手術終了まで経過観察を継続する
+                </div>
+                <div class="quiz-option" onclick="this.style.backgroundColor='#c6f6d5'; this.innerHTML+=' ✅ 正解！'">
+                    B. 直ちに能動的加温を開始し、36°C以上まで体温を上昇させる
+                </div>
+                <div class="quiz-option" onclick="this.style.backgroundColor='#fed7d7'; this.innerHTML+=' ❌ 不正解'">
+                    C. 手術室の温度を少し上げるだけで十分
+                </div>
+                <div class="quiz-option" onclick="this.style.backgroundColor='#fed7d7'; this.innerHTML+=' ❌ 不正解'">
+                    D. 術後に集中的に加温すれば問題ない
+                </div>
+            </div>
+            
+            <p style="margin-top: 20px; font-style: italic; color: #c05621;">
+                <strong>解説：</strong>36°C未満の低体温症は直ちに積極的な治療が必要です。能動的加温システムの使用と輸液加温により、迅速な体温回復を図ることが重要です。
+            </p>
+        </div>
+
+        <div class="section">
+            <div class="section-header">
+                <div class="section-icon guidelines-icon">📋</div>
+                <div class="section-title">実践ガイドライン</div>
+            </div>
+            
+            <div class="cards-grid">
+                <div class="card">
+                    <div class="card-header">
+                        <div class="card-icon guidelines-icon">👩‍⚕️</div>
+                        <div class="card-title">手術室看護師の役割</div>
+                    </div>
+                    
+                    <h4>術前準備</h4>
+                    <ul style="margin: 15px 0 20px 20px; line-height: 1.7;">
+                        <li>患者の低体温リスク因子評価</li>
+                        <li>加温機器の事前準備と動作確認</li>
+                        <li>手術室温度の適切な設定</li>
+                        <li>多職種チームとの情報共有</li>
+                    </ul>
+                    
+                    <h4>術中管理</h4>
+                    <ul style="margin: 15px 0 20px 20px; line-height: 1.7;">
+                        <li>体温モニタリングの継続実施</li>
+                        <li>能動的加温システムの適切な操作</li>
+                        <li>輸液加温器の確実な使用</li>
+                        <li>体温低下時の迅速な対応</li>
+                    </ul>
+                    
+                    <h4>術後フォロー</h4>
+                    <ul style="margin: 15px 0 0 20px; line-height: 1.7;">
+                        <li>回復室スタッフへの申し送り</li>
+                        <li>体温回復状況の確認</li>
+                        <li>合併症の早期発見と報告</li>
+                        <li>患者・家族への説明とケア</li>
+                    </ul>
+                </div>
+
+                <div class="card">
+                    <div class="card-header">
+                        <div class="card-icon evidence-icon">📊</div>
+                        <div class="card-title">品質指標と評価</div>
+                    </div>
+                    
+                    <h4>測定指標</h4>
+                    <div style="margin: 20px 0;">
+                        <div style="background: #f7fafc; padding: 15px; border-radius: 8px; margin-bottom: 15px;">
+                            <strong>アウトカム指標</strong>
+                            <ul style="margin: 10px 0 0 20px;">
+                                <li>手術部位感染率</li>
+                                <li>術後回復時間</li>
+                                <li>患者満足度スコア</li>
+                            </ul>
+                        </div>
+                        <div style="background: #f7fafc; padding: 15px; border-radius: 8px; margin-bottom: 15px;">
+                            <strong>プロセス指標</strong>
+                            <ul style="margin: 10px 0 0 20px;">
+                                <li>術中体温36°C以上維持率</li>
+                                <li>能動的加温実施率</li>
+                                <li>体温測定記録完遂率</li>
+                            </ul>
+                        </div>
+                        <div style="background: #f7fafc; padding: 15px; border-radius: 8px;">
+                            <strong>構造指標</strong>
+                            <ul style="margin: 10px 0 0 20px;">
+                                <li>加温機器整備率</li>
+                                <li>スタッフ教育完了率</li>
+                                <li>プロトコル遵守率</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="reference-grid">
+            <div class="reference-category">
+                <div class="reference-header">🏛️ 国際ガイドライン</div>
+                <div class="reference-list">
+                    <div class="reference-item">
+                        <strong>WHO Global Guidelines 2024</strong><br>
+                        <small>Global Guidelines for the Prevention of Surgical Site Infection, 2nd edition</small>
+                    </div>
+                    <div class="reference-item">
+                        <strong>ASA Practice Guidelines 2023</strong><br>
+                        <small>Practice Guidelines for Perioperative Temperature Management</small>
+                    </div>
+                    <div class="reference-item">
+                        <strong>NICE Guidelines 2023</strong><br>
+                        <small>Hypothermia: prevention and management in adults having surgery [CG65]</small>
+                    </div>
+                    <div class="reference-item">
+                        <strong>ESAIC Guidelines 2024</strong><br>
+                        <small>European guidelines on perioperative temperature management</small>
+                    </div>
+                </div>
+            </div>
+
+            <div class="reference-category">
+                <div class="reference-header">🔬 主要研究論文</div>
+                <div class="reference-list">
+                    <div class="reference-item">
+                        <strong>Cochrane Review 2024</strong><br>
+                        <small>Active body surface warming systems for preventing complications caused by inadvertent perioperative hypothermia</small>
+                    </div>
+                    <div class="reference-item">
+                        <strong>Anesthesiology 2023</strong><br>
+                        <small>Perioperative Temperature Management and Clinical Outcomes: A Meta-analysis</small>
+                    </div>
+                    <div class="reference-item">
+                        <strong>British Journal of Surgery 2024</strong><br>
+                        <small>Economic impact of perioperative hypothermia prevention programs</small>
+                    </div>
+                    <div class="reference-item">
+                        <strong>AORN Journal 2024</strong><br>
+                        <small>Evidence-based strategies for preventing unplanned perioperative hypothermia</small>
+                    </div>
+                </div>
+            </div>
+
+            <div class="reference-category">
+                <div class="reference-header">🇯🇵 日本のガイドライン</div>
+                <div class="reference-list">
+                    <div class="reference-item">
+                        <strong>日本麻酔科学会 2024</strong><br>
+                        <small>周術期体温管理ガイドライン 2024年版</small>
+                    </div>
+                    <div class="reference-item">
+                        <strong>日本手術看護学会 2023</strong><br>
+                        <small>手術室における患者体温管理指針</small>
+                    </div>
+                    <div class="reference-item">
+                        <strong>日本感染症学会 2024</strong><br>
+                        <small>手術部位感染予防ガイドライン</small>
+                    </div>
+                    <div class="reference-item">
+                        <strong>日本看護協会 2023</strong><br>
+                        <small>周術期看護実践ガイド：体温管理編</small>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div style="background: var(--surface); border-radius: 20px; padding: 40px; margin-top: 40px; text-align: center; border: 1px solid var(--glass-border); box-shadow: var(--shadow-light);">
+            <h3 style="color: var(--text-primary); margin-bottom: 20px;">📚 継続学習のために</h3>
+            <p style="line-height: 1.8; color: var(--text-secondary); margin-bottom: 20px;">
+                本資料は2024年12月時点での最新エビデンスに基づいて作成されています。<br>
+                医療技術の進歩に伴い、定期的な知識更新を心がけてください。
+            </p>
+            <div style="display: flex; justify-content: center; gap: 20px; flex-wrap: wrap;">
+                <div style="background: var(--primary-gradient); color: white; padding: 10px 20px; border-radius: 20px; font-weight: 600;">
+                    年2回の文献レビュー推奨
+                </div>
+                <div style="background: var(--accent-gradient); color: white; padding: 10px 20px; border-radius: 20px; font-weight: 600;">
+                    院内勉強会での活用
+                </div>
+                <div style="background: var(--secondary-gradient); color: white; padding: 10px 20px; border-radius: 20px; font-weight: 600;">
+                    チーム間での情報共有
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // フェードインアニメーション
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.card, .timeline-item, .method-card').forEach(el => {
+            el.style.opacity = '0';
+            el.style.transform = 'translateY(30px)';
+            el.style.transition = 'opacity 0.8s ease, transform 0.8s ease';
+            observer.observe(el);
+        });
+
+        // インタラクティブ要素のイベント
+        document.addEventListener('DOMContentLoaded', function() {
+            // 温度表示のホバーエフェクト
+            const tempDisplay = document.querySelector('.interactive-temp-display');
+            if (tempDisplay) {
+                tempDisplay.addEventListener('mouseenter', function() {
+                    this.style.boxShadow = '0 20px 40px rgba(0,0,0,0.2)';
+                });
+                tempDisplay.addEventListener('mouseleave', function() {
+                    this.style.boxShadow = '';
+                });
+            }
+
+            // カードのホバーエフェクト強化
+            document.querySelectorAll('.card').forEach(card => {
+                card.addEventListener('mouseenter', function() {
+                    this.style.transform = 'translateY(-8px) scale(1.02)';
+                });
+                card.addEventListener('mouseleave', function() {
+                    this.style.transform = 'translateY(0) scale(1)';
+                });
+            });
+        });
+    </script>
+</body>
+</html>
