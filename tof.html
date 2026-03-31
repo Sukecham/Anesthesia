@@ -42,7 +42,9 @@ color: var(–text);
 
 /* ── Header ── */
 .hero {
-background: linear-gradient(135deg, var(–primary) 0%, var(–primary-mid) 40%, var(–secondary) 100%);
+background: #0d2137;
+background: -webkit-linear-gradient(315deg, #0d2137 0%, #163a5f 40%, #1a6fa0 100%);
+background: linear-gradient(135deg, #0d2137 0%, #163a5f 40%, #1a6fa0 100%);
 color: #fff;
 padding: 56px 24px 72px;
 position: relative;
@@ -57,16 +59,18 @@ width: 600px;
 height: 600px;
 background: radial-gradient(circle, rgba(255,255,255,0.04) 0%, transparent 70%);
 border-radius: 50%;
+pointer-events: none;
 }
 .hero::after {
 content: “”;
 position: absolute;
-bottom: 0;
-left: 0;
-right: 0;
+bottom: -24px;
+left: -5%;
+right: -5%;
 height: 48px;
-background: var(–light);
-clip-path: ellipse(55% 100% at 50% 100%);
+background: #f0f4f8;
+border-radius: 50%;
+pointer-events: none;
 }
 .hero-inner {
 max-width: 960px;
@@ -78,16 +82,15 @@ z-index: 1;
 display: inline-flex;
 align-items: center;
 gap: 8px;
-background: rgba(255,255,255,0.12);
-border: 1px solid rgba(255,255,255,0.2);
+background: rgba(255,255,255,0.15);
+border: 1px solid rgba(255,255,255,0.25);
 border-radius: 100px;
 padding: 6px 18px;
 font-size: 0.82rem;
 letter-spacing: 0.04em;
 margin-bottom: 24px;
-backdrop-filter: blur(4px);
 }
-.hero-badge svg { width: 16px; height: 16px; fill: var(–warning); }
+.hero-badge svg { width: 16px; height: 16px; fill: #e9c46a; }
 .hero h1 {
 font-size: 2.2rem;
 font-weight: 800;
@@ -147,7 +150,7 @@ line-height: 1.4;
 flex-shrink: 0;
 width: 36px;
 height: 36px;
-background: linear-gradient(135deg, var(–secondary), var(–primary-mid));
+background: linear-gradient(135deg, #1a6fa0, #163a5f);
 border-radius: var(–radius-sm);
 display: flex;
 align-items: center;
@@ -172,7 +175,7 @@ position: absolute;
 top: 0; left: 0;
 width: 6px;
 height: 100%;
-background: linear-gradient(180deg, var(–secondary), var(–primary));
+background: linear-gradient(180deg, #1a6fa0, #0d2137);
 border-radius: var(–radius) 0 0 var(–radius);
 }
 .conclusion-top h2 {
@@ -318,7 +321,7 @@ left: 18px;
 top: 0;
 bottom: 0;
 width: 3px;
-background: linear-gradient(180deg, var(–secondary), var(–primary));
+background: linear-gradient(180deg, #1a6fa0, #0d2137);
 border-radius: 2px;
 }
 .tl-item {
