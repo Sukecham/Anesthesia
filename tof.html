@@ -6,37 +6,13 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>アブレーション全身麻酔 TOF/PTC 超実践ガイド</title>
 <style>
-:root {
-  --primary: #0d2137;
-  --primary-mid: #163a5f;
-  --secondary: #1a6fa0;
-  --accent: #e63946;
-  --accent-warm: #f4845f;
-  --success: #2a9d8f;
-  --success-light: #e8f5f2;
-  --warning: #e9c46a;
-  --warning-bg: #fdf6e3;
-  --danger: #e63946;
-  --danger-bg: #fdf0f0;
-  --light: #f0f4f8;
-  --surface: #ffffff;
-  --text: #1a1a2e;
-  --text-secondary: #4a5568;
-  --border: #d8e2ec;
-  --shadow-sm: 0 1px 3px rgba(13,33,55,0.06);
-  --shadow-md: 0 4px 16px rgba(13,33,55,0.08);
-  --shadow-lg: 0 8px 32px rgba(13,33,55,0.12);
-  --radius: 12px;
-  --radius-sm: 8px;
-}
-
-- { margin: 0; padding: 0; box-sizing: border-box; }
+* { margin: 0; padding: 0; box-sizing: border-box; }
 
 body {
 font-family: “Hiragino Kaku Gothic ProN”, “Hiragino Sans”, “Meiryo”, “Noto Sans JP”, sans-serif;
 line-height: 1.85;
-background: var(–light);
-color: var(–text);
+background: #f0f4f8;
+color: #1a1a2e;
 -webkit-font-smoothing: antialiased;
 }
 
@@ -46,7 +22,8 @@ background: #0d2137;
 background: -webkit-linear-gradient(315deg, #0d2137 0%, #163a5f 40%, #1a6fa0 100%);
 background: linear-gradient(135deg, #0d2137 0%, #163a5f 40%, #1a6fa0 100%);
 color: #fff;
-padding: 56px 24px 72px;
+padding: 56px 24px 48px;
+margin-bottom: 32px;
 position: relative;
 overflow: hidden;
 }
@@ -62,15 +39,7 @@ border-radius: 50%;
 pointer-events: none;
 }
 .hero::after {
-content: “”;
-position: absolute;
-bottom: -24px;
-left: -5%;
-right: -5%;
-height: 48px;
-background: #f0f4f8;
-border-radius: 50%;
-pointer-events: none;
+content: none;
 }
 .hero-inner {
 max-width: 960px;
@@ -114,19 +83,19 @@ padding: 0 20px 80px;
 
 /* ── Section ── */
 .section {
-background: var(–surface);
-border-radius: var(–radius);
-box-shadow: var(–shadow-md);
+background: #ffffff;
+border-radius: 12px;
+box-shadow: 0 4px 16px rgba(13,33,55,0.08);
 padding: 36px 32px;
 margin-bottom: 28px;
-border: 1px solid var(–border);
+border: 1px solid #d8e2ec;
 position: relative;
 }
 .section-number {
 position: absolute;
 top: -14px;
 left: 28px;
-background: var(–secondary);
+background: #1a6fa0;
 color: #fff;
 font-size: 0.75rem;
 font-weight: 700;
@@ -137,10 +106,10 @@ letter-spacing: 0.06em;
 .section h2 {
 font-size: 1.35rem;
 font-weight: 800;
-color: var(–primary);
+color: #0d2137;
 margin-bottom: 18px;
 padding-bottom: 12px;
-border-bottom: 2px solid var(–border);
+border-bottom: 2px solid #d8e2ec;
 display: flex;
 align-items: center;
 gap: 12px;
@@ -151,20 +120,20 @@ flex-shrink: 0;
 width: 36px;
 height: 36px;
 background: linear-gradient(135deg, #1a6fa0, #163a5f);
-border-radius: var(–radius-sm);
+border-radius: 8px;
 display: flex;
 align-items: center;
 justify-content: center;
 }
 .section h2 .sec-icon svg { width: 20px; height: 20px; fill: #fff; }
-.section p { margin-bottom: 14px; color: var(–text-secondary); }
+.section p { margin-bottom: 14px; color: #4a5568; }
 .section p:last-child { margin-bottom: 0; }
 
 /* ── Conclusion Box (top) ── */
 .conclusion-top {
 background: linear-gradient(135deg, #f0f7ff 0%, #e8f0fe 100%);
-border: 2px solid var(–secondary);
-border-radius: var(–radius);
+border: 2px solid #1a6fa0;
+border-radius: 12px;
 padding: 32px;
 margin-bottom: 28px;
 position: relative;
@@ -176,11 +145,11 @@ top: 0; left: 0;
 width: 6px;
 height: 100%;
 background: linear-gradient(180deg, #1a6fa0, #0d2137);
-border-radius: var(–radius) 0 0 var(–radius);
+border-radius: 12px 0 0 12px;
 }
 .conclusion-top h2 {
 font-size: 1.3rem;
-color: var(–primary);
+color: #0d2137;
 margin-bottom: 20px;
 border: none;
 padding-bottom: 0;
@@ -191,14 +160,14 @@ padding-bottom: 0;
 width: 100%;
 border-collapse: separate;
 border-spacing: 0;
-border-radius: var(–radius-sm);
+border-radius: 8px;
 overflow: hidden;
 margin: 20px 0;
 font-size: 0.92rem;
-box-shadow: var(–shadow-sm);
+box-shadow: 0 1px 3px rgba(13,33,55,0.06);
 }
 .judgment-table thead th {
-background: var(–primary);
+background: #0d2137;
 color: #fff;
 padding: 12px 16px;
 text-align: left;
@@ -208,12 +177,12 @@ letter-spacing: 0.04em;
 }
 .judgment-table tbody td {
 padding: 12px 16px;
-border-bottom: 1px solid var(–border);
+border-bottom: 1px solid #d8e2ec;
 vertical-align: top;
 }
 .judgment-table tbody tr:nth-child(even) { background: #f7fafc; }
 .judgment-table tbody tr:last-child td { border-bottom: none; }
-.judgment-table .val { font-weight: 700; color: var(–primary); white-space: nowrap; }
+.judgment-table .val { font-weight: 700; color: #0d2137; white-space: nowrap; }
 
 /* ── Dose Table ── */
 .dose-grid {
@@ -223,14 +192,14 @@ gap: 16px;
 margin: 20px 0;
 }
 .dose-card {
-border-radius: var(–radius-sm);
+border-radius: 8px;
 padding: 20px;
 border-left: 5px solid;
 position: relative;
 }
-.dose-card.shallow { background: var(–success-light); border-color: var(–success); }
-.dose-card.deep { background: var(–warning-bg); border-color: var(–warning); }
-.dose-card.emergency { background: var(–danger-bg); border-color: var(–danger); }
+.dose-card.shallow { background: #e8f5f2; border-color: #2a9d8f; }
+.dose-card.deep { background: #fdf6e3; border-color: #e9c46a; }
+.dose-card.emergency { background: #fdf0f0; border-color: #e63946; }
 .dose-card .dose-label {
 font-size: 0.78rem;
 font-weight: 700;
@@ -238,20 +207,20 @@ text-transform: uppercase;
 letter-spacing: 0.06em;
 margin-bottom: 4px;
 }
-.dose-card.shallow .dose-label { color: var(–success); }
+.dose-card.shallow .dose-label { color: #2a9d8f; }
 .dose-card.deep .dose-label { color: #b8860b; }
-.dose-card.emergency .dose-label { color: var(–danger); }
+.dose-card.emergency .dose-label { color: #e63946; }
 .dose-card .dose-value {
 font-size: 1.6rem;
 font-weight: 800;
-color: var(–primary);
+color: #0d2137;
 margin-bottom: 4px;
 }
-.dose-card .dose-desc { font-size: 0.88rem; color: var(–text-secondary); }
+.dose-card .dose-desc { font-size: 0.88rem; color: #4a5568; }
 
 /* ── Alert Box ── */
 .alert {
-border-radius: var(–radius-sm);
+border-radius: 8px;
 padding: 18px 20px;
 margin: 18px 0;
 display: flex;
@@ -261,12 +230,12 @@ font-size: 0.93rem;
 }
 .alert svg { flex-shrink: 0; width: 22px; height: 22px; margin-top: 2px; }
 .alert-danger {
-background: var(–danger-bg);
+background: #fdf0f0;
 border: 1px solid #f5c6cb;
 }
-.alert-danger svg { fill: var(–danger); }
+.alert-danger svg { fill: #e63946; }
 .alert-warning {
-background: var(–warning-bg);
+background: #fdf6e3;
 border: 1px solid #f0dca0;
 }
 .alert-warning svg { fill: #c9971a; }
@@ -274,7 +243,7 @@ border: 1px solid #f0dca0;
 background: #eef4ff;
 border: 1px solid #bdd4f7;
 }
-.alert-info svg { fill: var(–secondary); }
+.alert-info svg { fill: #1a6fa0; }
 
 /* ── Highlight ── */
 .hl {
@@ -296,19 +265,19 @@ margin: 20px 0;
 .key-num {
 text-align: center;
 padding: 20px 12px;
-background: var(–light);
-border-radius: var(–radius-sm);
-border: 1px solid var(–border);
+background: #f0f4f8;
+border-radius: 8px;
+border: 1px solid #d8e2ec;
 }
 .key-num .num {
 font-size: 1.8rem;
 font-weight: 800;
-color: var(–secondary);
+color: #1a6fa0;
 display: block;
 }
 .key-num .num-label {
 font-size: 0.82rem;
-color: var(–text-secondary);
+color: #4a5568;
 margin-top: 4px;
 }
 
@@ -336,19 +305,19 @@ left: 8px;
 top: 4px;
 width: 24px;
 height: 24px;
-background: var(–surface);
-border: 3px solid var(–secondary);
+background: #ffffff;
+border: 3px solid #1a6fa0;
 border-radius: 50%;
 z-index: 1;
 }
-.tl-dot.active { background: var(–secondary); }
+.tl-dot.active { background: #1a6fa0; }
 .tl-title {
 font-weight: 700;
 font-size: 1rem;
-color: var(–primary);
+color: #0d2137;
 margin-bottom: 4px;
 }
-.tl-desc { font-size: 0.92rem; color: var(–text-secondary); }
+.tl-desc { font-size: 0.92rem; color: #4a5568; }
 
 /* ── Danger List ── */
 .danger-list { margin: 16px 0; }
@@ -356,8 +325,8 @@ margin-bottom: 4px;
 list-style: none;
 padding: 10px 14px 10px 42px;
 margin-bottom: 8px;
-background: var(–danger-bg);
-border-radius: var(–radius-sm);
+background: #fdf0f0;
+border-radius: 8px;
 position: relative;
 font-size: 0.93rem;
 color: #5a1a1a;
@@ -371,7 +340,7 @@ top: 50%;
 transform: translateY(-50%);
 width: 8px;
 height: 8px;
-background: var(–danger);
+background: #e63946;
 border-radius: 50%;
 }
 
@@ -380,14 +349,14 @@ border-radius: 50%;
 width: 100%;
 border-collapse: separate;
 border-spacing: 0;
-border-radius: var(–radius-sm);
+border-radius: 8px;
 overflow: hidden;
 margin: 16px 0;
 font-size: 0.9rem;
-box-shadow: var(–shadow-sm);
+box-shadow: 0 1px 3px rgba(13,33,55,0.06);
 }
 .calc-table th {
-background: var(–primary-mid);
+background: #163a5f;
 color: #fff;
 padding: 10px 14px;
 text-align: center;
@@ -396,7 +365,7 @@ font-size: 0.82rem;
 }
 .calc-table td {
 padding: 10px 14px;
-border-bottom: 1px solid var(–border);
+border-bottom: 1px solid #d8e2ec;
 text-align: center;
 }
 .calc-table tbody tr:nth-child(even) { background: #f7fafc; }
@@ -410,21 +379,21 @@ gap: 16px;
 margin: 20px 0;
 }
 .rule-card {
-background: var(–light);
-border-radius: var(–radius-sm);
+background: #f0f4f8;
+border-radius: 8px;
 padding: 20px;
-border: 1px solid var(–border);
+border: 1px solid #d8e2ec;
 display: flex;
 gap: 14px;
 align-items: flex-start;
 transition: box-shadow 0.2s;
 }
-.rule-card:hover { box-shadow: var(–shadow-md); }
+.rule-card:hover { box-shadow: 0 4px 16px rgba(13,33,55,0.08); }
 .rule-num {
 flex-shrink: 0;
 width: 36px;
 height: 36px;
-background: var(–primary);
+background: #0d2137;
 color: #fff;
 border-radius: 50%;
 display: flex;
@@ -433,16 +402,16 @@ justify-content: center;
 font-weight: 800;
 font-size: 1rem;
 }
-.rule-text { font-size: 0.93rem; color: var(–text); line-height: 1.6; }
+.rule-text { font-size: 0.93rem; color: #1a1a2e; line-height: 1.6; }
 
 /* ── Quick Reference Card (bottom) ── */
 .quick-ref {
-background: var(–primary);
+background: #0d2137;
 color: #fff;
-border-radius: var(–radius);
+border-radius: 12px;
 padding: 36px 32px;
 margin-bottom: 28px;
-box-shadow: var(–shadow-lg);
+box-shadow: 0 8px 32px rgba(13,33,55,0.12);
 }
 .quick-ref h2 {
 color: #fff;
@@ -483,27 +452,27 @@ width: 8px;
 height: 8px;
 border-radius: 50%;
 }
-.qr-block.tof li::before { background: var(–warning); }
-.qr-block.suga li::before { background: var(–success); }
-.qr-block.risk li::before { background: var(–accent); }
-.qr-block.event li::before { background: var(–accent-warm); }
+.qr-block.tof li::before { background: #e9c46a; }
+.qr-block.suga li::before { background: #2a9d8f; }
+.qr-block.risk li::before { background: #e63946; }
+.qr-block.event li::before { background: #f4845f; }
 .qr-target {
 margin-top: 20px;
 padding: 18px 24px;
 background: rgba(255,255,255,0.08);
-border-radius: var(–radius-sm);
+border-radius: 8px;
 border: 1px solid rgba(255,255,255,0.15);
 text-align: center;
 font-size: 1.1rem;
 }
 .qr-target strong {
-color: var(–warning);
+color: #e9c46a;
 font-size: 1.5rem;
 }
 
 /* ── Footer ── */
 footer {
-background: var(–primary);
+background: #0d2137;
 color: rgba(255,255,255,0.6);
 text-align: center;
 padding: 28px 20px;
@@ -600,7 +569,7 @@ font-size: 0.82rem;
     </tbody>
   </table>
 
-  <h3 style="margin-top:24px; font-size:1.05rem; color:var(--primary);">スガマデクス投与量（日本の電子添文）</h3>
+  <h3 style="margin-top:24px; font-size:1.05rem; color:#0d2137;">スガマデクス投与量（日本の電子添文）</h3>
   <div class="dose-grid">
     <div class="dose-card shallow">
       <div class="dose-label">浅い筋弛緩（T2再出現後）</div>
@@ -693,7 +662,7 @@ font-size: 0.82rem;
       <span class="num-label">定性的モニター時の<br>残存筋弛緩率</span>
     </div>
     <div class="key-num">
-      <span class="num" style="color:var(--success);">11.5%</span>
+      <span class="num" style="color:#2a9d8f;">11.5%</span>
       <span class="num-label">定量的モニター時の<br>残存筋弛緩率</span>
     </div>
   </div>
