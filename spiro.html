@@ -1,0 +1,1074 @@
+<!DOCTYPE html>
+
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>全身麻酔下アブレーションにおける術前呼吸機能評価について</title>
+<style>
+:root {
+  --primary: #0d3b66;
+  --secondary: #1a6fa0;
+  --accent: #e05c45;
+  --accent-warm: #d4853b;
+  --teal: #2a9d8f;
+  --teal-light: #e8f6f4;
+  --light: #f4f6f8;
+  --dark: #1e2a38;
+  --text: #2c3e50;
+  --card-shadow: 0 4px 20px rgba(13,59,102,0.08);
+  --card-hover: 0 12px 36px rgba(13,59,102,0.14);
+  --border-subtle: #dde4ec;
+  --green: #27ae60;
+  --yellow: #f0ad30;
+  --red: #e05c45;
+}
+
+- { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+font-family: “Hiragino Kaku Gothic Pro”, “Meiryo”, “Noto Sans JP”, sans-serif;
+line-height: 1.85;
+background: var(–light);
+color: var(–text);
+-webkit-font-smoothing: antialiased;
+}
+
+.container {
+max-width: 1120px;
+margin: 0 auto;
+padding: 0 24px;
+}
+
+/* ===== HEADER ===== */
+header {
+background: linear-gradient(140deg, var(–primary) 0%, var(–secondary) 55%, #2a9d8f 100%);
+color: #fff;
+padding: 72px 0 96px;
+text-align: center;
+position: relative;
+overflow: hidden;
+clip-path: polygon(0 0, 100% 0, 100% 82%, 0 100%);
+}
+
+header::before {
+content: “”;
+position: absolute;
+top: -60%;
+right: -20%;
+width: 600px;
+height: 600px;
+border-radius: 50%;
+background: rgba(255,255,255,0.04);
+pointer-events: none;
+}
+
+header::after {
+content: “”;
+position: absolute;
+bottom: -30%;
+left: -10%;
+width: 400px;
+height: 400px;
+border-radius: 50%;
+background: rgba(255,255,255,0.03);
+pointer-events: none;
+}
+
+.header-badge {
+display: inline-flex;
+align-items: center;
+gap: 8px;
+background: rgba(255,255,255,0.15);
+border: 1px solid rgba(255,255,255,0.25);
+border-radius: 40px;
+padding: 6px 20px;
+font-size: 0.82rem;
+letter-spacing: 0.06em;
+margin-bottom: 24px;
+backdrop-filter: blur(4px);
+}
+
+.header-badge svg {
+width: 16px;
+height: 16px;
+fill: #fff;
+}
+
+h1 {
+font-size: 2.2rem;
+font-weight: 800;
+letter-spacing: 0.02em;
+margin-bottom: 16px;
+line-height: 1.35;
+}
+
+.subtitle {
+font-size: 1.05rem;
+opacity: 0.88;
+font-weight: 400;
+line-height: 1.6;
+}
+
+/* ===== INTRO CALLOUT ===== */
+.intro-callout {
+background: #fff;
+border-radius: 14px;
+padding: 36px 40px;
+box-shadow: var(–card-shadow);
+margin-top: -48px;
+margin-bottom: 48px;
+position: relative;
+z-index: 2;
+border-left: 5px solid var(–secondary);
+}
+
+.intro-callout p {
+margin-bottom: 12px;
+font-size: 0.98rem;
+}
+
+.intro-callout p:last-child { margin-bottom: 0; }
+
+/* ===== SECTION ===== */
+section {
+background: #fff;
+border-radius: 14px;
+padding: 36px 40px;
+box-shadow: var(–card-shadow);
+margin-bottom: 40px;
+}
+
+h2 {
+color: var(–primary);
+font-size: 1.35rem;
+font-weight: 700;
+margin-bottom: 24px;
+padding-bottom: 14px;
+border-bottom: 2px solid var(–primary);
+display: flex;
+align-items: center;
+gap: 14px;
+}
+
+h2 .section-num {
+display: inline-flex;
+align-items: center;
+justify-content: center;
+width: 36px;
+height: 36px;
+background: var(–primary);
+color: #fff;
+border-radius: 10px;
+font-size: 0.9rem;
+font-weight: 800;
+flex-shrink: 0;
+}
+
+h2 .h2-icon {
+width: 32px;
+height: 32px;
+flex-shrink: 0;
+}
+
+h2 .h2-icon svg {
+width: 32px;
+height: 32px;
+fill: var(–secondary);
+}
+
+h3 {
+font-size: 1.08rem;
+color: var(–primary);
+margin: 20px 0 12px;
+}
+
+p { margin-bottom: 14px; font-size: 0.96rem; }
+p:last-child { margin-bottom: 0; }
+
+/* ===== RISK FACTORS LIST ===== */
+.risk-factors {
+display: grid;
+grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+gap: 14px;
+margin: 20px 0;
+}
+
+.risk-item {
+display: flex;
+align-items: flex-start;
+gap: 12px;
+background: #f8fafc;
+border-radius: 10px;
+padding: 14px 18px;
+border: 1px solid var(–border-subtle);
+font-size: 0.94rem;
+transition: border-color 0.25s;
+}
+
+.risk-item:hover {
+border-color: var(–secondary);
+}
+
+.risk-item .ri-icon {
+width: 22px;
+height: 22px;
+flex-shrink: 0;
+margin-top: 2px;
+}
+
+.risk-item .ri-icon svg {
+width: 22px;
+height: 22px;
+fill: var(–accent);
+}
+
+/* ===== HIGHLIGHT ===== */
+.highlight {
+background: linear-gradient(transparent 55%, rgba(42,157,143,0.22) 45%);
+font-weight: 700;
+}
+
+/* ===== PROPOSAL BOX ===== */
+.proposal-box {
+background: linear-gradient(135deg, #f0f7ff 0%, #e8f6f4 100%);
+border: 2px solid var(–secondary);
+border-radius: 14px;
+padding: 32px 36px;
+margin: 24px 0;
+position: relative;
+}
+
+.proposal-box::before {
+content: “”;
+position: absolute;
+top: -1px;
+left: 30px;
+right: 30px;
+height: 3px;
+background: linear-gradient(90deg, var(–secondary), var(–teal));
+border-radius: 0 0 4px 4px;
+}
+
+.proposal-box p {
+font-size: 1.02rem;
+line-height: 1.9;
+}
+
+/* ===== BENEFIT POINTS ===== */
+.benefit-grid {
+display: grid;
+grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+gap: 16px;
+margin: 20px 0;
+}
+
+.benefit-card {
+background: #fff;
+border-radius: 12px;
+padding: 20px;
+border: 1px solid var(–border-subtle);
+display: flex;
+align-items: flex-start;
+gap: 14px;
+transition: 0.3s;
+}
+
+.benefit-card:hover {
+box-shadow: 0 6px 20px rgba(13,59,102,0.08);
+transform: translateY(-2px);
+}
+
+.benefit-icon {
+width: 40px;
+height: 40px;
+border-radius: 10px;
+background: var(–teal-light);
+display: flex;
+align-items: center;
+justify-content: center;
+flex-shrink: 0;
+}
+
+.benefit-icon svg {
+width: 20px;
+height: 20px;
+fill: var(–teal);
+}
+
+.benefit-text {
+font-size: 0.93rem;
+line-height: 1.65;
+}
+
+/* ===== COMPLICATION LIST ===== */
+.complication-row {
+display: flex;
+flex-wrap: wrap;
+gap: 10px;
+margin: 16px 0;
+}
+
+.complication-tag {
+display: inline-flex;
+align-items: center;
+gap: 6px;
+background: #fdf0ed;
+color: var(–accent);
+border: 1px solid #f5c9bf;
+border-radius: 8px;
+padding: 6px 14px;
+font-size: 0.88rem;
+font-weight: 600;
+}
+
+.complication-tag svg {
+width: 14px;
+height: 14px;
+fill: var(–accent);
+}
+
+.latent-list {
+list-style: none;
+margin: 16px 0;
+padding: 0;
+}
+
+.latent-list li {
+margin-bottom: 8px;
+padding-left: 24px;
+position: relative;
+font-size: 0.94rem;
+}
+
+.latent-list li::before {
+content: “”;
+width: 8px;
+height: 8px;
+background: var(–accent-warm);
+border-radius: 50%;
+position: absolute;
+left: 0;
+top: 10px;
+}
+
+/* ===== EVALUATION CARDS ===== */
+.eval-grid {
+display: grid;
+grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+gap: 24px;
+margin: 24px 0;
+}
+
+.eval-card {
+background: #fff;
+border-radius: 14px;
+overflow: hidden;
+box-shadow: var(–card-shadow);
+transition: 0.3s;
+border: 1px solid var(–border-subtle);
+}
+
+.eval-card:hover {
+transform: translateY(-4px);
+box-shadow: var(–card-hover);
+}
+
+.eval-card-header {
+background: linear-gradient(135deg, var(–primary), var(–secondary));
+color: #fff;
+padding: 18px 24px;
+display: flex;
+align-items: center;
+gap: 14px;
+position: relative;
+}
+
+.eval-card-header .eval-num {
+position: absolute;
+top: 50%;
+right: 18px;
+transform: translateY(-50%);
+font-size: 3rem;
+font-weight: 900;
+opacity: 0.15;
+line-height: 1;
+}
+
+.eval-icon {
+width: 44px;
+height: 44px;
+border-radius: 12px;
+background: rgba(255,255,255,0.18);
+display: flex;
+align-items: center;
+justify-content: center;
+flex-shrink: 0;
+}
+
+.eval-icon svg {
+width: 22px;
+height: 22px;
+fill: #fff;
+}
+
+.eval-card-header h3 {
+color: #fff;
+margin: 0;
+font-size: 1.1rem;
+font-weight: 700;
+}
+
+.eval-card-header .eval-subtitle {
+font-size: 0.82rem;
+opacity: 0.8;
+margin-top: 2px;
+}
+
+.eval-card-body {
+padding: 22px 24px;
+}
+
+.eval-row {
+display: flex;
+align-items: center;
+gap: 12px;
+padding: 10px 0;
+border-bottom: 1px solid #f0f2f5;
+font-size: 0.92rem;
+}
+
+.eval-row:last-child { border-bottom: none; }
+
+.eval-badge {
+display: inline-block;
+padding: 3px 12px;
+border-radius: 6px;
+font-size: 0.8rem;
+font-weight: 700;
+flex-shrink: 0;
+min-width: 64px;
+text-align: center;
+}
+
+.badge-green { background: #e8f8ef; color: var(–green); }
+.badge-yellow { background: #fef6e6; color: #c08a1e; }
+.badge-red { background: #fdecea; color: var(–red); }
+
+/* ===== JUDGMENT FRAME ===== */
+.judgment-frame {
+display: grid;
+grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+gap: 16px;
+margin: 20px 0;
+}
+
+.judgment-item {
+border-radius: 12px;
+padding: 20px 24px;
+display: flex;
+align-items: flex-start;
+gap: 14px;
+}
+
+.judgment-item.j-ok {
+background: #e8f8ef;
+border: 1px solid #b8e6cc;
+}
+
+.judgment-item.j-caution {
+background: #fef6e6;
+border: 1px solid #f5dda8;
+}
+
+.judgment-item.j-alert {
+background: #fdecea;
+border: 1px solid #f5c0b8;
+}
+
+.j-signal {
+width: 36px;
+height: 36px;
+border-radius: 50%;
+display: flex;
+align-items: center;
+justify-content: center;
+flex-shrink: 0;
+}
+
+.j-ok .j-signal { background: var(–green); }
+.j-caution .j-signal { background: var(–yellow); }
+.j-alert .j-signal { background: var(–red); }
+
+.j-signal svg {
+width: 18px;
+height: 18px;
+fill: #fff;
+}
+
+.j-text {
+font-size: 0.94rem;
+line-height: 1.65;
+}
+
+.j-text strong {
+display: block;
+margin-bottom: 4px;
+font-size: 0.98rem;
+}
+
+/* ===== CHANGE SECTION ===== */
+.change-flow {
+display: grid;
+grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+gap: 18px;
+margin: 20px 0;
+}
+
+.change-card {
+background: #f8fafc;
+border-radius: 12px;
+padding: 22px 24px;
+border: 1px solid var(–border-subtle);
+position: relative;
+overflow: hidden;
+}
+
+.change-card::after {
+content: “”;
+position: absolute;
+bottom: 0;
+left: 0;
+right: 0;
+height: 3px;
+background: linear-gradient(90deg, var(–teal), var(–secondary));
+}
+
+.change-before {
+font-size: 0.88rem;
+color: #7f8c9b;
+margin-bottom: 8px;
+}
+
+.change-arrow {
+display: flex;
+align-items: center;
+gap: 8px;
+margin: 8px 0;
+}
+
+.change-arrow svg {
+width: 20px;
+height: 20px;
+fill: var(–teal);
+}
+
+.change-after {
+font-size: 0.96rem;
+font-weight: 700;
+color: var(–primary);
+}
+
+/* ===== KEY MESSAGE ===== */
+.key-message {
+background: var(–primary);
+color: #fff;
+border-radius: 14px;
+padding: 32px 40px;
+margin: 24px 0;
+position: relative;
+overflow: hidden;
+}
+
+.key-message::before {
+content: “”;
+position: absolute;
+top: -50%;
+right: -15%;
+width: 300px;
+height: 300px;
+border-radius: 50%;
+background: rgba(255,255,255,0.04);
+pointer-events: none;
+}
+
+.key-message p {
+position: relative;
+z-index: 1;
+font-size: 1.0rem;
+line-height: 1.9;
+}
+
+/* ===== SUMMARY BOX ===== */
+.summary-box {
+background: linear-gradient(135deg, #f0f7ff 0%, #edf8f6 100%);
+border-radius: 14px;
+padding: 32px 36px;
+margin: 24px 0;
+border: 1px solid var(–border-subtle);
+}
+
+.summary-list {
+list-style: none;
+padding: 0;
+margin: 0;
+}
+
+.summary-list > li {
+margin-bottom: 12px;
+padding-left: 28px;
+position: relative;
+font-size: 0.95rem;
+}
+
+.summary-list > li::before {
+content: “”;
+width: 10px;
+height: 10px;
+background: var(–teal);
+border-radius: 50%;
+position: absolute;
+left: 0;
+top: 9px;
+}
+
+.summary-sub {
+list-style: none;
+padding: 0;
+margin: 8px 0 0 4px;
+}
+
+.summary-sub li {
+padding-left: 22px;
+position: relative;
+margin-bottom: 6px;
+font-size: 0.92rem;
+}
+
+.summary-sub li::before {
+content: “”;
+width: 6px;
+height: 6px;
+border: 2px solid var(–secondary);
+border-radius: 50%;
+position: absolute;
+left: 0;
+top: 10px;
+background: transparent;
+}
+
+/* ===== FOOTER ===== */
+footer {
+background: var(–dark);
+color: rgba(255,255,255,0.7);
+padding: 32px 0;
+text-align: center;
+font-size: 0.85rem;
+margin-top: 20px;
+}
+
+footer strong {
+color: #fff;
+}
+
+/* ===== RESPONSIVE ===== */
+@media (max-width: 768px) {
+h1 { font-size: 1.6rem; }
+header { padding: 48px 0 72px; }
+section, .intro-callout { padding: 24px 20px; }
+.eval-grid { grid-template-columns: 1fr; }
+.risk-factors { grid-template-columns: 1fr; }
+.benefit-grid { grid-template-columns: 1fr; }
+.judgment-frame { grid-template-columns: 1fr; }
+.change-flow { grid-template-columns: 1fr; }
+.key-message { padding: 24px 20px; }
+.proposal-box { padding: 24px 20px; }
+}
+</style>
+
+</head>
+<body>
+
+<!-- ===== HEADER ===== -->
+
+<header>
+  <div class="container">
+    <div class="header-badge">
+      <svg viewBox="0 0 24 24"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.27 2 8.5 2 5.41 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.08C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.41 22 8.5c0 3.77-3.4 6.86-8.55 11.53L12 21.35z"/></svg>
+      循環器科の先生方へ
+    </div>
+    <h1>全身麻酔下アブレーションにおける<br>術前呼吸機能評価について</h1>
+    <div class="subtitle">― 安全性向上のためのスクリーニング導入提案 ―</div>
+  </div>
+</header>
+
+<div class="container">
+
+<!-- ===== INTRO ===== -->
+
+<div class="intro-callout">
+  <p>平素より大変お世話になっております。</p>
+  <p>全身麻酔下で実施されるアブレーション症例における術前評価について、特に<span class="highlight">呼吸機能評価の位置づけ</span>に関して、整理とご提案をさせていただきます。</p>
+</div>
+
+<!-- ===== SECTION 1: 背景 ===== -->
+
+<section>
+  <h2>
+    <span class="section-num">1</span>
+    本提案の背景
+  </h2>
+  <p>現在の国内外の考え方として、全身麻酔を行うすべての患者に対してスパイロメトリーを一律に実施することが明確に推奨されているわけではありません。</p>
+  <p>一方で、以下の点を踏まえると、本領域では状況がやや異なると考えます。</p>
+
+  <div class="risk-factors">
+    <div class="risk-item">
+      <div class="ri-icon"><svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg></div>
+      <span>対象患者に<strong>高齢者</strong>が多く含まれる</span>
+    </div>
+    <div class="risk-item">
+      <div class="ri-icon"><svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg></div>
+      <span>心不全・虚血性心疾患・不整脈など<strong>循環器ハイリスク群</strong>である</span>
+    </div>
+    <div class="risk-item">
+      <div class="ri-icon"><svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg></div>
+      <span>アブレーションは<strong>長時間手技</strong>となることがある</span>
+    </div>
+    <div class="risk-item">
+      <div class="ri-icon"><svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg></div>
+      <span>麻酔管理が<strong>循環器主体</strong>で行われる場面がある</span>
+    </div>
+    <div class="risk-item">
+      <div class="ri-icon"><svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg></div>
+      <span>術前評価が<strong>体系化されていない</strong>ことがある</span>
+    </div>
+  </div>
+
+  <p>このような条件が重なる場合、問診や一般的な診察のみで呼吸リスクを十分に拾い上げることには<span class="highlight">限界がある</span>と考えられます。</p>
+</section>
+
+<!-- ===== SECTION 2: 提案の要旨 ===== -->
+
+<section>
+  <h2>
+    <span class="section-num">2</span>
+    提案の要旨
+  </h2>
+
+  <div class="proposal-box">
+    <p>全例必須の検査として制度的に定められているわけではないが、<br>
+    本領域（全身麻酔下アブレーション）においては、<br>
+    <span class="highlight">術前スクリーニングとして呼吸機能検査（スパイロメトリー）を組み込むことは合理的である</span><br>
+    と考えます。</p>
+  </div>
+
+  <p style="margin-top:20px;">その理由は以下の通りです。</p>
+
+  <div class="benefit-grid">
+    <div class="benefit-card">
+      <div class="benefit-icon">
+        <svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41L9 16.17z"/></svg>
+      </div>
+      <div class="benefit-text">呼吸機能は<strong>数値として客観的に評価可能</strong></div>
+    </div>
+    <div class="benefit-card">
+      <div class="benefit-icon">
+        <svg viewBox="0 0 24 24"><path d="M12 4.5C7 4.5 2.73 7.61 1 12c1.73 4.39 6 7.5 11 7.5s9.27-3.11 11-7.5c-1.73-4.39-6-7.5-11-7.5zM12 17c-2.76 0-5-2.24-5-5s2.24-5 5-5 5 2.24 5 5-2.24 5-5 5zm0-8c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3z"/></svg>
+      </div>
+      <div class="benefit-text">問診では見逃されやすい<strong>潜在的な換気障害</strong>を拾える</div>
+    </div>
+    <div class="benefit-card">
+      <div class="benefit-icon">
+        <svg viewBox="0 0 24 24"><path d="M3 13h2v-2H3v2zm0 4h2v-2H3v2zm0-8h2V7H3v2zm4 4h14v-2H7v2zm0 4h14v-2H7v2zM7 7v2h14V7H7z"/></svg>
+      </div>
+      <div class="benefit-text">術前に<strong>リスクの層別化</strong>（ふるい分け）が可能</div>
+    </div>
+    <div class="benefit-card">
+      <div class="benefit-icon">
+        <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.95-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.54c-.26-.81-1-1.39-1.9-1.39h-1v-3c0-.55-.45-1-1-1H8v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.39z"/></svg>
+      </div>
+      <div class="benefit-text">術後トラブル（低酸素・換気不全・抜管後問題）を<strong>予防的に回避</strong>できる</div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== SECTION 3: なぜふるいにかけるか ===== -->
+
+<section>
+  <h2>
+    <span class="section-num">3</span>
+    なぜ「検査でふるいにかける」ことが重要か
+  </h2>
+
+  <p>術後の呼吸合併症は以下のような形で発生します。</p>
+
+  <div class="complication-row">
+    <span class="complication-tag">
+      <svg viewBox="0 0 24 24"><path d="M1 21h22L12 2 1 21zm12-3h-2v-2h2v2zm0-4h-2v-4h2v4z"/></svg>
+      上気道閉塞
+    </span>
+    <span class="complication-tag">
+      <svg viewBox="0 0 24 24"><path d="M1 21h22L12 2 1 21zm12-3h-2v-2h2v2zm0-4h-2v-4h2v4z"/></svg>
+      低酸素血症
+    </span>
+    <span class="complication-tag">
+      <svg viewBox="0 0 24 24"><path d="M1 21h22L12 2 1 21zm12-3h-2v-2h2v2zm0-4h-2v-4h2v4z"/></svg>
+      換気不全（高CO₂）
+    </span>
+    <span class="complication-tag">
+      <svg viewBox="0 0 24 24"><path d="M1 21h22L12 2 1 21zm12-3h-2v-2h2v2zm0-4h-2v-4h2v4z"/></svg>
+      再挿管
+    </span>
+  </div>
+
+  <p>これらは必ずしも「重症肺疾患患者」に限らず、以下のような患者でも起こり得ます。</p>
+
+  <ul class="latent-list">
+    <li>軽度COPD</li>
+    <li>無症候性の拘束性障害</li>
+    <li>フレイルや筋力低下</li>
+    <li>心不全に伴う肺うっ血</li>
+  </ul>
+
+  <p>問題は、これらが<span class="highlight">問診では拾いきれないことがある</span>という点です。</p>
+  <p>そのため、<strong>簡便に数値で評価できるスパイロメトリーを用いて、術前にリスクを可視化しておく</strong>というアプローチは、実務上非常に合理的です。</p>
+</section>
+
+<!-- ===== SECTION 4: 実務的な評価 ===== -->
+
+<section>
+  <h2>
+    <span class="section-num">4</span>
+    実務的な評価の仕方
+    <span style="font-size:0.82rem;font-weight:400;color:#7f8c9b;margin-left:8px;">― ここだけ見ればOK ―</span>
+  </h2>
+
+  <p>専門的な解釈は不要です。<span class="highlight">以下の3つだけ</span>見ていただければ十分です。</p>
+
+  <div class="eval-grid">
+
+```
+<!-- Card 1: %VC -->
+<div class="eval-card">
+  <div class="eval-card-header">
+    <div class="eval-icon">
+      <svg viewBox="0 0 24 24"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-5 14H7v-2h7v2zm3-4H7v-2h10v2zm0-4H7V7h10v2z"/></svg>
+    </div>
+    <div>
+      <h3>%VC（％肺活量）</h3>
+      <div class="eval-subtitle">肺の広がり（拘束性障害）</div>
+    </div>
+    <div class="eval-num">①</div>
+  </div>
+  <div class="eval-card-body">
+    <div class="eval-row">
+      <span class="eval-badge badge-green">80%以上</span>
+      問題なし
+    </div>
+    <div class="eval-row">
+      <span class="eval-badge badge-yellow">70〜80%</span>
+      軽度低下（注意）
+    </div>
+    <div class="eval-row">
+      <span class="eval-badge badge-red">70%未満</span>
+      明らかな低下 → リスクあり
+    </div>
+  </div>
+</div>
+
+<!-- Card 2: 1秒率 -->
+<div class="eval-card">
+  <div class="eval-card-header">
+    <div class="eval-icon">
+      <svg viewBox="0 0 24 24"><path d="M11.99 2C6.47 2 2 6.48 2 12s4.47 10 9.99 10C17.52 22 22 17.52 22 12S17.52 2 11.99 2zM12 20c-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8-3.58 8-8 8zm.5-13H11v6l5.25 3.15.75-1.23-4.5-2.67V7z"/></svg>
+    </div>
+    <div>
+      <h3>1秒率（FEV1/FVC）</h3>
+      <div class="eval-subtitle">気道の狭さ（閉塞性障害）</div>
+    </div>
+    <div class="eval-num">②</div>
+  </div>
+  <div class="eval-card-body">
+    <div class="eval-row">
+      <span class="eval-badge badge-green">70%以上</span>
+      問題なし
+    </div>
+    <div class="eval-row">
+      <span class="eval-badge badge-red">70%未満</span>
+      閉塞性障害あり（COPDなど）
+    </div>
+  </div>
+</div>
+
+<!-- Card 3: FEV1 -->
+<div class="eval-card">
+  <div class="eval-card-header">
+    <div class="eval-icon">
+      <svg viewBox="0 0 24 24"><path d="M16 6l2.29 2.29-4.88 4.88-4-4L2 16.59 3.41 18l6-6 4 4 6.3-6.29L22 12V6h-6z"/></svg>
+    </div>
+    <div>
+      <h3>1秒量（FEV1）</h3>
+      <div class="eval-subtitle">実際の呼吸能力</div>
+    </div>
+    <div class="eval-num">③</div>
+  </div>
+  <div class="eval-card-body">
+    <div class="eval-row">
+      <span class="eval-badge badge-green">1.5L以上</span>
+      概ね安全域
+    </div>
+    <div class="eval-row">
+      <span class="eval-badge badge-yellow">1.0〜1.5L</span>
+      中等度低下（注意）
+    </div>
+    <div class="eval-row">
+      <span class="eval-badge badge-red">1.0L未満</span>
+      高リスク
+    </div>
+  </div>
+</div>
+```
+
+  </div>
+</section>
+
+<!-- ===== SECTION 5: 判断フレーム ===== -->
+
+<section>
+  <h2>
+    <span class="section-num">5</span>
+    シンプルな判断フレーム
+  </h2>
+
+  <p>以下のように覚えていただければ十分です。</p>
+
+  <div class="judgment-frame">
+    <div class="judgment-item j-ok">
+      <div class="j-signal">
+        <svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41L9 16.17z"/></svg>
+      </div>
+      <div class="j-text">
+        <strong>全部正常</strong>
+        通常通りでOK
+      </div>
+    </div>
+    <div class="judgment-item j-caution">
+      <div class="j-signal">
+        <svg viewBox="0 0 24 24"><path d="M1 21h22L12 2 1 21zm12-3h-2v-2h2v2zm0-4h-2v-4h2v4z"/></svg>
+      </div>
+      <div class="j-text">
+        <strong>どれか軽度異常</strong>
+        術中・術後の呼吸管理に注意
+      </div>
+    </div>
+    <div class="judgment-item j-alert">
+      <div class="j-signal">
+        <svg viewBox="0 0 24 24"><path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41z"/></svg>
+      </div>
+      <div class="j-text">
+        <strong>明らかな異常</strong>
+        %VC&lt;70 ／ 1秒率&lt;70 ／ FEV1&lt;1.0 → 要注意症例
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== SECTION 6: 何が変わるか ===== -->
+
+<section>
+  <h2>
+    <span class="section-num">6</span>
+    この検査を入れることで何が変わるか
+  </h2>
+
+  <div class="change-flow">
+    <div class="change-card">
+      <div class="change-before">「問題なさそう」</div>
+      <div class="change-arrow">
+        <svg viewBox="0 0 24 24"><path d="M16.01 11H4v2h12.01v3L20 12l-3.99-4v3z"/></svg>
+        <span style="font-size:0.85rem;color:var(--teal);font-weight:600;">検査導入で</span>
+      </div>
+      <div class="change-after">「数値的に問題ない」と確認できる</div>
+    </div>
+    <div class="change-card">
+      <div class="change-before">「見た目は元気」</div>
+      <div class="change-arrow">
+        <svg viewBox="0 0 24 24"><path d="M16.01 11H4v2h12.01v3L20 12l-3.99-4v3z"/></svg>
+        <span style="font-size:0.85rem;color:var(--teal);font-weight:600;">検査導入で</span>
+      </div>
+      <div class="change-after">「実は低予備能」と気づける</div>
+    </div>
+    <div class="change-card">
+      <div class="change-before">経験と感覚による判断</div>
+      <div class="change-arrow">
+        <svg viewBox="0 0 24 24"><path d="M16.01 11H4v2h12.01v3L20 12l-3.99-4v3z"/></svg>
+        <span style="font-size:0.85rem;color:var(--teal);font-weight:600;">検査導入で</span>
+      </div>
+      <div class="change-after">抜管や術後管理の判断に根拠が持てる</div>
+    </div>
+  </div>
+
+  <div class="key-message">
+    <p>これは単なる検査追加ではなく、<br>
+    <strong style="font-size:1.1rem;">「術前にリスクを構造的に把握するためのツール」</strong><br>
+    と考えていただければよいと思います。</p>
+  </div>
+</section>
+
+<!-- ===== SECTION 7: 重要ポイント ===== -->
+
+<section>
+  <h2>
+    <span class="section-num">7</span>
+    最後に（重要ポイント）
+  </h2>
+
+  <p>本提案は、「全例必須だからやるべき」という話ではありません。「慣習としてやるべき」という話でもありません。</p>
+
+  <p>あくまで、</p>
+
+  <div class="proposal-box">
+    <p>全身麻酔下で行うアブレーションという特殊性<br>
+    （<strong>高齢・循環器ハイリスク・麻酔科不在</strong>）を踏まえた場合、<br>
+    <span class="highlight">呼吸機能を数値で評価しておくことは、安全性の観点から合理的である</span></p>
+  </div>
+
+  <p>という提案です。</p>
+</section>
+
+<!-- ===== SECTION 8: 要点まとめ ===== -->
+
+<section>
+  <h2>
+    <span class="section-num">8</span>
+    要点まとめ（超短縮版）
+  </h2>
+
+  <div class="summary-box">
+    <ul class="summary-list">
+      <li><strong>全例必須ではないが、この領域では実施が合理的</strong></li>
+      <li>問診だけでは呼吸リスクは拾いきれない</li>
+      <li>スパイロは簡単に数値でふるい分けできる</li>
+      <li>見るのは<span class="highlight">3つだけ</span>
+        <ul class="summary-sub">
+          <li>%VC（肺の広がり）</li>
+          <li>1秒率（気道の狭さ）</li>
+          <li>1秒量（実際の呼吸能力）</li>
+        </ul>
+      </li>
+      <li><strong>異常があれば術後トラブルリスクあり</strong></li>
+    </ul>
+  </div>
+</section>
+
+</div>
+
+<footer>
+  <div class="container">
+    <strong>全身麻酔下アブレーションにおける術前呼吸機能評価について（提案）</strong><br>
+    循環器科の先生方への安全管理提案資料
+  </div>
+</footer>
+
+</body>
+</html>
