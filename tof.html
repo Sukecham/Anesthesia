@@ -1,0 +1,1000 @@
+<!DOCTYPE html>
+
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>アブレーション全身麻酔 TOF/PTC 超実践ガイド</title>
+<style>
+:root {
+  --primary: #0d2137;
+  --primary-mid: #163a5f;
+  --secondary: #1a6fa0;
+  --accent: #e63946;
+  --accent-warm: #f4845f;
+  --success: #2a9d8f;
+  --success-light: #e8f5f2;
+  --warning: #e9c46a;
+  --warning-bg: #fdf6e3;
+  --danger: #e63946;
+  --danger-bg: #fdf0f0;
+  --light: #f0f4f8;
+  --surface: #ffffff;
+  --text: #1a1a2e;
+  --text-secondary: #4a5568;
+  --border: #d8e2ec;
+  --shadow-sm: 0 1px 3px rgba(13,33,55,0.06);
+  --shadow-md: 0 4px 16px rgba(13,33,55,0.08);
+  --shadow-lg: 0 8px 32px rgba(13,33,55,0.12);
+  --radius: 12px;
+  --radius-sm: 8px;
+}
+
+- { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+font-family: “Hiragino Kaku Gothic ProN”, “Hiragino Sans”, “Meiryo”, “Noto Sans JP”, sans-serif;
+line-height: 1.85;
+background: var(–light);
+color: var(–text);
+-webkit-font-smoothing: antialiased;
+}
+
+/* ── Header ── */
+.hero {
+background: linear-gradient(135deg, var(–primary) 0%, var(–primary-mid) 40%, var(–secondary) 100%);
+color: #fff;
+padding: 56px 24px 72px;
+position: relative;
+overflow: hidden;
+}
+.hero::before {
+content: “”;
+position: absolute;
+top: -60%;
+right: -20%;
+width: 600px;
+height: 600px;
+background: radial-gradient(circle, rgba(255,255,255,0.04) 0%, transparent 70%);
+border-radius: 50%;
+}
+.hero::after {
+content: “”;
+position: absolute;
+bottom: 0;
+left: 0;
+right: 0;
+height: 48px;
+background: var(–light);
+clip-path: ellipse(55% 100% at 50% 100%);
+}
+.hero-inner {
+max-width: 960px;
+margin: 0 auto;
+position: relative;
+z-index: 1;
+}
+.hero-badge {
+display: inline-flex;
+align-items: center;
+gap: 8px;
+background: rgba(255,255,255,0.12);
+border: 1px solid rgba(255,255,255,0.2);
+border-radius: 100px;
+padding: 6px 18px;
+font-size: 0.82rem;
+letter-spacing: 0.04em;
+margin-bottom: 24px;
+backdrop-filter: blur(4px);
+}
+.hero-badge svg { width: 16px; height: 16px; fill: var(–warning); }
+.hero h1 {
+font-size: 2.2rem;
+font-weight: 800;
+line-height: 1.3;
+margin-bottom: 16px;
+letter-spacing: -0.02em;
+}
+.hero-sub {
+font-size: 1.05rem;
+opacity: 0.85;
+max-width: 640px;
+line-height: 1.7;
+}
+
+/* ── Layout ── */
+.container {
+max-width: 960px;
+margin: 0 auto;
+padding: 0 20px 80px;
+}
+
+/* ── Section ── */
+.section {
+background: var(–surface);
+border-radius: var(–radius);
+box-shadow: var(–shadow-md);
+padding: 36px 32px;
+margin-bottom: 28px;
+border: 1px solid var(–border);
+position: relative;
+}
+.section-number {
+position: absolute;
+top: -14px;
+left: 28px;
+background: var(–secondary);
+color: #fff;
+font-size: 0.75rem;
+font-weight: 700;
+padding: 4px 14px;
+border-radius: 100px;
+letter-spacing: 0.06em;
+}
+.section h2 {
+font-size: 1.35rem;
+font-weight: 800;
+color: var(–primary);
+margin-bottom: 18px;
+padding-bottom: 12px;
+border-bottom: 2px solid var(–border);
+display: flex;
+align-items: center;
+gap: 12px;
+line-height: 1.4;
+}
+.section h2 .sec-icon {
+flex-shrink: 0;
+width: 36px;
+height: 36px;
+background: linear-gradient(135deg, var(–secondary), var(–primary-mid));
+border-radius: var(–radius-sm);
+display: flex;
+align-items: center;
+justify-content: center;
+}
+.section h2 .sec-icon svg { width: 20px; height: 20px; fill: #fff; }
+.section p { margin-bottom: 14px; color: var(–text-secondary); }
+.section p:last-child { margin-bottom: 0; }
+
+/* ── Conclusion Box (top) ── */
+.conclusion-top {
+background: linear-gradient(135deg, #f0f7ff 0%, #e8f0fe 100%);
+border: 2px solid var(–secondary);
+border-radius: var(–radius);
+padding: 32px;
+margin-bottom: 28px;
+position: relative;
+}
+.conclusion-top::before {
+content: “”;
+position: absolute;
+top: 0; left: 0;
+width: 6px;
+height: 100%;
+background: linear-gradient(180deg, var(–secondary), var(–primary));
+border-radius: var(–radius) 0 0 var(–radius);
+}
+.conclusion-top h2 {
+font-size: 1.3rem;
+color: var(–primary);
+margin-bottom: 20px;
+border: none;
+padding-bottom: 0;
+}
+
+/* ── Judgment Table ── */
+.judgment-table {
+width: 100%;
+border-collapse: separate;
+border-spacing: 0;
+border-radius: var(–radius-sm);
+overflow: hidden;
+margin: 20px 0;
+font-size: 0.92rem;
+box-shadow: var(–shadow-sm);
+}
+.judgment-table thead th {
+background: var(–primary);
+color: #fff;
+padding: 12px 16px;
+text-align: left;
+font-weight: 700;
+font-size: 0.85rem;
+letter-spacing: 0.04em;
+}
+.judgment-table tbody td {
+padding: 12px 16px;
+border-bottom: 1px solid var(–border);
+vertical-align: top;
+}
+.judgment-table tbody tr:nth-child(even) { background: #f7fafc; }
+.judgment-table tbody tr:last-child td { border-bottom: none; }
+.judgment-table .val { font-weight: 700; color: var(–primary); white-space: nowrap; }
+
+/* ── Dose Table ── */
+.dose-grid {
+display: grid;
+grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+gap: 16px;
+margin: 20px 0;
+}
+.dose-card {
+border-radius: var(–radius-sm);
+padding: 20px;
+border-left: 5px solid;
+position: relative;
+}
+.dose-card.shallow { background: var(–success-light); border-color: var(–success); }
+.dose-card.deep { background: var(–warning-bg); border-color: var(–warning); }
+.dose-card.emergency { background: var(–danger-bg); border-color: var(–danger); }
+.dose-card .dose-label {
+font-size: 0.78rem;
+font-weight: 700;
+text-transform: uppercase;
+letter-spacing: 0.06em;
+margin-bottom: 4px;
+}
+.dose-card.shallow .dose-label { color: var(–success); }
+.dose-card.deep .dose-label { color: #b8860b; }
+.dose-card.emergency .dose-label { color: var(–danger); }
+.dose-card .dose-value {
+font-size: 1.6rem;
+font-weight: 800;
+color: var(–primary);
+margin-bottom: 4px;
+}
+.dose-card .dose-desc { font-size: 0.88rem; color: var(–text-secondary); }
+
+/* ── Alert Box ── */
+.alert {
+border-radius: var(–radius-sm);
+padding: 18px 20px;
+margin: 18px 0;
+display: flex;
+gap: 14px;
+align-items: flex-start;
+font-size: 0.93rem;
+}
+.alert svg { flex-shrink: 0; width: 22px; height: 22px; margin-top: 2px; }
+.alert-danger {
+background: var(–danger-bg);
+border: 1px solid #f5c6cb;
+}
+.alert-danger svg { fill: var(–danger); }
+.alert-warning {
+background: var(–warning-bg);
+border: 1px solid #f0dca0;
+}
+.alert-warning svg { fill: #c9971a; }
+.alert-info {
+background: #eef4ff;
+border: 1px solid #bdd4f7;
+}
+.alert-info svg { fill: var(–secondary); }
+
+/* ── Highlight ── */
+.hl {
+background: linear-gradient(transparent 55%, rgba(26,111,160,0.18) 45%);
+font-weight: 700;
+}
+.hl-danger {
+background: linear-gradient(transparent 55%, rgba(230,57,70,0.18) 45%);
+font-weight: 700;
+}
+
+/* ── Key Numbers ── */
+.key-nums {
+display: grid;
+grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+gap: 14px;
+margin: 20px 0;
+}
+.key-num {
+text-align: center;
+padding: 20px 12px;
+background: var(–light);
+border-radius: var(–radius-sm);
+border: 1px solid var(–border);
+}
+.key-num .num {
+font-size: 1.8rem;
+font-weight: 800;
+color: var(–secondary);
+display: block;
+}
+.key-num .num-label {
+font-size: 0.82rem;
+color: var(–text-secondary);
+margin-top: 4px;
+}
+
+/* ── Steps / Timeline ── */
+.timeline { margin: 24px 0; position: relative; }
+.timeline::before {
+content: “”;
+position: absolute;
+left: 18px;
+top: 0;
+bottom: 0;
+width: 3px;
+background: linear-gradient(180deg, var(–secondary), var(–primary));
+border-radius: 2px;
+}
+.tl-item {
+position: relative;
+padding-left: 52px;
+margin-bottom: 24px;
+}
+.tl-item:last-child { margin-bottom: 0; }
+.tl-dot {
+position: absolute;
+left: 8px;
+top: 4px;
+width: 24px;
+height: 24px;
+background: var(–surface);
+border: 3px solid var(–secondary);
+border-radius: 50%;
+z-index: 1;
+}
+.tl-dot.active { background: var(–secondary); }
+.tl-title {
+font-weight: 700;
+font-size: 1rem;
+color: var(–primary);
+margin-bottom: 4px;
+}
+.tl-desc { font-size: 0.92rem; color: var(–text-secondary); }
+
+/* ── Danger List ── */
+.danger-list { margin: 16px 0; }
+.danger-list li {
+list-style: none;
+padding: 10px 14px 10px 42px;
+margin-bottom: 8px;
+background: var(–danger-bg);
+border-radius: var(–radius-sm);
+position: relative;
+font-size: 0.93rem;
+color: #5a1a1a;
+border: 1px solid #f5c6cb;
+}
+.danger-list li::before {
+content: “”;
+position: absolute;
+left: 16px;
+top: 50%;
+transform: translateY(-50%);
+width: 8px;
+height: 8px;
+background: var(–danger);
+border-radius: 50%;
+}
+
+/* ── Comparison / Calc Table ── */
+.calc-table {
+width: 100%;
+border-collapse: separate;
+border-spacing: 0;
+border-radius: var(–radius-sm);
+overflow: hidden;
+margin: 16px 0;
+font-size: 0.9rem;
+box-shadow: var(–shadow-sm);
+}
+.calc-table th {
+background: var(–primary-mid);
+color: #fff;
+padding: 10px 14px;
+text-align: center;
+font-weight: 600;
+font-size: 0.82rem;
+}
+.calc-table td {
+padding: 10px 14px;
+border-bottom: 1px solid var(–border);
+text-align: center;
+}
+.calc-table tbody tr:nth-child(even) { background: #f7fafc; }
+.calc-table tbody tr:last-child td { border-bottom: none; }
+
+/* ── Five Rules ── */
+.rules-grid {
+display: grid;
+grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+gap: 16px;
+margin: 20px 0;
+}
+.rule-card {
+background: var(–light);
+border-radius: var(–radius-sm);
+padding: 20px;
+border: 1px solid var(–border);
+display: flex;
+gap: 14px;
+align-items: flex-start;
+transition: box-shadow 0.2s;
+}
+.rule-card:hover { box-shadow: var(–shadow-md); }
+.rule-num {
+flex-shrink: 0;
+width: 36px;
+height: 36px;
+background: var(–primary);
+color: #fff;
+border-radius: 50%;
+display: flex;
+align-items: center;
+justify-content: center;
+font-weight: 800;
+font-size: 1rem;
+}
+.rule-text { font-size: 0.93rem; color: var(–text); line-height: 1.6; }
+
+/* ── Quick Reference Card (bottom) ── */
+.quick-ref {
+background: var(–primary);
+color: #fff;
+border-radius: var(–radius);
+padding: 36px 32px;
+margin-bottom: 28px;
+box-shadow: var(–shadow-lg);
+}
+.quick-ref h2 {
+color: #fff;
+border-bottom-color: rgba(255,255,255,0.2);
+font-size: 1.3rem;
+}
+.quick-ref h2 .sec-icon {
+background: rgba(255,255,255,0.15);
+}
+.qr-grid {
+display: grid;
+grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+gap: 20px;
+margin-top: 20px;
+}
+.qr-block h3 {
+font-size: 0.82rem;
+text-transform: uppercase;
+letter-spacing: 0.08em;
+opacity: 0.7;
+margin-bottom: 10px;
+}
+.qr-block ul {
+list-style: none;
+}
+.qr-block li {
+padding: 6px 0 6px 20px;
+position: relative;
+font-size: 0.92rem;
+opacity: 0.95;
+}
+.qr-block li::before {
+content: “”;
+position: absolute;
+left: 0;
+top: 14px;
+width: 8px;
+height: 8px;
+border-radius: 50%;
+}
+.qr-block.tof li::before { background: var(–warning); }
+.qr-block.suga li::before { background: var(–success); }
+.qr-block.risk li::before { background: var(–accent); }
+.qr-block.event li::before { background: var(–accent-warm); }
+.qr-target {
+margin-top: 20px;
+padding: 18px 24px;
+background: rgba(255,255,255,0.08);
+border-radius: var(–radius-sm);
+border: 1px solid rgba(255,255,255,0.15);
+text-align: center;
+font-size: 1.1rem;
+}
+.qr-target strong {
+color: var(–warning);
+font-size: 1.5rem;
+}
+
+/* ── Footer ── */
+footer {
+background: var(–primary);
+color: rgba(255,255,255,0.6);
+text-align: center;
+padding: 28px 20px;
+font-size: 0.82rem;
+}
+
+/* ── Responsive ── */
+@media (max-width: 768px) {
+.hero { padding: 40px 16px 56px; }
+.hero h1 { font-size: 1.6rem; }
+.section { padding: 24px 18px; }
+.conclusion-top { padding: 24px 18px; }
+.quick-ref { padding: 24px 18px; }
+.dose-grid { grid-template-columns: 1fr; }
+.key-nums { grid-template-columns: repeat(2, 1fr); }
+.rules-grid { grid-template-columns: 1fr; }
+.qr-grid { grid-template-columns: 1fr; }
+.judgment-table { font-size: 0.82rem; }
+.calc-table { font-size: 0.82rem; }
+}
+@media (max-width: 480px) {
+.key-nums { grid-template-columns: 1fr; }
+}
+</style>
+
+</head>
+
+<body>
+
+<!-- ════ HERO ════ -->
+
+<div class="hero">
+  <div class="hero-inner">
+    <div class="hero-badge">
+      <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 15l-5-5 1.41-1.41L11 14.17l7.59-7.59L20 8l-9 9z"/></svg>
+      循環器医向け 超実践ガイド
+    </div>
+    <h1>アブレーション全身麻酔で使う<br>TOF／PTCの実践ガイド</h1>
+    <p class="hero-sub">ロクロニウム持続投与下の筋弛緩モニタリングから、スガマデクスによる適切な拮抗、TOF ratio 0.9以上を確認した安全な抜管までを一本のフローで解説します。</p>
+  </div>
+</div>
+
+<div class="container">
+
+<!-- ════ 1. 目的 ════ -->
+
+<div class="section">
+  <div class="section-number">SECTION 01</div>
+  <h2>
+    <span class="sec-icon"><svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20zm1 15h-2v-2h2v2zm0-4h-2V7h2v6z"/></svg></span>
+    この資料の目的
+  </h2>
+  <p>この資料の目的は一つです。</p>
+  <p><span class="hl">ロクロニウムを使った全身麻酔で、筋弛緩の効きすぎ・残りすぎを見逃さず、適切にスガマデクスを使い、TOF ratio 0.9以上を確認して安全に抜管すること</span>です。</p>
+  <div class="alert alert-danger">
+    <svg viewBox="0 0 24 24"><path d="M1 21h22L12 2 1 21zm12-3h-2v-2h2v2zm0-4h-2v-8h2v8z"/></svg>
+    <div>「自発呼吸が出た」「手が少し動いた」「なんとなく戻っていそう」では<strong>不十分</strong>です。日本麻酔科学会FAQでは、定量的モニタリングでTOF比を実測して回復を確認することが危機的な呼吸器合併症の回避につながるとされ、2023年ASAガイドラインや欧州ガイドラインでも筋弛緩薬使用時の定量的筋弛緩モニタリングは<strong>強く推奨</strong>されています。</div>
+  </div>
+</div>
+
+<!-- ════ 2. まず結論だけ ════ -->
+
+<div class="conclusion-top">
+  <h2>
+    <span class="sec-icon"><svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41L9 16.17z"/></svg></span>
+    まず結論だけ ― 見るべき数字は3つ
+  </h2>
+
+  <div class="key-nums">
+    <div class="key-num">
+      <span class="num">TOF count</span>
+      <span class="num-label">4回刺激で何回反応したか</span>
+    </div>
+    <div class="key-num">
+      <span class="num">TOF ratio</span>
+      <span class="num-label">4発目÷1発目の比</span>
+    </div>
+    <div class="key-num">
+      <span class="num">PTC</span>
+      <span class="num-label">TOF 0の深い領域を見る</span>
+    </div>
+  </div>
+
+  <table class="judgment-table">
+    <thead>
+      <tr><th>指標</th><th>値</th><th>判断</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>TOF count</td><td class="val">0</td><td>まだかなり深い</td></tr>
+      <tr><td>TOF count</td><td class="val">1〜3</td><td>まだ抜管の段階ではない</td></tr>
+      <tr><td>TOF count</td><td class="val">4</td><td>まだ安心しない → 次に TOF ratio を見る</td></tr>
+      <tr><td>TOF ratio</td><td class="val">≥ 0.9</td><td>抜管判断に進める目安</td></tr>
+      <tr><td>PTC</td><td class="val">1〜2</td><td>深い筋弛緩 → スガマデクス 4 mg/kg の適応</td></tr>
+    </tbody>
+  </table>
+
+  <h3 style="margin-top:24px; font-size:1.05rem; color:var(--primary);">スガマデクス投与量（日本の電子添文）</h3>
+  <div class="dose-grid">
+    <div class="dose-card shallow">
+      <div class="dose-label">浅い筋弛緩（T2再出現後）</div>
+      <div class="dose-value">2 mg/kg</div>
+      <div class="dose-desc">TOF count 4 が出ている段階</div>
+    </div>
+    <div class="dose-card deep">
+      <div class="dose-label">深い筋弛緩（PTC 1〜2）</div>
+      <div class="dose-value">4 mg/kg</div>
+      <div class="dose-desc">TOF count 0、PTC確認後</div>
+    </div>
+    <div class="dose-card emergency">
+      <div class="dose-label">緊急回復</div>
+      <div class="dose-value">16 mg/kg</div>
+      <div class="dose-desc">挿管直後（投与3分後目安）</div>
+    </div>
+  </div>
+</div>
+
+<!-- ════ 3. TOFとは ════ -->
+
+<div class="section">
+  <div class="section-number">SECTION 03</div>
+  <h2>
+    <span class="sec-icon"><svg viewBox="0 0 24 24"><path d="M11 7h2v2h-2V7zm0 4h2v6h-2v-6zm1-9C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2z"/></svg></span>
+    TOFとは何か
+  </h2>
+  <p>TOFは、<span class="hl">神経を2Hzで4回連続刺激して、筋肉が何回どれくらい反応するかを見る方法</span>です。要するに、ロクロニウムがどれくらい残っているかを、その場で数値で見る検査です。</p>
+  <p>TOFには<strong>2つの見方</strong>があります。</p>
+
+  <table class="judgment-table">
+    <thead><tr><th style="width:160px;">指標</th><th>意味</th></tr></thead>
+    <tbody>
+      <tr>
+        <td class="val">TOF count</td>
+        <td>4回刺激して、何回反応が返ってきたか（0〜4で表す）</td>
+      </tr>
+      <tr>
+        <td class="val">TOF ratio</td>
+        <td>4回とも反応があるときに、4発目が1発目に対してどれだけ弱くなっているか。<span class="hl">0.9以上で「筋弛緩は十分回復した」と判断</span>する</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="alert alert-info">
+    <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z"/></svg>
+    <div>日本麻酔科学会FAQでも、TOF比を実測できる定量モニタリングで、TOF比 ≒ 1 を確認することが重要とされています。</div>
+  </div>
+</div>
+
+<!-- ════ 4. PTCとは ════ -->
+
+<div class="section">
+  <div class="section-number">SECTION 04</div>
+  <h2>
+    <span class="sec-icon"><svg viewBox="0 0 24 24"><path d="M16 6l2.29 2.29-4.88 4.88-4-4L2 16.59 3.41 18l6-6 4 4 6.3-6.29L22 12V6h-6z"/></svg></span>
+    PTCとは何か
+  </h2>
+  <p>PTCは、<span class="hl">TOF countが0のときに使う指標</span>です。</p>
+  <p>TOFをやっても4発とも全く反応しない場合、TOFだけでは「深い」のはわかりますが、<strong>どれくらい深いかがわかりません</strong>。そこでPTCを使って、深い筋弛緩の中でどこまで戻ってきているかを見ます。</p>
+
+  <div class="alert alert-warning">
+    <svg viewBox="0 0 24 24"><path d="M1 21h22L12 2 1 21zm12-3h-2v-2h2v2zm0-4h-2v-8h2v8z"/></svg>
+    <div>
+      <strong>すごく単純に言えば：</strong><br>
+      ・TOFが見える段階より前の、もっと深い世界を見るための指標<br>
+      ・PTC 1〜2 が出ているなら → 「深いけれど、スガマデクス 4 mg/kg で拮抗を考える段階」
+    </div>
+  </div>
+</div>
+
+<!-- ════ 5. なぜモニタリングが必要か ════ -->
+
+<div class="section">
+  <div class="section-number">SECTION 05</div>
+  <h2>
+    <span class="sec-icon"><svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg></span>
+    なぜモニタリングが必要なのか
+  </h2>
+  <p>理由は明確です。<span class="hl-danger">見た目だけでは、筋弛緩の残りをかなり見逃す</span>からです。</p>
+  <p>日本麻酔科学会FAQでは、定性的評価ではTOF比が高くなると減衰を触知できなくなり、筋弛緩からの至適回復を評価できないとされています。</p>
+
+  <div class="key-nums">
+    <div class="key-num">
+      <span class="num">33.1%</span>
+      <span class="num-label">モニターなし時の<br>残存筋弛緩率</span>
+    </div>
+    <div class="key-num">
+      <span class="num">30.6%</span>
+      <span class="num-label">定性的モニター時の<br>残存筋弛緩率</span>
+    </div>
+    <div class="key-num">
+      <span class="num" style="color:var(--success);">11.5%</span>
+      <span class="num-label">定量的モニター時の<br>残存筋弛緩率</span>
+    </div>
+  </div>
+
+  <div class="alert alert-info">
+    <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z"/></svg>
+    <div>適切なスガマデクス投与と定量的モニタリングの組み合わせで、PACU到着時の残存筋弛緩率を<strong>32% → 1.6%</strong>に低下させた報告もあります。</div>
+  </div>
+
+  <p>つまり、<span class="hl-danger">モニターなしでロクロニウムを持続投与し、最後にスガマデクスを1バイアル盲目的に入れる運用</span>は、「戻ったように見えるが、実はTOF ratio 0.9未満」という患者をかなり残しうるということです。</p>
+</div>
+
+<!-- ════ 6. 盲目的管理の有害事象 ════ -->
+
+<div class="section">
+  <div class="section-number">SECTION 06</div>
+  <h2>
+    <span class="sec-icon"><svg viewBox="0 0 24 24"><path d="M1 21h22L12 2 1 21zm12-3h-2v-2h2v2zm0-4h-2v-8h2v8z"/></svg></span>
+    盲目的な管理で起こりうる有害事象
+  </h2>
+  <p>ロクロニウムの添文には、<span class="hl-danger">残存する筋弛緩作用による呼吸抑制、誤嚥等の合併症を防止するため、筋弛緩が十分回復したことを確認した後に抜管すること</span>と書かれています。</p>
+  <p>日本麻酔科学会の2025年ガイドラインでも、残存筋弛緩は抜管・術後早期の危険因子であり、独立した原因として扱われています。</p>
+
+  <ul class="danger-list">
+    <li>抜管直後は呼吸しているように見えるが、上気道筋が弱くて<strong>気道閉塞</strong>する</li>
+    <li>病棟移動中に<strong>低酸素血症</strong>になる</li>
+    <li>自発呼吸はあるが弱く、<strong>換気不全・高CO₂血症</strong>になる</li>
+    <li>咽頭筋・喉頭周囲筋の回復が不十分で、<strong>誤嚥のリスク</strong>が上がる</li>
+    <li>最悪、<strong>再挿管</strong>が必要になる</li>
+  </ul>
+
+  <div class="alert alert-danger">
+    <svg viewBox="0 0 24 24"><path d="M1 21h22L12 2 1 21zm12-3h-2v-2h2v2zm0-4h-2v-8h2v8z"/></svg>
+    <div>これは「退室時には一見大丈夫そうだが、移動中や帰室後に問題化する」パターンとかなり整合的です。</div>
+  </div>
+</div>
+
+<!-- ════ 7. ロクロニウムの基本用法 ════ -->
+
+<div class="section">
+  <div class="section-number">SECTION 07</div>
+  <h2>
+    <span class="sec-icon"><svg viewBox="0 0 24 24"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-7 3c1.93 0 3.5 1.57 3.5 3.5S13.93 13 12 13s-3.5-1.57-3.5-3.5S10.07 6 12 6zm7 13H5v-.23c0-.62.28-1.2.76-1.58C7.47 15.82 9.64 15 12 15s4.53.82 6.24 2.19c.48.38.76.97.76 1.58V19z"/></svg></span>
+    ロクロニウムの日本での基本用法
+  </h2>
+
+  <table class="judgment-table">
+    <thead><tr><th>用途</th><th>用量</th></tr></thead>
+    <tbody>
+      <tr><td>挿管用量</td><td class="val">0.6 mg/kg</td></tr>
+      <tr><td>術中追加</td><td class="val">0.1〜0.2 mg/kg</td></tr>
+      <tr><td>持続投与</td><td class="val">7 μg/kg/分 で開始</td></tr>
+    </tbody>
+  </table>
+
+  <div class="alert alert-warning">
+    <svg viewBox="0 0 24 24"><path d="M1 21h22L12 2 1 21zm12-3h-2v-2h2v2zm0-4h-2v-8h2v8z"/></svg>
+    <div>添文上も、持続投与は<strong>「体重で流すだけ」ではなく「モニタを見ながら調節する」前提</strong>です。「筋弛緩モニタリング装置を用いて適切に注入速度を調節すること」と明記されています。</div>
+  </div>
+</div>
+
+<!-- ════ 8. スガマデクスの基本用法 ════ -->
+
+<div class="section">
+  <div class="section-number">SECTION 08</div>
+  <h2>
+    <span class="sec-icon"><svg viewBox="0 0 24 24"><path d="M19 8l-4 4h3c0 3.31-2.69 6-6 6a5.87 5.87 0 0 1-2.8-.7l-1.46 1.46A7.93 7.93 0 0 0 12 20c4.42 0 8-3.58 8-8h3l-4-4zM6 12c0-3.31 2.69-6 6-6 1.01 0 1.97.25 2.8.7l1.46-1.46A7.93 7.93 0 0 0 12 4c-4.42 0-8 3.58-8 8H1l4 4 4-4H6z"/></svg></span>
+    スガマデクスの日本での基本用法
+  </h2>
+
+  <div class="dose-grid">
+    <div class="dose-card shallow">
+      <div class="dose-label">T2再出現後（浅い筋弛緩）</div>
+      <div class="dose-value">2 mg/kg</div>
+    </div>
+    <div class="dose-card deep">
+      <div class="dose-label">PTC 1〜2（深い筋弛緩）</div>
+      <div class="dose-value">4 mg/kg</div>
+    </div>
+    <div class="dose-card emergency">
+      <div class="dose-label">緊急回復（挿管3分後目安）</div>
+      <div class="dose-value">16 mg/kg</div>
+    </div>
+  </div>
+
+  <p>添文にはさらに、筋弛緩モニターによる確認ができない場合の記載もあります。</p>
+  <table class="judgment-table">
+    <thead><tr><th>状況</th><th>投与量</th><th>注意</th></tr></thead>
+    <tbody>
+      <tr><td>十分な自発呼吸の発現後</td><td class="val">2 mg/kg</td><td>—</td></tr>
+      <tr><td>それ以前</td><td class="val">4 mg/kg</td><td><span class="hl-danger">回復が遅延することがあるため十分観察</span></td></tr>
+    </tbody>
+  </table>
+
+  <div class="alert alert-danger">
+    <svg viewBox="0 0 24 24"><path d="M1 21h22L12 2 1 21zm12-3h-2v-2h2v2zm0-4h-2v-8h2v8z"/></svg>
+    <div>モニターなしで4 mg/kgを投与しても、「完全に安全が保証される」とは添文は言っていません。むしろ「回復が遅延することがあるので十分観察」と注意喚起しています。</div>
+  </div>
+</div>
+
+<!-- ════ 9. 200mg固定投与の問題 ════ -->
+
+<div class="section">
+  <div class="section-number">SECTION 09</div>
+  <h2>
+    <span class="sec-icon"><svg viewBox="0 0 24 24"><path d="M12 2C6.47 2 2 6.47 2 12s4.47 10 10 10 10-4.47 10-10S17.53 2 12 2zm5 13.59L15.59 17 12 13.41 8.41 17 7 15.59 10.59 12 7 8.41 8.41 7 12 10.59 15.59 7 17 8.41 13.41 12 17 15.59z"/></svg></span>
+    「200 mgを1バイアル盲目的に入れる」問題
+  </h2>
+  <p>これは<span class="hl-danger">患者体重と筋弛緩深度の両方を無視してしまう</span>点が問題です。</p>
+
+  <table class="calc-table">
+    <thead><tr><th>体重</th><th>200 mg 換算</th><th>備考</th></tr></thead>
+    <tbody>
+      <tr><td>50 kg</td><td><strong>4.0 mg/kg</strong></td><td>深い筋弛緩に足りうる</td></tr>
+      <tr><td>60 kg</td><td><strong>3.3 mg/kg</strong></td><td>中間領域</td></tr>
+      <tr><td>70 kg</td><td><strong>2.9 mg/kg</strong></td><td>浅い用量に近い</td></tr>
+      <tr><td>80 kg</td><td><strong>2.5 mg/kg</strong></td><td>浅い筋弛緩相当</td></tr>
+      <tr><td>100 kg</td><td><strong>2.0 mg/kg</strong></td><td>浅い筋弛緩量のみ</td></tr>
+    </tbody>
+  </table>
+
+  <p>したがって、PTC 0〜1のような深い筋弛緩状態なのに体重に見合わない量を盲目的に投与して抜管すると、<span class="hl-danger">TOF ratio 0.9未満のまま退室する危険</span>があります。</p>
+</div>
+
+<!-- ════ 10. リスクが高まる条件 ════ -->
+
+<div class="section">
+  <div class="section-number">SECTION 10</div>
+  <h2>
+    <span class="sec-icon"><svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg></span>
+    残存筋弛緩リスクが高まる条件
+  </h2>
+  <p>以下の条件が揃う場合、<span class="hl">残存筋弛緩による有害事象のリスクはかなり高くなります</span>。</p>
+
+  <ul class="danger-list">
+    <li>ロクロニウムを<strong>持続投与</strong>している</li>
+    <li>添文開始量より<strong>多めに入れている</strong>可能性がある</li>
+    <li>TOF/PTCで<strong>深さを見ていない</strong></li>
+    <li>スガマデクス200 mgを<strong>一律投与</strong>している</li>
+    <li>抜管判断が<strong>自発呼吸の有無だけ</strong>に依存している</li>
+  </ul>
+
+  <p>この運用だと、「深い筋弛緩のままスガマデクス量が不足」「見かけ上は呼吸しているがTOF ratio 0.9未満」という症例が起こりえます。JSA FAQでも、適切なモニタリングなしでは残存筋弛緩が高率に起こりうることが明示されています。</p>
+</div>
+
+<!-- ════ 11. 実務運用 ════ -->
+
+<div class="section">
+  <div class="section-number">SECTION 11</div>
+  <h2>
+    <span class="sec-icon"><svg viewBox="0 0 24 24"><path d="M14 2H6c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V8l-6-6zm-1 7V3.5L18.5 9H13zM6 20V4h5v7h7v9H6z"/></svg></span>
+    実務でどう運用すべきか
+  </h2>
+
+  <div class="timeline">
+    <div class="tl-item">
+      <div class="tl-dot"></div>
+      <div class="tl-title">導入時</div>
+      <div class="tl-desc">ロクロニウムは原則、添文通り <strong>0.6 mg/kg</strong> を基本に考える</div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-dot"></div>
+      <div class="tl-title">維持中</div>
+      <div class="tl-desc">持続投与は添文上 7 μg/kg/分 で開始。母指内転筋のTOFを見ながら調節する。「いつもの速度で流す」は避ける。</div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-dot"></div>
+      <div class="tl-title">終了が近づいたら</div>
+      <div class="tl-desc">
+        ① まず持続投与を止める → ② TOFを見る → ③ TOF count 0 ならPTCを見る → ④ TOF count 4 が出ても、それだけで抜管しない → ⑤ <strong>最後は必ず TOF ratio を見る</strong>
+      </div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-dot"></div>
+      <div class="tl-title">スガマデクス投与</div>
+      <div class="tl-desc">T2再出現なら 2 mg/kg、PTC 1〜2 なら 4 mg/kg。量は<strong>体重換算</strong>で決める。一律200 mg固定は避ける。</div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-dot active"></div>
+      <div class="tl-title">抜管前</div>
+      <div class="tl-desc"><span class="hl">TOF ratio 0.9以上を確認</span>。そこで初めて抜管を考える。</div>
+    </div>
+  </div>
+</div>
+
+<!-- ════ 12. 4倍希釈ロクロニウムの流量計算 ════ -->
+
+<div class="section">
+  <div class="section-number">SECTION 12</div>
+  <h2>
+    <span class="sec-icon"><svg viewBox="0 0 24 24"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-4 8h-2v2h-2v-2H9V9h2V7h2v2h2v2z"/></svg></span>
+    4倍希釈ロクロニウムの流量計算
+  </h2>
+  <p>ロクロニウム原液は通常 <strong>10 mg/mL</strong> です。4倍希釈とは最終濃度を1/4にすること、すなわち <span class="hl">2.5 mg/mL</span> です。</p>
+
+  <p>添文の開始量 7 μg/kg/分 = 0.42 mg/kg/時 なので、4倍希釈液での流量は次のとおりです。</p>
+
+  <table class="calc-table">
+    <thead><tr><th>項目</th><th>値</th></tr></thead>
+    <tbody>
+      <tr><td>原液濃度</td><td><strong>10 mg/mL</strong></td></tr>
+      <tr><td>4倍希釈後の濃度</td><td><strong>2.5 mg/mL</strong></td></tr>
+      <tr><td>添文開始量</td><td><strong>7 μg/kg/分 = 0.42 mg/kg/時</strong></td></tr>
+      <tr><td>流量計算式</td><td><strong>0.42 ÷ 2.5 × 体重 = 0.168 × 体重（mL/時）</strong></td></tr>
+    </tbody>
+  </table>
+
+  <div class="alert alert-info">
+    <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z"/></svg>
+    <div>これはあくまで添文上の開始量に基づく計算です。実際の投与速度は<strong>筋弛緩モニター（TOF）を見ながら調節</strong>してください。</div>
+  </div>
+</div>
+
+<!-- ════ 13. 現場で一番伝えたいこと ════ -->
+
+<div class="section">
+  <div class="section-number">SECTION 13</div>
+  <h2>
+    <span class="sec-icon"><svg viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.62L12 2 9.19 8.62 2 9.24l5.46 4.73L5.82 21 12 17.27z"/></svg></span>
+    現場向けに一番伝えたいこと
+  </h2>
+
+  <div class="rules-grid">
+    <div class="rule-card">
+      <div class="rule-num">1</div>
+      <div class="rule-text">ロクロニウム持続投与中は、<strong>TOFを見ない運用は危険</strong></div>
+    </div>
+    <div class="rule-card">
+      <div class="rule-num">2</div>
+      <div class="rule-text"><strong>TOF count 4だけ</strong>では抜管してはいけない</div>
+    </div>
+    <div class="rule-card">
+      <div class="rule-num">3</div>
+      <div class="rule-text">深いときは<strong>PTC</strong>が必要</div>
+    </div>
+    <div class="rule-card">
+      <div class="rule-num">4</div>
+      <div class="rule-text">スガマデクスは<strong>体重と深さ</strong>で量を決める</div>
+    </div>
+    <div class="rule-card">
+      <div class="rule-num">5</div>
+      <div class="rule-text">抜管前は <strong>TOF ratio 0.9以上</strong>を確認する</div>
+    </div>
+  </div>
+
+  <p>この5点が守れれば、「退室時は大丈夫そうでも、移送中や帰室後に残存筋弛緩で悪化する」という事故リスクはかなり減らせます。</p>
+</div>
+
+<!-- ════ 14. そのまま配れるまとめ ════ -->
+
+<div class="quick-ref">
+  <h2>
+    <span class="sec-icon"><svg viewBox="0 0 24 24"><path d="M14 2H6c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V8l-6-6zm-1 7V3.5L18.5 9H13zM6 20V4h5v7h7v9H6z"/></svg></span>
+    そのまま配れる短いまとめ
+  </h2>
+
+  <div class="qr-grid">
+    <div class="qr-block tof">
+      <h3>TOF/PTCの見方</h3>
+      <ul>
+        <li>TOF count：4回中、何回反応するか</li>
+        <li>TOF ratio：回復の最終確認。0.9以上が目標</li>
+        <li>PTC：TOF 0のときに深さをみる指標</li>
+      </ul>
+    </div>
+    <div class="qr-block suga">
+      <h3>スガマデクス</h3>
+      <ul>
+        <li>T2再出現 → 2 mg/kg</li>
+        <li>PTC 1〜2 → 4 mg/kg</li>
+        <li>緊急回復 → 16 mg/kg</li>
+      </ul>
+    </div>
+    <div class="qr-block risk">
+      <h3>危険な運用</h3>
+      <ul>
+        <li>TOFを見ない</li>
+        <li>200 mgを全員に固定で入れる</li>
+        <li>自発呼吸だけで抜管する</li>
+      </ul>
+    </div>
+    <div class="qr-block event">
+      <h3>起こりうること</h3>
+      <ul>
+        <li>上気道閉塞</li>
+        <li>低酸素血症</li>
+        <li>換気不全</li>
+        <li>誤嚥</li>
+        <li>再挿管</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="qr-target">
+    抜管条件：母指内転筋で <strong>TOF ratio ≥ 0.9</strong>
+  </div>
+</div>
+
+</div><!-- /.container -->
+
+<footer>
+  <div>循環器医向け アブレーション全身麻酔 TOF/PTC 超実践ガイド</div>
+  <div style="margin-top:6px;">※ 本資料は日本の電子添文・JSA FAQ・2025年JSAガイドライン・ASA/欧州ガイドラインに基づく実践的整理です</div>
+</footer>
+
+</body>
+</html>
