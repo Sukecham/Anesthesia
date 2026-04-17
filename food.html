@@ -133,13 +133,21 @@ line-height: 1.3;
 letter-spacing: -0.02em;
 margin-bottom: 1rem;
 animation: fadeInUp 1s ease 0.2s both;
+color: #e8edf5;
 }
 
 .hero h1 span {
-background: linear-gradient(135deg, var(–accent-cyan), var(–accent-teal));
+color: #00d4ff;
+}
+
+@supports (-webkit-background-clip: text) or (background-clip: text) {
+.hero h1 span {
+background: linear-gradient(135deg, #00d4ff, #00b8a9);
 -webkit-background-clip: text;
 -webkit-text-fill-color: transparent;
 background-clip: text;
+color: transparent;
+}
 }
 
 .hero-sub {
