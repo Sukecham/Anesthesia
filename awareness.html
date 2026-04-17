@@ -1,0 +1,457 @@
+<!DOCTYPE html>
+
+<html lang="ja" style="background-color:#0a1628;">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#0a1628">
+<meta name="color-scheme" content="dark">
+<title>術中覚醒ガイド ― カテ室アブレーション</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;700;900&family=Noto+Serif+JP:wght@400;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<style>
+:root{--bg-deep:#0a1628;--bg-card:#111d33;--bg-card-alt:#152240;--accent-cyan:#00d4ff;--accent-teal:#00b8a9;--accent-red:#ff4d6a;--accent-amber:#ffb74d;--accent-green:#4cdb8a;--accent-purple:#b388ff;--accent-orange:#ff8a65;--text-primary:#e8edf5;--text-secondary:#8fa3c4;--text-muted:#5a7099;--border:rgba(0,212,255,.12)}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth;scrollbar-width:thin;scrollbar-color:#00d4ff #0a1628;background:#0a1628!important}
+body{font-family:'Noto Sans JP',sans-serif;background:#0a1628!important;color:#e8edf5;line-height:1.8;font-weight:400;overflow-x:hidden;min-height:100vh}
+.progress-bar{position:fixed;top:0;left:0;height:2px;background:linear-gradient(90deg,var(--accent-purple),var(--accent-cyan));z-index:999;transition:width .1s linear;box-shadow:0 0 12px var(--accent-purple)}
+.hero{position:relative;min-height:100vh;display:flex;align-items:center;justify-content:center;text-align:center;padding:2rem;overflow:hidden}
+.hero::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 80% 60% at 50% 40%,rgba(179,136,255,.06) 0%,transparent 70%),radial-gradient(ellipse 50% 40% at 20% 80%,rgba(0,212,255,.04) 0%,transparent 60%),radial-gradient(ellipse 40% 30% at 80% 20%,rgba(255,77,106,.03) 0%,transparent 50%);pointer-events:none}
+.hero-grid{position:absolute;inset:0;background-image:linear-gradient(rgba(179,136,255,.03) 1px,transparent 1px),linear-gradient(90deg,rgba(179,136,255,.03) 1px,transparent 1px);background-size:60px 60px;mask-image:radial-gradient(ellipse 70% 60% at 50% 50%,black 20%,transparent 70%);animation:gridPulse 8s ease-in-out infinite}
+@keyframes gridPulse{0%,100%{opacity:.5}50%{opacity:1}}
+.hero-content{position:relative;z-index:2;max-width:800px}
+.hero-badge{display:inline-flex;align-items:center;gap:.5rem;background:rgba(179,136,255,.08);border:1px solid rgba(179,136,255,.2);padding:.4rem 1.2rem;border-radius:100px;font-size:.75rem;letter-spacing:.15em;text-transform:uppercase;color:var(--accent-purple);font-weight:500;margin-bottom:2rem;animation:fadeInUp 1s ease both}
+.hero-badge::before{content:'';width:6px;height:6px;border-radius:50%;background:var(--accent-purple);box-shadow:0 0 8px var(--accent-purple);animation:pulse 2s ease-in-out infinite}
+@keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.5;transform:scale(.8)}}
+.hero h1{font-family:'Noto Serif JP',serif;font-size:clamp(2rem,5vw,3.5rem);font-weight:700;line-height:1.3;letter-spacing:-.02em;margin-bottom:1rem;animation:fadeInUp 1s ease .2s both}
+.hero h1 span{background:linear-gradient(135deg,var(--accent-purple),var(--accent-cyan));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.hero-sub{font-size:1.1rem;color:var(--text-secondary);font-weight:300;animation:fadeInUp 1s ease .4s both;margin-bottom:1rem}
+.hero-sub strong{color:var(--accent-amber);font-weight:500}
+.hero-warning{display:inline-block;background:rgba(255,77,106,.08);border:1px solid rgba(255,77,106,.2);padding:.6rem 1.5rem;border-radius:8px;font-size:.85rem;color:var(--accent-red);font-weight:500;animation:fadeInUp 1s ease .5s both;margin-bottom:2rem}
+.hero-cta{display:inline-flex;align-items:center;gap:.5rem;background:linear-gradient(135deg,var(--accent-purple),var(--accent-cyan));color:var(--bg-deep);padding:.8rem 2rem;border-radius:100px;font-weight:700;font-size:.9rem;text-decoration:none;transition:all .3s ease;animation:fadeInUp 1s ease .7s both}
+.hero-cta:hover{transform:translateY(-2px);box-shadow:0 8px 30px rgba(179,136,255,.3)}
+.hero-cta svg{width:16px;height:16px;transition:transform .3s}
+.hero-cta:hover svg{transform:translateY(3px)}
+@keyframes fadeInUp{from{opacity:0;transform:translateY(30px)}to{opacity:1;transform:translateY(0)}}
+.toc{position:sticky;top:0;z-index:100;background:rgba(10,22,40,.88);backdrop-filter:blur(20px);border-bottom:1px solid var(--border);padding:.5rem .75rem;overflow-x:auto;white-space:nowrap;-webkit-overflow-scrolling:touch}
+.toc-inner{display:flex;gap:0;max-width:1200px;margin:0 auto}
+.toc a{display:inline-flex;align-items:center;gap:.2rem;color:var(--text-muted);text-decoration:none;font-size:.6rem;font-weight:500;padding:.35rem .45rem;border-radius:5px;transition:all .25s;white-space:nowrap}
+.toc a:hover,.toc a.active{color:var(--accent-purple);background:rgba(179,136,255,.08)}
+.toc a.supplement-link{color:var(--accent-orange)}
+.toc a.supplement-link:hover,.toc a.supplement-link.active{color:var(--accent-orange);background:rgba(255,138,101,.08)}
+.toc .num{font-family:'JetBrains Mono',monospace;font-size:.55rem;opacity:.5}
+.toc .sep{display:inline-flex;align-items:center;color:var(--text-muted);opacity:.25;font-size:.7rem;padding:0 .2rem}
+main{max-width:900px;margin:0 auto;padding:0 1.5rem 6rem}
+.section{margin-top:5rem;opacity:0;transform:translateY(40px);transition:all .8s cubic-bezier(.16,1,.3,1)}
+.section.visible{opacity:1;transform:translateY(0)}
+.section-header{display:flex;align-items:baseline;gap:1rem;margin-bottom:2rem;padding-bottom:1rem;border-bottom:1px solid var(--border)}
+.section-num{font-family:'JetBrains Mono',monospace;font-size:.75rem;color:var(--accent-purple);background:rgba(179,136,255,.08);padding:.25rem .6rem;border-radius:4px;letter-spacing:.05em;flex-shrink:0}
+.section-num.supplement{color:var(--accent-orange);background:rgba(255,138,101,.08)}
+.section-title{font-family:'Noto Serif JP',serif;font-size:clamp(1.4rem,3vw,1.8rem);font-weight:700;line-height:1.4}
+.prose{font-size:.92rem;color:var(--text-secondary);line-height:2;margin:1rem 0}
+.prose strong{color:var(--text-primary);font-weight:600}
+.prose em{color:var(--accent-amber);font-style:normal;font-weight:500}
+.def-box{background:var(--bg-card);border:1px solid rgba(179,136,255,.2);border-left:3px solid var(--accent-purple);border-radius:12px;padding:1.5rem;margin:1.5rem 0}
+.def-box .term{font-family:'JetBrains Mono',monospace;font-size:.7rem;color:var(--accent-purple);letter-spacing:.1em;font-weight:600;margin-bottom:.6rem}
+.def-box p{font-size:.95rem;color:var(--text-secondary);line-height:1.9}
+.def-box p strong{color:var(--text-primary)}
+.def-box .key-point{margin-top:.8rem;padding:.5rem .75rem;background:rgba(179,136,255,.06);border-radius:6px;font-size:.85rem;color:var(--accent-purple);font-weight:500}
+.risk-grid{display:grid;gap:1rem}
+.risk-card{background:var(--bg-card);border:1px solid var(--border);border-radius:12px;padding:1.5rem;transition:all .3s ease;position:relative;overflow:hidden}
+.risk-card::before{content:'';position:absolute;top:0;left:0;width:3px;height:100%;border-radius:3px 0 0 3px}
+.risk-card.critical::before{background:var(--accent-red)}
+.risk-card.warning::before{background:var(--accent-amber)}
+.risk-card.info::before{background:var(--accent-cyan)}
+.risk-card.orange::before{background:var(--accent-orange)}
+.risk-card:hover{border-color:rgba(179,136,255,.25);transform:translateX(4px)}
+.risk-title{font-weight:700;font-size:1.05rem;margin-bottom:.6rem;display:flex;align-items:center;gap:.5rem}
+.risk-title .icon{font-size:1.2rem;flex-shrink:0}
+.risk-body{color:var(--text-secondary);font-size:.88rem;line-height:1.9}
+.risk-body .arrow-flow{color:var(--accent-red);font-weight:600;font-size:.85rem;margin-top:.5rem;padding:.5rem .75rem;background:rgba(255,77,106,.06);border-radius:6px;display:block}
+.callout{background:var(--bg-card);border:1px solid var(--border);border-radius:12px;padding:1.5rem;margin:1.5rem 0}
+.callout.important{border-left:3px solid var(--accent-amber);background:rgba(255,183,77,.04)}
+.callout.tip{border-left:3px solid var(--accent-cyan);background:rgba(0,212,255,.04)}
+.callout.danger{border-left:3px solid var(--accent-red);background:rgba(255,77,106,.04)}
+.callout.purple-glow{border-left:3px solid var(--accent-purple);background:rgba(179,136,255,.04)}
+.callout.orange-glow{border-left:3px solid var(--accent-orange);background:rgba(255,138,101,.04)}
+.callout-label{font-family:'JetBrains Mono',monospace;font-size:.7rem;letter-spacing:.1em;font-weight:600;margin-bottom:.5rem;display:flex;align-items:center;gap:.4rem}
+.callout.important .callout-label{color:var(--accent-amber)}
+.callout.tip .callout-label{color:var(--accent-cyan)}
+.callout.danger .callout-label{color:var(--accent-red)}
+.callout.purple-glow .callout-label{color:var(--accent-purple)}
+.callout.orange-glow .callout-label{color:var(--accent-orange)}
+.callout p{font-size:.9rem;color:var(--text-secondary)}
+.callout strong{color:var(--text-primary)}
+.mech-flow{display:flex;flex-direction:column;gap:0;margin:1.5rem 0;position:relative}
+.mech-flow::before{content:'';position:absolute;left:23px;top:40px;bottom:40px;width:2px;background:linear-gradient(180deg,var(--accent-purple),var(--accent-red));opacity:.3}
+.mech-step{display:flex;gap:1rem;align-items:flex-start;padding:1rem 0;position:relative;z-index:2}
+.mech-icon{width:48px;height:48px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:1.2rem;flex-shrink:0;border:2px solid}
+.mech-icon.purple{background:rgba(179,136,255,.1);border-color:rgba(179,136,255,.3)}
+.mech-icon.amber{background:rgba(255,183,77,.1);border-color:rgba(255,183,77,.3)}
+.mech-icon.red{background:rgba(255,77,106,.1);border-color:rgba(255,77,106,.3)}
+.mech-content{flex:1;background:var(--bg-card);border:1px solid var(--border);border-radius:10px;padding:1rem 1.25rem}
+.mech-content h4{font-size:.95rem;font-weight:700;margin-bottom:.3rem}
+.mech-content p{font-size:.85rem;color:var(--text-secondary);line-height:1.8}
+.mech-content .causes{display:flex;flex-wrap:wrap;gap:.35rem;margin-top:.5rem}
+.cause-tag{font-size:.72rem;padding:.2rem .55rem;border-radius:100px;font-weight:500}
+.cause-tag.purple{background:rgba(179,136,255,.1);border:1px solid rgba(179,136,255,.2);color:var(--accent-purple)}
+.cause-tag.amber{background:rgba(255,183,77,.1);border:1px solid rgba(255,183,77,.2);color:var(--accent-amber)}
+.cause-tag.red{background:rgba(255,77,106,.1);border:1px solid rgba(255,77,106,.2);color:var(--accent-red)}
+.mech-result{margin-top:.5rem;padding:1rem 1.25rem;background:rgba(255,77,106,.06);border:1px solid rgba(255,77,106,.15);border-radius:10px;text-align:center}
+.mech-result p{font-size:.9rem;color:var(--accent-red);font-weight:700}
+.mech-result .sub{font-size:.8rem;font-weight:400;color:var(--text-secondary);margin-top:.3rem}
+.factor-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:1rem;margin:1.5rem 0}
+.factor-card{background:var(--bg-card);border:1px solid var(--border);border-radius:12px;padding:1.25rem;transition:all .3s}
+.factor-card:hover{border-color:rgba(179,136,255,.25);transform:translateY(-3px);box-shadow:0 8px 30px rgba(0,0,0,.3)}
+.factor-num{font-family:'JetBrains Mono',monospace;font-size:.65rem;color:var(--text-muted);margin-bottom:.4rem}
+.factor-title{font-weight:700;font-size:.95rem;margin-bottom:.5rem;display:flex;align-items:center;gap:.5rem}
+.factor-body{font-size:.85rem;color:var(--text-secondary);line-height:1.8}
+.factor-body .consequence{margin-top:.5rem;font-size:.82rem;color:var(--accent-amber);font-weight:500}
+.bis-gauge{background:var(--bg-card);border:1px solid var(--border);border-radius:12px;padding:1.5rem;margin-bottom:1rem}
+.bis-bar{position:relative;height:40px;border-radius:8px;overflow:hidden;display:flex;margin:1rem 0}
+.bis-zone{display:flex;align-items:center;justify-content:center;font-size:.7rem;font-weight:700;font-family:'JetBrains Mono',monospace;letter-spacing:.05em}
+.bis-zone.deep{flex:4;background:linear-gradient(90deg,rgba(0,184,169,.25),rgba(0,184,169,.15));color:var(--accent-teal)}
+.bis-zone.optimal{flex:2;background:linear-gradient(90deg,rgba(76,219,138,.25),rgba(76,219,138,.15));color:var(--accent-green);border-left:2px solid var(--accent-green);border-right:2px solid var(--accent-green)}
+.bis-zone.risky{flex:2;background:linear-gradient(90deg,rgba(255,183,77,.2),rgba(255,77,106,.2));color:var(--accent-amber)}
+.bis-zone.awake{flex:2;background:linear-gradient(90deg,rgba(255,77,106,.2),rgba(255,77,106,.3));color:var(--accent-red)}
+.bis-labels{display:flex;justify-content:space-between;font-family:'JetBrains Mono',monospace;font-size:.7rem;color:var(--text-muted)}
+.bis-limits{display:grid;grid-template-columns:1fr 1fr;gap:.75rem;margin-top:1rem}
+.bis-limit{padding:.6rem .8rem;border-radius:8px;font-size:.82rem;color:var(--text-secondary);background:rgba(255,183,77,.06);border:1px solid rgba(255,183,77,.15)}
+.bis-limit .label{font-family:'JetBrains Mono',monospace;font-size:.7rem;font-weight:600;margin-bottom:.25rem;color:var(--accent-amber)}
+.signs-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:.75rem;margin:1.5rem 0}
+.sign-item{background:var(--bg-card);border:1px solid var(--border);border-radius:10px;padding:1rem;text-align:center;transition:all .3s}
+.sign-item:hover{border-color:rgba(255,183,77,.3);transform:scale(1.03)}
+.sign-icon{font-size:1.6rem;margin-bottom:.4rem}
+.sign-label{font-size:.8rem;font-weight:600;color:var(--text-primary)}
+.sign-sub{font-size:.7rem;color:var(--text-muted);margin-top:.15rem}
+.case-grid{display:grid;gap:1rem;margin:1.5rem 0}
+.case-card{background:var(--bg-card);border:1px solid var(--border);border-radius:12px;padding:1.5rem;transition:all .3s}
+.case-card:hover{border-color:rgba(255,183,77,.2);background:var(--bg-card-alt)}
+.case-label{font-family:'JetBrains Mono',monospace;font-size:.7rem;color:var(--accent-amber);letter-spacing:.08em;font-weight:600;margin-bottom:.5rem}
+.case-title{font-weight:700;font-size:.95rem;margin-bottom:.6rem}
+.case-flow{display:flex;flex-wrap:wrap;align-items:center;gap:.4rem;font-size:.83rem;color:var(--text-secondary)}
+.case-flow .arr{color:var(--accent-red);font-weight:700;font-size:.9rem}
+.case-flow .step{padding:.25rem .6rem;background:rgba(255,255,255,.03);border-radius:6px;border:1px solid rgba(255,255,255,.05)}
+.case-flow .result{padding:.25rem .6rem;background:rgba(255,77,106,.08);border-radius:6px;border:1px solid rgba(255,77,106,.15);color:var(--accent-red);font-weight:600}
+.config-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:.75rem;margin:1.5rem 0}
+.config-item{background:var(--bg-card);border:1px solid var(--border);border-radius:10px;padding:1rem;text-align:center}
+.config-drug{font-weight:700;font-size:.9rem;margin-bottom:.2rem}
+.config-role{font-size:.75rem;color:var(--text-muted)}
+.config-item .check{font-size:1.2rem;margin-bottom:.3rem}
+.key-grid{display:grid;gap:1rem;margin:1.5rem 0}
+.key-card{background:var(--bg-card);border:1px solid var(--border);border-radius:12px;padding:1.25rem;display:grid;grid-template-columns:auto 1fr;gap:1rem;align-items:start;transition:all .3s}
+.key-card:hover{border-color:rgba(0,212,255,.2)}
+.key-icon{width:44px;height:44px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:1.2rem;background:rgba(0,212,255,.08);border:1px solid rgba(0,212,255,.15);flex-shrink:0}
+.key-icon.orange{background:rgba(255,138,101,.08);border:1px solid rgba(255,138,101,.15)}
+.key-title{font-weight:700;font-size:.95rem;margin-bottom:.3rem}
+.key-body{font-size:.85rem;color:var(--text-secondary);line-height:1.8}
+.key-body .highlight{color:var(--accent-cyan);font-weight:600}
+.key-body .hl-orange{color:var(--accent-orange);font-weight:600}
+.tiva-box{background:var(--bg-card);border:1px solid rgba(255,77,106,.15);border-radius:12px;padding:1.5rem;margin:1.5rem 0;text-align:center}
+.tiva-box .label{font-family:'JetBrains Mono',monospace;font-size:.7rem;color:var(--accent-red);letter-spacing:.1em;font-weight:600;margin-bottom:.5rem}
+.tiva-box p{font-size:.9rem;color:var(--text-secondary)}
+.tiva-box strong{color:var(--text-primary)}
+.summary-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:1rem;margin:1.5rem 0}
+.summary-card{background:var(--bg-card);border:1px solid var(--border);border-radius:12px;padding:1.25rem;text-align:center;transition:all .3s}
+.summary-card:hover{transform:translateY(-4px);border-color:rgba(179,136,255,.3);box-shadow:0 12px 40px rgba(0,0,0,.3)}
+.summary-icon{font-size:2rem;margin-bottom:.6rem}
+.summary-text{font-size:.88rem;font-weight:600;line-height:1.6}
+.summary-detail{font-size:.78rem;color:var(--text-muted);margin-top:.3rem}
+.final-cta{margin-top:4rem;text-align:center;padding:3rem 2rem;background:linear-gradient(135deg,rgba(179,136,255,.05),rgba(0,212,255,.05));border:1px solid var(--border);border-radius:16px}
+.final-cta h3{font-family:'Noto Serif JP',serif;font-size:1.5rem;margin-bottom:.8rem}
+.final-cta p{color:var(--text-secondary);font-size:.95rem}
+.final-cta .hl{color:var(--accent-purple);font-weight:700}
+.final-cta .hl-orange{color:var(--accent-orange);font-weight:700}
+.supplement-divider{margin:6rem 0 2rem;text-align:center;position:relative}
+.supplement-divider::before{content:'';position:absolute;left:0;right:0;top:50%;height:1px;background:linear-gradient(90deg,transparent,var(--accent-orange),transparent)}
+.supplement-divider span{position:relative;display:inline-flex;align-items:center;gap:.6rem;background:var(--bg-deep);padding:.5rem 1.5rem;font-family:'JetBrains Mono',monospace;font-size:.75rem;color:var(--accent-orange);letter-spacing:.15em;font-weight:600;border:1px solid rgba(255,138,101,.25);border-radius:100px}
+.cascade-flow{margin:1.5rem 0}
+.cascade-step{background:var(--bg-card);border:1px solid var(--border);border-radius:10px;padding:1rem 1.25rem;position:relative;z-index:2;display:flex;align-items:center;gap:.8rem}
+.cascade-step .step-num{font-family:'JetBrains Mono',monospace;font-size:.75rem;font-weight:700;width:28px;height:28px;border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.cascade-step .step-num.n{background:rgba(255,138,101,.15);color:var(--accent-orange)}
+.cascade-step .step-num.d{background:rgba(255,77,106,.15);color:var(--accent-red)}
+.cascade-step .step-text{font-size:.88rem;color:var(--text-secondary)}
+.cascade-step .step-text strong{color:var(--text-primary)}
+.cascade-arrow{text-align:center;padding:.3rem 0;color:var(--accent-orange);font-size:1rem;opacity:.5}
+.cascade-result{padding:1rem 1.25rem;background:rgba(255,77,106,.06);border:1px solid rgba(255,77,106,.15);border-radius:10px;text-align:center;font-size:.9rem;color:var(--accent-red);font-weight:600}
+.var-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:1rem;margin:1.5rem 0}
+.var-card{background:var(--bg-card);border:1px solid var(--border);border-radius:12px;padding:1.25rem;transition:all .3s}
+.var-card:hover{border-color:rgba(255,138,101,.25);transform:translateY(-3px);box-shadow:0 8px 30px rgba(0,0,0,.3)}
+.var-card-icon{font-size:1.5rem;margin-bottom:.5rem}
+.var-card h4{font-size:.95rem;font-weight:700;margin-bottom:.4rem}
+.var-card p{font-size:.85rem;color:var(--text-secondary);line-height:1.8}
+.var-card .hl{color:var(--accent-orange);font-weight:600}
+.patient-tags{display:flex;flex-wrap:wrap;gap:.5rem;margin:1rem 0}
+.ptag{font-size:.78rem;padding:.35rem .8rem;border-radius:100px;font-weight:500;background:rgba(255,138,101,.08);border:1px solid rgba(255,138,101,.2);color:var(--accent-orange)}
+.quote-box{margin:2rem 0;padding:2rem;text-align:center;background:linear-gradient(135deg,rgba(255,138,101,.05),rgba(255,77,106,.05));border:1px solid rgba(255,138,101,.15);border-radius:16px}
+.quote-box .quote{font-family:'Noto Serif JP',serif;font-size:1.2rem;font-weight:700;color:var(--accent-orange);line-height:1.6}
+.quote-box .quote-sub{font-size:.82rem;color:var(--text-muted);margin-top:.6rem}
+footer{text-align:center;padding:3rem 1rem;color:var(--text-muted);font-size:.75rem;border-top:1px solid var(--border);margin-top:4rem}
+@media(max-width:600px){.bis-limits{grid-template-columns:1fr}.factor-grid,.var-grid{grid-template-columns:1fr}.config-grid{grid-template-columns:1fr 1fr}.signs-grid{grid-template-columns:repeat(3,1fr)}}
+</style>
+</head>
+<body style="background-color:#0a1628;color:#e8edf5;">
+<div class="progress-bar" id="progressBar"></div>
+
+<section class="hero" id="top">
+<div class="hero-grid"></div>
+<div class="hero-content">
+<div class="hero-badge">Anesthesiology × Cardiology</div>
+<h1>カテ室アブレーションにおける<br><span>術中覚醒（Awareness）</span></h1>
+<p class="hero-sub">麻酔科から循環器内科の先生方へ ―<br><strong>見逃されやすい重大合併症</strong>を理解する</p>
+<div class="hero-warning">⚠ 筋弛緩下での覚醒 ＝ 動けないのに意識がある状態</div><br>
+<a href="#s1" class="hero-cta">学習を始める<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 5v14M19 12l-7 7-7-7"/></svg></a>
+</div>
+</section>
+
+<nav class="toc" id="toc">
+<div class="toc-inner">
+<a href="#s1"><span class="num">01</span>定義</a>
+<a href="#s2"><span class="num">02</span>有害事象</a>
+<a href="#s3"><span class="num">03</span>麻酔条件</a>
+<a href="#s4"><span class="num">04</span>メカニズム</a>
+<a href="#s5"><span class="num">05</span>カテ室</a>
+<a href="#s6"><span class="num">06</span>BIS</a>
+<a href="#s7"><span class="num">07</span>サイン</a>
+<a href="#s8"><span class="num">08</span>具体例</a>
+<a href="#s9"><span class="num">09</span>理解点</a>
+<a href="#s10"><span class="num">10</span>まとめ</a>
+<span class="sep">│</span>
+<a href="#sup1" class="supplement-link"><span class="num">補1</span>前提</a>
+<a href="#sup2" class="supplement-link"><span class="num">補2</span>3つの差</a>
+<a href="#sup3" class="supplement-link"><span class="num">補3</span>患者像</a>
+<a href="#sup4" class="supplement-link"><span class="num">補4</span>構造</a>
+<a href="#sup5" class="supplement-link"><span class="num">補5</span>ズレ</a>
+<a href="#sup6" class="supplement-link"><span class="num">補6</span>BIS限界</a>
+<a href="#sup7" class="supplement-link"><span class="num">補7</span>要点</a>
+<a href="#sup8" class="supplement-link"><span class="num">補8</span>総括</a>
+</div>
+</nav>
+
+<main>
+
+<!-- ====== 本編 ====== -->
+
+<section class="section" id="s1">
+<div class="section-header"><span class="section-num">01</span><h2 class="section-title">術中覚醒とは何か</h2></div>
+<div class="def-box">
+<div class="term">DEFINITION — INTRAOPERATIVE AWARENESS</div>
+<p><strong>術中覚醒（Awareness）</strong>とは、全身麻酔中に意識が保たれ、<strong>記憶として残る</strong>状態です。</p>
+<p>単なる「浅い麻酔」ではなく、患者が<strong>"覚えている"</strong>ことが問題になります。</p>
+<div class="key-point">💡 麻酔が浅い ≠ 術中覚醒。「記憶が残る」ことが臨床的に問題となる。</div>
+</div>
+</section>
+
+<section class="section" id="s2">
+<div class="section-header"><span class="section-num">02</span><h2 class="section-title">なぜ重要か（有害事象）</h2></div>
+<p class="prose">術中覚醒は頻度は高くありませんが、起きた場合の影響は<strong>非常に大きい</strong>です。</p>
+<div class="risk-grid">
+<div class="risk-card critical"><div class="risk-title"><span class="icon">😰</span>手術中の痛みの記憶</div><div class="risk-body">侵害刺激を意識下で体験し、その記憶が残る最も深刻な事態。</div></div>
+<div class="risk-card critical"><div class="risk-title"><span class="icon">😱</span>恐怖・パニック体験</div><div class="risk-body">動けないのに意識がある ― 極度の恐怖と無力感を体験。</div></div>
+<div class="risk-card warning"><div class="risk-title"><span class="icon">🧠</span>PTSD（心的外傷後ストレス障害）</div><div class="risk-body">術後のフラッシュバック、不眠、全身麻酔への拒否反応など長期的な影響。</div></div>
+<div class="risk-card warning"><div class="risk-title"><span class="icon">⚖️</span>医療不信・訴訟リスク</div><div class="risk-body">患者-医療者関係の破綻、法的紛争に発展するケースも。</div></div>
+</div>
+<div class="callout danger" style="margin-top:1.5rem"><div class="callout-label">🚨 MOST CRITICAL</div><p>特に問題となるのは<strong>「動けないのに意識がある状態」</strong>（筋弛緩薬使用下）。患者は助けを求めることもできません。</p></div>
+</section>
+
+<section class="section" id="s3">
+<div class="section-header"><span class="section-num">03</span><h2 class="section-title">今回の麻酔条件での前提</h2></div>
+<p class="prose">標準的な<strong>TIVA（全静脈麻酔）</strong>ですが、同時に術中覚醒の典型的リスク条件も含みます。</p>
+<div class="config-grid">
+<div class="config-item"><div class="check">💉</div><div class="config-drug">プロポフォール</div><div class="config-role">持続投与 ― 主麻酔</div></div>
+<div class="config-item"><div class="check">💊</div><div class="config-drug">フェンタニル</div><div class="config-role">導入時 ― 鎮痛</div></div>
+<div class="config-item"><div class="check">🧬</div><div class="config-drug">ロクロニウム</div><div class="config-role">筋弛緩</div></div>
+<div class="config-item"><div class="check">📊</div><div class="config-drug">BISモニタ</div><div class="config-role">意識深度モニタ</div></div>
+</div>
+<div class="callout important"><div class="callout-label">⚠ IMPORTANT</div><p>この構成は<strong>標準的TIVA</strong>である一方、<strong>術中覚醒の典型的リスク条件</strong>も含む構成です。</p></div>
+</section>
+
+<section class="section" id="s4">
+<div class="section-header"><span class="section-num">04</span><h2 class="section-title">術中覚醒が起こるメカニズム</h2></div>
+<div class="callout purple-glow"><div class="callout-label">🔑 CORE CONCEPT</div><p>シンプルに言うと：<strong>「麻酔の深さが足りない」＋「患者が動けない」</strong></p></div>
+<div class="mech-flow">
+<div class="mech-step"><div class="mech-icon purple">①</div><div class="mech-content"><h4>プロポフォールが不足</h4><p>意識レベルが上昇し、覚醒の土台ができる。</p><div class="causes"><span class="cause-tag purple">低血圧回避で減量</span><span class="cause-tag purple">シリンジトラブル</span><span class="cause-tag purple">ライン閉塞・漏れ</span></div></div></div>
+<div class="mech-step"><div class="mech-icon amber">②</div><div class="mech-content"><h4>フェンタニルの効果切れ</h4><p>導入時のみ使用のため、術中は鎮痛が不足。痛み刺激で覚醒方向へ。</p><div class="causes"><span class="cause-tag amber">導入時のみ</span><span class="cause-tag amber">術中追加なし</span><span class="cause-tag amber">焼灼刺激</span></div></div></div>
+<div class="mech-step"><div class="mech-icon red">③</div><div class="mech-content"><h4>ロクロニウムで動けない</h4><p>筋弛緩薬により患者は動くことも訴えることもできない。</p><div class="causes"><span class="cause-tag red">体動不可</span><span class="cause-tag red">意思表示不可</span></div></div></div>
+</div>
+<div class="mech-result"><p>この3つが重なると ―</p><p style="font-size:1.1rem;margin-top:.3rem">"完全に覚醒しているのに動けない" 状態が成立</p><p class="sub">患者は助けを求めることも、目を開けることもできません</p></div>
+</section>
+
+<section class="section" id="s5">
+<div class="section-header"><span class="section-num">05</span><h2 class="section-title">カテ室でリスクが上がる理由</h2></div>
+<p class="prose">手術室と違い、カテ室では<strong>気づかないうちに麻酔が浅くなる構造的要因</strong>があります。</p>
+<div class="factor-grid">
+<div class="factor-card"><div class="factor-num">FACTOR ①</div><div class="factor-title">🎯 麻酔優先度が下がりやすい</div><div class="factor-body">術者の操作に集中が移り、チームの重心が術野寄りに。<div class="consequence">→ 麻酔管理への注意が分散</div></div></div>
+<div class="factor-card"><div class="factor-num">FACTOR ②</div><div class="factor-title">⏱ 長時間・低侵襲という誤解</div><div class="factor-body">「そんなに痛くないだろう」という認識が鎮痛軽視に。<div class="consequence">→ アブレーションは無痛ではない</div></div></div>
+<div class="factor-card"><div class="factor-num">FACTOR ③</div><div class="factor-title">📉 血圧低下を嫌う</div><div class="factor-body">循環動態維持のためプロポフォールを絞りがちに。<div class="consequence">→ 麻酔が浅くなる</div></div></div>
+</div>
+<div class="callout danger"><div class="callout-label">🚨 STRUCTURAL RISK</div><p>結果として、カテ室では<strong>"気づかないうちに浅くなる"構造</strong>が存在します。</p></div>
+</section>
+
+<section class="section" id="s6">
+<div class="section-header"><span class="section-num">06</span><h2 class="section-title">BISモニタの位置づけ</h2></div>
+<div class="bis-gauge">
+<p class="prose" style="margin:0 0 .5rem">BIS（Bispectral Index）は有用ですが、<strong>万能ではありません。</strong></p>
+<div class="bis-bar"><div class="bis-zone deep">0–40<br>深い</div><div class="bis-zone optimal">40–60<br>適正</div><div class="bis-zone risky">60–80<br>注意</div><div class="bis-zone awake">80–100<br>覚醒</div></div>
+<div class="bis-labels"><span>0</span><span>40</span><span>60</span><span>80</span><span>100</span></div>
+</div>
+<div class="bis-limits">
+<div class="bis-limit"><div class="label">LIMITATION ①</div>筋弛緩下では臨床徴候（体動）が消える</div>
+<div class="bis-limit"><div class="label">LIMITATION ②</div>電気的アーチファクトの影響を受ける</div>
+<div class="bis-limit"><div class="label">LIMITATION ③</div>鎮痛不足は反映されにくい</div>
+<div class="bis-limit"><div class="label">CONCLUSION</div>BISだけで安全は担保できない</div>
+</div>
+</section>
+
+<section class="section" id="s7">
+<div class="section-header"><span class="section-num">07</span><h2 class="section-title">覚醒を疑うサイン</h2></div>
+<p class="prose">以下の徴候があれば<strong>「麻酔が浅い可能性」</strong>を疑うべきです。</p>
+<div class="signs-grid">
+<div class="sign-item"><div class="sign-icon">📈</div><div class="sign-label">血圧上昇</div></div>
+<div class="sign-item"><div class="sign-icon">💓</div><div class="sign-label">心拍数上昇</div></div>
+<div class="sign-item"><div class="sign-icon">💦</div><div class="sign-label">発汗</div></div>
+<div class="sign-item"><div class="sign-icon">😢</div><div class="sign-label">涙</div></div>
+<div class="sign-item"><div class="sign-icon">🫁</div><div class="sign-label">呼吸努力</div><div class="sign-sub">補助呼吸時</div></div>
+<div class="sign-item"><div class="sign-icon">📊</div><div class="sign-label">BIS上昇</div><div class="sign-sub">60以上に注意</div></div>
+</div>
+<div class="callout important"><div class="callout-label">⚠ KEY INSIGHT</div><p>特に重要なのは<strong>"原因不明の交感神経反応"</strong>です。カテ操作では説明がつかない血圧・心拍上昇は、覚醒を疑う手がかりに。</p></div>
+</section>
+
+<section class="section" id="s8">
+<div class="section-header"><span class="section-num">08</span><h2 class="section-title">実際に起こりやすい場面</h2></div>
+<div class="case-grid">
+<div class="case-card"><div class="case-label">CASE 1</div><div class="case-title">低血圧でプロポフォール減量</div><div class="case-flow"><span class="step">血圧低下</span><span class="arr">→</span><span class="step">プロポフォール減量</span><span class="arr">→</span><span class="step">BIS 60〜70</span><span class="arr">→</span><span class="result">覚醒リスク ↑</span></div></div>
+<div class="case-card"><div class="case-label">CASE 2</div><div class="case-title">フェンタニル導入のみ</div><div class="case-flow"><span class="step">鎮痛効果切れ</span><span class="arr">→</span><span class="step">焼灼刺激</span><span class="arr">→</span><span class="step">交感神経反応</span><span class="arr">→</span><span class="result">意識レベル ↑</span></div></div>
+<div class="case-card"><div class="case-label">CASE 3</div><div class="case-title">シリンジトラブル</div><div class="case-flow"><span class="step">プロポフォール停止</span><span class="arr">→</span><span class="step">数分経過</span><span class="arr">→</span><span class="result">覚醒</span></div></div>
+</div>
+<div class="tiva-box"><div class="label">⚠ TIVA — CRITICAL DIFFERENCE</div><p>TIVAは吸入麻酔と違い、<strong>"気づかない麻酔切れ"</strong>が起こりうる。<br>吸入麻酔のような「匂いで気づく」セーフティネットがありません。</p></div>
+</section>
+
+<section class="section" id="s9">
+<div class="section-header"><span class="section-num">09</span><h2 class="section-title">循環器内科として理解してほしいポイント</h2></div>
+<div class="key-grid">
+<div class="key-card"><div class="key-icon">🏥</div><div><div class="key-title">① 環境要因も影響する</div><div class="key-body"><span class="highlight">カテ室の環境・長時間・低侵襲という認識</span>も覚醒リスクに影響します。</div></div></div>
+<div class="key-card"><div class="key-icon">📉</div><div><div class="key-title">② 「浅い方が安全」は危険</div><div class="key-body">血圧だけ見て麻酔を浅くすると、<span class="highlight">浅すぎる ＝ 覚醒リスク</span>になります。</div></div></div>
+<div class="key-card"><div class="key-icon">🔥</div><div><div class="key-title">③ 鎮痛軽視は覚醒につながる</div><div class="key-body"><span class="highlight">アブレーションは無痛ではない。</span>鎮痛不足は覚醒の引き金に。</div></div></div>
+<div class="key-card"><div class="key-icon">📊</div><div><div class="key-title">④ BISがあるから安心ではない</div><div class="key-body"><span class="highlight">トレンド ＋ 臨床徴候</span>の総合判断が重要です。</div></div></div>
+</div>
+</section>
+
+<section class="section" id="s10">
+<div class="section-header"><span class="section-num">10</span><h2 class="section-title">まとめ ― 最重要ポイント</h2></div>
+<div class="summary-grid">
+<div class="summary-card"><div class="summary-icon">🧠</div><div class="summary-text">意識＋記憶が残る<br>重大合併症</div></div>
+<div class="summary-card"><div class="summary-icon">🔒</div><div class="summary-text">筋弛緩下での覚醒<br>が最も問題</div><div class="summary-detail">動けない＋意識がある</div></div>
+<div class="summary-card"><div class="summary-icon">💉</div><div class="summary-text">プロポフォール＋<br>ロクロニウム構成</div><div class="summary-detail">典型的リスク構造を含む</div></div>
+<div class="summary-card"><div class="summary-icon">🏥</div><div class="summary-text">カテ室では<br>気づかず浅くなる</div><div class="summary-detail">構造的リスク因子</div></div>
+</div>
+<div class="final-cta"><h3>対策の核心</h3><p><span class="hl">適切な麻酔深度</span> ＋ <span class="hl">十分な鎮痛</span> ＋ <span class="hl">モニタ総合判断</span></p><p style="margin-top:.5rem;font-size:.85rem;color:var(--text-muted)">数値だけに頼らず、臨床徴候とトレンドを組み合わせた管理を。</p></div>
+</section>
+
+<!-- ====== 追補 ====== -->
+
+<div class="supplement-divider"><span>＋ SUPPLEMENT ― プロポフォールの個人差</span></div>
+
+<section class="section" id="sup1">
+<div class="section-header"><span class="section-num supplement">補 1</span><h2 class="section-title">プロポフォールは「効き方の個人差が非常に大きい薬」</h2></div>
+<div class="def-box" style="border-color:rgba(255,138,101,.2);border-left-color:var(--accent-orange)">
+<div class="term" style="color:var(--accent-orange)">PREMISE — INTER-INDIVIDUAL VARIABILITY</div>
+<p>プロポフォールは、同じ体重・同じ投与速度でも<strong>効き方に大きな個人差がある</strong>という特徴があります。</p>
+<div class="key-point" style="background:rgba(255,138,101,.06);color:var(--accent-orange)">💡 これは臨床的に非常に重要な事実です</div>
+</div>
+</section>
+
+<section class="section" id="sup2">
+<div class="section-header"><span class="section-num supplement">補 2</span><h2 class="section-title">何が違うのか ― 3つの個人差</h2></div>
+<div class="var-grid">
+<div class="var-card"><div class="var-card-icon">🎚️</div><h4>① 薬に対する"感受性"</h4><p>少量で深く眠る人もいれば、同じ量でも浅くなる人もいる。<span class="hl">同じ mg/kg でも効果が違う。</span></p></div>
+<div class="var-card"><div class="var-card-icon">🔄</div><h4>② 分布・代謝（PK）</h4><p>心機能、肝血流、体脂肪量によって<span class="hl">効き始め・切れ方が変わる。</span></p></div>
+<div class="var-card"><div class="var-card-icon">🧠</div><h4>③ 脳の反応（PD）</h4><p>同じ血中濃度でも<span class="hl">脳の抑制のされ方が違う。</span></p></div>
+</div>
+</section>
+
+<section class="section" id="sup3">
+<div class="section-header"><span class="section-num supplement">補 3</span><h2 class="section-title">アブレーション患者で特に問題になる理由</h2></div>
+<p class="prose">アブレーション患者は、プロポフォールの<strong>効き方のばらつきが出やすい集団</strong>です。</p>
+<div class="patient-tags"><span class="ptag">高齢</span><span class="ptag">心機能低下（または境界）</span><span class="ptag">多剤内服</span><span class="ptag">体格差が大きい</span></div>
+<div class="callout orange-glow"><div class="callout-label">🔍 IMPLICATION</div><p>これらの特徴が重なるため、<strong>同じプロトコルでも患者ごとに効き方が大きく異なる</strong>ことを前提にする必要があります。</p></div>
+</section>
+
+<section class="section" id="sup4">
+<div class="section-header"><span class="section-num supplement">補 4</span><h2 class="section-title">術中覚醒との関係 ― 問題の構造</h2></div>
+<div class="callout danger"><div class="callout-label">🚨 CORE DILEMMA</div><p>プロポフォールは<strong>"効きすぎると危険（低血圧）"</strong>であり、<strong>"効かなさすぎても危険（覚醒）"</strong>です。</p></div>
+<p class="prose" style="margin-bottom:.5rem"><strong>循環器領域でよくある流れ：</strong></p>
+<div class="cascade-flow">
+<div class="cascade-step"><div class="step-num n">①</div><div class="step-text"><strong>血圧が下がる</strong></div></div>
+<div class="cascade-arrow">↓</div>
+<div class="cascade-step"><div class="step-num n">②</div><div class="step-text">プロポフォールを<strong>減量</strong></div></div>
+<div class="cascade-arrow">↓</div>
+<div class="cascade-step"><div class="step-num n">③</div><div class="step-text">「血圧はよくなった」 ← <strong>ここで安心しがち</strong></div></div>
+<div class="cascade-arrow">↓</div>
+<div class="cascade-step"><div class="step-num d">④</div><div class="step-text">実は<strong>麻酔が浅くなっている</strong></div></div>
+<div class="cascade-arrow">↓</div>
+<div class="cascade-result">⑤ 覚醒リスク上昇</div>
+</div>
+<div class="callout important" style="margin-top:1rem"><div class="callout-label">⚠ KEY PATTERN</div><p>循環器領域では特に<strong>「血圧優先で浅くなる」方向に振れやすい</strong>構造があります。</p></div>
+</section>
+
+<section class="section" id="sup5">
+<div class="section-header"><span class="section-num supplement">補 5</span><h2 class="section-title">具体的に起こるズレ</h2></div>
+<p class="prose">同じ患者でも時間経過とともに効き方が変わることがあります。</p>
+<div class="case-grid">
+<div class="case-card"><div class="case-label">PHASE SHIFT</div><div class="case-title">「最初と同じ量で維持できるとは限らない」</div><div class="case-flow"><span class="step">導入直後 → よく効く</span><span class="arr">→</span><span class="step">術中 → 効きが弱くなる</span></div></div>
+</div>
+<div class="var-grid" style="margin-top:1rem">
+<div class="var-card"><h4>分布変化</h4><p>時間とともに末梢組織への分布が変化し、<span class="hl">中枢濃度が下がる</span></p></div>
+<div class="var-card"><h4>侵襲刺激</h4><p>焼灼刺激の程度が変化し、<span class="hl">必要な麻酔深度が変わる</span></p></div>
+<div class="var-card"><h4>鎮痛不足</h4><p>フェンタニル効果減弱で<span class="hl">覚醒閾値が低下</span></p></div>
+</div>
+</section>
+
+<section class="section" id="sup6">
+<div class="section-header"><span class="section-num supplement">補 6</span><h2 class="section-title">BISとの関係 ― 個人差を吸収できない</h2></div>
+<p class="prose">BIS（脳波モニタ）は重要ですが、<strong>プロポフォールの個人差を完全には吸収できません。</strong></p>
+<div class="risk-grid">
+<div class="risk-card orange"><div class="risk-title"><span class="icon">❌</span>ありがちな誤解</div><div class="risk-body">「BISが50だから安心」「BISだけ見ればいい」→ いずれも<strong>誤りです。</strong></div></div>
+<div class="risk-card info"><div class="risk-title"><span class="icon">✅</span>正しい理解</div><div class="risk-body"><strong>BIS ＋ 循環反応 ＋ 臨床状況</strong>の<strong>総合判断</strong>が必要です。</div></div>
+</div>
+</section>
+
+<section class="section" id="sup7">
+<div class="section-header"><span class="section-num supplement">補 7</span><h2 class="section-title">循環器内科に知ってほしいポイント</h2></div>
+<div class="key-grid">
+<div class="key-card"><div class="key-icon orange">💉</div><div><div class="key-title">① 「一定量で安全」な薬ではない</div><div class="key-body"><span class="hl-orange">患者ごとに適正量が全く違う。</span>体重換算だけでは決められません。</div></div></div>
+<div class="key-card"><div class="key-icon orange">📉</div><div><div class="key-title">② 血圧だけで浅くするのは危険</div><div class="key-body"><span class="hl-orange">浅すぎると術中覚醒リスク。</span>血圧安定 ≠ 安全な麻酔深度。</div></div></div>
+<div class="key-card"><div class="key-icon orange">⚖️</div><div><div class="key-title">③ 「あまり使わない方が安全」は誤解</div><div class="key-body"><span class="hl-orange">少なすぎるのもリスク。</span>効きすぎも効かなさすぎも危険です。</div></div></div>
+<div class="key-card"><div class="key-icon orange">⏱</div><div><div class="key-title">④ 長時間症例ほどズレる</div><div class="key-body"><span class="hl-orange">アブレーションは要注意。</span>時間経過とともに効き方が変化します。</div></div></div>
+</div>
+</section>
+
+<section class="section" id="sup8">
+<div class="section-header"><span class="section-num supplement">補 8</span><h2 class="section-title">追補まとめ</h2></div>
+<div class="summary-grid">
+<div class="summary-card"><div class="summary-icon">🎚️</div><div class="summary-text">個人差が<br>非常に大きい</div><div class="summary-detail">PK/PD/感受性</div></div>
+<div class="summary-card"><div class="summary-icon">📉</div><div class="summary-text">低血圧回避で<br>浅くなりやすい</div><div class="summary-detail">循環器領域の構造</div></div>
+<div class="summary-card"><div class="summary-icon">⚠️</div><div class="summary-text">覚醒リスクが<br>上がる構造</div><div class="summary-detail">血圧優先の落とし穴</div></div>
+<div class="summary-card"><div class="summary-icon">👁️</div><div class="summary-text">量ではなく<br>"反応を見て調整"</div><div class="summary-detail">個別化が必須</div></div>
+</div>
+<div class="quote-box"><p class="quote">「プロポフォールは<br>"同じ量で同じ深さ"にはならない」</p><p class="quote-sub">この一言を覚えておいてください</p></div>
+<div class="final-cta" style="background:linear-gradient(135deg,rgba(255,138,101,.05),rgba(179,136,255,.05))"><h3>本編＋追補の核心</h3><p><span class="hl-orange">個人差を前提に</span> ＋ <span class="hl">適切な麻酔深度</span> ＋ <span class="hl">十分な鎮痛</span> ＋ <span class="hl-orange">反応ベースの調整</span></p><p style="margin-top:.5rem;font-size:.85rem;color:var(--text-muted)">「量」ではなく「反応」を見る ― それが安全な麻酔管理の基本です。</p></div>
+</section>
+
+</main>
+
+<footer>
+<p>術中覚醒（Awareness）＋ プロポフォール個人差 学習ガイド</p>
+<p style="margin-top:.3rem">麻酔科から循環器内科の先生方へ ― カテ室アブレーション TIVA管理</p>
+</footer>
+
+<script>
+window.addEventListener('scroll',()=>{const h=document.documentElement;const p=(h.scrollTop/(h.scrollHeight-h.clientHeight))*100;document.getElementById('progressBar').style.width=p+'%'});
+const obs=new IntersectionObserver(e=>{e.forEach(x=>{if(x.isIntersecting)x.target.classList.add('visible')})},{threshold:.08});
+document.querySelectorAll('.section').forEach(s=>obs.observe(s));
+const secs=document.querySelectorAll('.section');const links=document.querySelectorAll('.toc a');
+window.addEventListener('scroll',()=>{let c='';secs.forEach(s=>{if(scrollY>=s.offsetTop-120)c=s.id});links.forEach(a=>{a.classList.toggle('active',a.getAttribute('href')==='#'+c)})});
+</script>
+
+</body>
+</html>
