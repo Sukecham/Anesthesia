@@ -7,1326 +7,474 @@
 <meta name="theme-color" content="#0a1628">
 <meta name="color-scheme" content="dark">
 <title>絶飲食管理ガイド ― カテ室アブレーション</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;700;900&family=Noto+Serif+JP:wght@400;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
 <style>
-  :root {
-    --bg-deep: #0a1628;
-    --bg-card: #111d33;
-    --bg-card-alt: #152240;
-    --accent-cyan: #00d4ff;
-    --accent-teal: #00b8a9;
-    --accent-red: #ff4d6a;
-    --accent-amber: #ffb74d;
-    --accent-green: #4cdb8a;
-    --text-primary: #e8edf5;
-    --text-secondary: #8fa3c4;
-    --text-muted: #5a7099;
-    --border: rgba(0, 212, 255, 0.12);
-    --glow-cyan: rgba(0, 212, 255, 0.15);
-    --glow-red: rgba(255, 77, 106, 0.12);
-  }
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth;scrollbar-width:thin;scrollbar-color:#00d4ff #0a1628;background:#0a1628!important}
+body{font-family:'Noto Sans JP','Hiragino Sans','Hiragino Kaku Gothic ProN','Yu Gothic','Meiryo',sans-serif;background:#0a1628!important;color:#e8edf5;line-height:1.8;font-weight:400;overflow-x:hidden;min-height:100vh}
 
-- { margin: 0; padding: 0; box-sizing: border-box; }
-
-html {
-scroll-behavior: smooth;
-scrollbar-width: thin;
-scrollbar-color: #00d4ff #0a1628;
-background: #0a1628 !important;
-background-color: #0a1628 !important;
-}
-
-body {
-font-family: ‘Noto Sans JP’, sans-serif;
-background: #0a1628 !important;
-background-color: #0a1628 !important;
-color: #e8edf5;
-color: var(–text-primary);
-line-height: 1.8;
-font-weight: 400;
-overflow-x: hidden;
-min-height: 100vh;
-}
+/* ===== PROGRESS ===== */
+.progress-bar{position:fixed;top:0;left:0;height:3px;background:linear-gradient(90deg,#00d4ff,#00b8a9);z-index:999;box-shadow:0 0 12px #00d4ff}
 
 /* ===== HERO ===== */
-.hero {
-position: relative;
-min-height: 100vh;
-display: flex;
-align-items: center;
-justify-content: center;
-text-align: center;
-padding: 2rem;
-overflow: hidden;
+.hero{position:relative;min-height:100vh;display:flex;align-items:center;justify-content:center;text-align:center;padding:2rem;overflow:hidden}
+.hero::before{content:’’;position:absolute;inset:0;background:radial-gradient(ellipse 80% 60% at 50% 40%,rgba(0,212,255,.08) 0%,transparent 70%),radial-gradient(ellipse 50% 40% at 20% 80%,rgba(0,184,169,.05) 0%,transparent 60%);pointer-events:none}
+.hero-grid{position:absolute;inset:0;background-image:linear-gradient(rgba(0,212,255,.04) 1px,transparent 1px),linear-gradient(90deg,rgba(0,212,255,.04) 1px,transparent 1px);background-size:60px 60px;mask-image:radial-gradient(ellipse 70% 60% at 50% 50%,black 20%,transparent 70%);-webkit-mask-image:radial-gradient(ellipse 70% 60% at 50% 50%,black 20%,transparent 70%);animation:gridPulse 8s ease-in-out infinite}
+@keyframes gridPulse{0%,100%{opacity:.5}50%{opacity:1}}
+.hero-content{position:relative;z-index:2;max-width:800px}
+.hero-badge{display:inline-flex;align-items:center;gap:.5rem;background:rgba(0,212,255,.1);border:1px solid rgba(0,212,255,.25);padding:.4rem 1.2rem;border-radius:100px;font-size:.75rem;letter-spacing:.15em;text-transform:uppercase;color:#00d4ff;font-weight:500;margin-bottom:2rem;animation:fadeInUp .8s ease both}
+.hero-badge::before{content:’’;width:6px;height:6px;border-radius:50%;background:#00d4ff;box-shadow:0 0 8px #00d4ff;animation:pulse 2s ease-in-out infinite}
+@keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.5;transform:scale(.8)}}
+.hero h1{font-family:‘Noto Serif JP’,‘Hiragino Mincho ProN’,‘Yu Mincho’,serif;font-size:clamp(2rem,5vw,3.5rem);font-weight:700;line-height:1.3;letter-spacing:-.02em;margin-bottom:1rem;color:#e8edf5;animation:fadeInUp .8s ease .15s both}
+.hero h1 span{color:#00d4ff}
+@supports(-webkit-background-clip:text){
+.hero h1 span{background:linear-gradient(135deg,#00d4ff,#00b8a9);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
 }
-
-.hero::before {
-content: ‘’;
-position: absolute;
-inset: 0;
-background:
-radial-gradient(ellipse 80% 60% at 50% 40%, rgba(0, 212, 255, 0.06) 0%, transparent 70%),
-radial-gradient(ellipse 50% 40% at 20% 80%, rgba(0, 184, 169, 0.04) 0%, transparent 60%),
-radial-gradient(ellipse 40% 30% at 80% 20%, rgba(255, 77, 106, 0.03) 0%, transparent 50%);
-pointer-events: none;
-}
-
-.hero-grid {
-position: absolute;
-inset: 0;
-background-image:
-linear-gradient(rgba(0, 212, 255, 0.03) 1px, transparent 1px),
-linear-gradient(90deg, rgba(0, 212, 255, 0.03) 1px, transparent 1px);
-background-size: 60px 60px;
-mask-image: radial-gradient(ellipse 70% 60% at 50% 50%, black 20%, transparent 70%);
-animation: gridPulse 8s ease-in-out infinite;
-}
-
-@keyframes gridPulse {
-0%, 100% { opacity: 0.5; }
-50% { opacity: 1; }
-}
-
-.hero-content {
-position: relative;
-z-index: 2;
-max-width: 800px;
-}
-
-.hero-badge {
-display: inline-flex;
-align-items: center;
-gap: 0.5rem;
-background: rgba(0, 212, 255, 0.08);
-border: 1px solid rgba(0, 212, 255, 0.2);
-padding: 0.4rem 1.2rem;
-border-radius: 100px;
-font-size: 0.75rem;
-letter-spacing: 0.15em;
-text-transform: uppercase;
-color: var(–accent-cyan);
-font-weight: 500;
-margin-bottom: 2rem;
-animation: fadeInUp 1s ease both;
-}
-
-.hero-badge::before {
-content: ‘’;
-width: 6px;
-height: 6px;
-border-radius: 50%;
-background: var(–accent-cyan);
-box-shadow: 0 0 8px var(–accent-cyan);
-animation: pulse 2s ease-in-out infinite;
-}
-
-@keyframes pulse {
-0%, 100% { opacity: 1; transform: scale(1); }
-50% { opacity: 0.5; transform: scale(0.8); }
-}
-
-.hero h1 {
-font-family: ‘Noto Serif JP’, serif;
-font-size: clamp(2rem, 5vw, 3.5rem);
-font-weight: 700;
-line-height: 1.3;
-letter-spacing: -0.02em;
-margin-bottom: 1rem;
-animation: fadeInUp 1s ease 0.2s both;
-color: #e8edf5;
-}
-
-.hero h1 span {
-color: #00d4ff;
-}
-
-@supports (-webkit-background-clip: text) or (background-clip: text) {
-.hero h1 span {
-background: linear-gradient(135deg, #00d4ff, #00b8a9);
--webkit-background-clip: text;
--webkit-text-fill-color: transparent;
-background-clip: text;
-color: transparent;
-}
-}
-
-.hero-sub {
-font-size: 1.1rem;
-color: var(–text-secondary);
-font-weight: 300;
-animation: fadeInUp 1s ease 0.4s both;
-margin-bottom: 2.5rem;
-}
-
-.hero-sub strong {
-color: var(–accent-amber);
-font-weight: 500;
-}
-
-.hero-cta {
-display: inline-flex;
-align-items: center;
-gap: 0.5rem;
-background: linear-gradient(135deg, var(–accent-cyan), var(–accent-teal));
-color: var(–bg-deep);
-padding: 0.8rem 2rem;
-border-radius: 100px;
-font-weight: 700;
-font-size: 0.9rem;
-text-decoration: none;
-transition: all 0.3s ease;
-animation: fadeInUp 1s ease 0.6s both;
-}
-
-.hero-cta:hover {
-transform: translateY(-2px);
-box-shadow: 0 8px 30px rgba(0, 212, 255, 0.3);
-}
-
-.hero-cta svg {
-width: 16px;
-height: 16px;
-transition: transform 0.3s;
-}
-
-.hero-cta:hover svg {
-transform: translateY(3px);
-}
-
-@keyframes fadeInUp {
-from { opacity: 0; transform: translateY(30px); }
-to { opacity: 1; transform: translateY(0); }
-}
+.hero-sub{font-size:1.1rem;color:#8fa3c4;font-weight:300;animation:fadeInUp .8s ease .3s both;margin-bottom:2.5rem}
+.hero-sub strong{color:#ffb74d;font-weight:500}
+.hero-cta{display:inline-flex;align-items:center;gap:.5rem;background:linear-gradient(135deg,#00d4ff,#00b8a9);color:#0a1628;padding:.8rem 2rem;border-radius:100px;font-weight:700;font-size:.9rem;text-decoration:none;transition:all .3s ease;animation:fadeInUp .8s ease .45s both}
+.hero-cta:hover{transform:translateY(-2px);box-shadow:0 8px 30px rgba(0,212,255,.3)}
+.hero-cta svg{width:16px;height:16px;transition:transform .3s}
+.hero-cta:hover svg{transform:translateY(3px)}
+@keyframes fadeInUp{from{opacity:0;transform:translateY(24px)}to{opacity:1;transform:translateY(0)}}
 
 /* ===== NAV ===== */
-.toc {
-position: sticky;
-top: 0;
-z-index: 100;
-background: rgba(10, 22, 40, 0.85);
-backdrop-filter: blur(20px);
-border-bottom: 1px solid var(–border);
-padding: 0.6rem 1rem;
-overflow-x: auto;
-white-space: nowrap;
--webkit-overflow-scrolling: touch;
-}
-
-.toc-inner {
-display: flex;
-gap: 0.25rem;
-max-width: 1100px;
-margin: 0 auto;
-justify-content: center;
-}
-
-.toc a {
-display: inline-flex;
-align-items: center;
-gap: 0.35rem;
-color: var(–text-muted);
-text-decoration: none;
-font-size: 0.7rem;
-font-weight: 500;
-padding: 0.4rem 0.75rem;
-border-radius: 6px;
-transition: all 0.25s;
-white-space: nowrap;
-}
-
-.toc a:hover, .toc a.active {
-color: var(–accent-cyan);
-background: rgba(0, 212, 255, 0.08);
-}
-
-.toc .num {
-font-family: ‘JetBrains Mono’, monospace;
-font-size: 0.65rem;
-opacity: 0.5;
-}
+.toc{position:sticky;top:0;z-index:100;background:rgba(10,22,40,.92);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);border-bottom:1px solid rgba(0,212,255,.15);padding:.6rem 1rem;overflow-x:auto;white-space:nowrap;-webkit-overflow-scrolling:touch}
+.toc-inner{display:flex;gap:.25rem;max-width:1100px;margin:0 auto;justify-content:center}
+.toc a{display:inline-flex;align-items:center;gap:.35rem;color:#5a7099;text-decoration:none;font-size:.7rem;font-weight:500;padding:.4rem .75rem;border-radius:6px;transition:all .25s;white-space:nowrap}
+.toc a:hover,.toc a.active{color:#00d4ff;background:rgba(0,212,255,.1)}
+.toc .num{font-family:‘JetBrains Mono’,monospace;font-size:.65rem;opacity:.5}
 
 /* ===== MAIN ===== */
-main {
-max-width: 900px;
-margin: 0 auto;
-padding: 0 1.5rem 6rem;
-}
+main{max-width:900px;margin:0 auto;padding:0 1.5rem 6rem}
 
 /* ===== SECTION ===== */
-.section {
-margin-top: 5rem;
-opacity: 0;
-transform: translateY(40px);
-transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
-}
+.section{margin-top:5rem;opacity:0;transform:translateY(30px);transition:all .7s cubic-bezier(.16,1,.3,1)}
+.section.visible{opacity:1;transform:translateY(0)}
+.section-header{display:flex;align-items:baseline;gap:1rem;margin-bottom:2rem;padding-bottom:1rem;border-bottom:1px solid rgba(0,212,255,.15)}
+.section-num{font-family:‘JetBrains Mono’,monospace;font-size:.75rem;color:#00d4ff;background:rgba(0,212,255,.1);padding:.25rem .6rem;border-radius:4px;letter-spacing:.05em;flex-shrink:0;border:1px solid rgba(0,212,255,.2)}
+.section-title{font-family:‘Noto Serif JP’,‘Hiragino Mincho ProN’,serif;font-size:clamp(1.4rem,3vw,1.8rem);font-weight:700;line-height:1.4;color:#e8edf5}
 
-.section.visible {
-opacity: 1;
-transform: translateY(0);
-}
-
-.section-header {
-display: flex;
-align-items: baseline;
-gap: 1rem;
-margin-bottom: 2rem;
-padding-bottom: 1rem;
-border-bottom: 1px solid var(–border);
-}
-
-.section-num {
-font-family: ‘JetBrains Mono’, monospace;
-font-size: 0.75rem;
-color: var(–accent-cyan);
-background: rgba(0, 212, 255, 0.08);
-padding: 0.25rem 0.6rem;
-border-radius: 4px;
-letter-spacing: 0.05em;
-flex-shrink: 0;
-}
-
-.section-title {
-font-family: ‘Noto Serif JP’, serif;
-font-size: clamp(1.4rem, 3vw, 1.8rem);
-font-weight: 700;
-line-height: 1.4;
-}
+/* ===== PROSE ===== */
+.prose{font-size:.92rem;color:#8fa3c4;line-height:2;margin:1rem 0}
+.prose strong{color:#e8edf5;font-weight:600}
 
 /* ===== RISK CARDS ===== */
-.risk-grid {
-display: grid;
-gap: 1rem;
-}
+.risk-grid{display:grid;gap:1rem}
+.risk-card{background:#131f37;border:1px solid rgba(255,255,255,.08);border-radius:12px;padding:1.5rem;padding-left:1.75rem;transition:all .3s ease;position:relative;overflow:hidden}
+.risk-card::before{content:’’;position:absolute;top:0;left:0;width:4px;height:100%;border-radius:4px 0 0 4px}
+.risk-card.critical::before{background:#ff4d6a}
+.risk-card.warning::before{background:#ffb74d}
+.risk-card.info::before{background:#00d4ff}
+.risk-card.caution::before{background:#4cdb8a}
+.risk-card:hover{border-color:rgba(0,212,255,.2);transform:translateX(4px)}
+.risk-num{font-family:‘JetBrains Mono’,monospace;font-size:.7rem;color:#5a7099;margin-bottom:.4rem}
+.risk-title{font-weight:700;font-size:1.05rem;margin-bottom:.6rem;display:flex;align-items:center;gap:.5rem;color:#e8edf5}
+.risk-title .icon{font-size:1.2rem;flex-shrink:0}
+.risk-body{color:#8fa3c4;font-size:.88rem;line-height:1.9}
+.risk-body .arrow-flow{color:#ff4d6a;font-weight:600;font-size:.85rem;margin-top:.5rem;padding:.6rem .85rem;background:rgba(255,77,106,.1);border:1px solid rgba(255,77,106,.15);border-radius:6px;display:block}
+.risk-body ul{list-style:none;margin-top:.5rem}
+.risk-body ul li{position:relative;padding-left:1.2rem;margin-bottom:.25rem}
+.risk-body ul li::before{content:‘▸’;position:absolute;left:0;color:#00d4ff;font-size:.8rem}
 
-.risk-card {
-background: var(–bg-card);
-border: 1px solid var(–border);
-border-radius: 12px;
-padding: 1.5rem;
-transition: all 0.3s ease;
-position: relative;
-overflow: hidden;
-}
-
-.risk-card::before {
-content: ‘’;
-position: absolute;
-top: 0;
-left: 0;
-width: 3px;
-height: 100%;
-border-radius: 3px 0 0 3px;
-}
-
-.risk-card.critical::before { background: var(–accent-red); }
-.risk-card.warning::before { background: var(–accent-amber); }
-.risk-card.info::before { background: var(–accent-cyan); }
-.risk-card.caution::before { background: var(–accent-green); }
-
-.risk-card:hover {
-border-color: rgba(0, 212, 255, 0.25);
-transform: translateX(4px);
-}
-
-.risk-num {
-font-family: ‘JetBrains Mono’, monospace;
-font-size: 0.7rem;
-color: var(–text-muted);
-margin-bottom: 0.4rem;
-}
-
-.risk-title {
-font-weight: 700;
-font-size: 1.05rem;
-margin-bottom: 0.6rem;
-display: flex;
-align-items: center;
-gap: 0.5rem;
-}
-
-.risk-title .icon {
-font-size: 1.2rem;
-flex-shrink: 0;
-}
-
-.risk-body {
-color: var(–text-secondary);
-font-size: 0.88rem;
-line-height: 1.9;
-}
-
-.risk-body .arrow-flow {
-color: var(–accent-red);
-font-weight: 600;
-font-size: 0.85rem;
-margin-top: 0.5rem;
-padding: 0.5rem 0.75rem;
-background: var(–glow-red);
-border-radius: 6px;
-display: block;
-}
-
-.risk-body ul {
-list-style: none;
-margin-top: 0.5rem;
-}
-
-.risk-body ul li {
-position: relative;
-padding-left: 1.2rem;
-margin-bottom: 0.25rem;
-}
-
-.risk-body ul li::before {
-content: ‘▸’;
-position: absolute;
-left: 0;
-color: var(–accent-cyan);
-font-size: 0.8rem;
-}
-
-/* ===== TIMELINE TABLE ===== */
-.time-table {
-width: 100%;
-border-collapse: separate;
-border-spacing: 0;
-margin: 1.5rem 0;
-border-radius: 12px;
-overflow: hidden;
-border: 1px solid var(–border);
-}
-
-.time-table th {
-background: rgba(0, 212, 255, 0.08);
-color: var(–accent-cyan);
-font-weight: 600;
-font-size: 0.8rem;
-padding: 0.8rem 1rem;
-text-align: left;
-letter-spacing: 0.05em;
-}
-
-.time-table td {
-background: var(–bg-card);
-padding: 0.8rem 1rem;
-font-size: 0.9rem;
-border-top: 1px solid var(–border);
-}
-
-.time-table tr:hover td {
-background: var(–bg-card-alt);
-}
-
-.time-badge {
-font-family: ‘JetBrains Mono’, monospace;
-font-weight: 600;
-font-size: 0.85rem;
-color: var(–accent-teal);
-}
+/* ===== TIME TABLE ===== */
+.time-table{width:100%;border-collapse:separate;border-spacing:0;margin:1.5rem 0;border-radius:12px;overflow:hidden;border:1px solid rgba(255,255,255,.08)}
+.time-table th{background:rgba(0,212,255,.1);color:#00d4ff;font-weight:600;font-size:.8rem;padding:.8rem 1rem;text-align:left;letter-spacing:.05em}
+.time-table td{background:#131f37;padding:.8rem 1rem;font-size:.9rem;border-top:1px solid rgba(255,255,255,.05);color:#8fa3c4}
+.time-table tr:hover td{background:#172544}
+.time-badge{font-family:‘JetBrains Mono’,monospace;font-weight:600;font-size:.85rem;color:#00b8a9}
 
 /* ===== NG / OK BOXES ===== */
-.verdict-row {
-display: grid;
-grid-template-columns: 1fr 1fr;
-gap: 1rem;
-margin: 1.5rem 0;
-}
-
-@media (max-width: 600px) {
-.verdict-row { grid-template-columns: 1fr; }
-}
-
-.verdict-box {
-border-radius: 12px;
-padding: 1.25rem;
-border: 1px solid;
-}
-
-.verdict-box.ng {
-background: rgba(255, 77, 106, 0.05);
-border-color: rgba(255, 77, 106, 0.2);
-}
-
-.verdict-box.ok {
-background: rgba(76, 219, 138, 0.05);
-border-color: rgba(76, 219, 138, 0.2);
-}
-
-.verdict-label {
-font-family: ‘JetBrains Mono’, monospace;
-font-size: 0.7rem;
-font-weight: 600;
-letter-spacing: 0.15em;
-margin-bottom: 0.6rem;
-}
-
-.verdict-box.ng .verdict-label { color: var(–accent-red); }
-.verdict-box.ok .verdict-label { color: var(–accent-green); }
-
-.verdict-box p, .verdict-box ul {
-font-size: 0.88rem;
-color: var(–text-secondary);
-line-height: 1.8;
-}
-
-.verdict-box ul {
-list-style: none;
-}
-
-.verdict-box.ng ul li::before {
-content: ’✕ ’;
-color: var(–accent-red);
-font-weight: 700;
-}
-
-.verdict-box.ok ul li::before {
-content: ’✓ ’;
-color: var(–accent-green);
-font-weight: 700;
-}
+.verdict-row{display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin:1.5rem 0}
+@media(max-width:600px){.verdict-row{grid-template-columns:1fr}}
+.verdict-box{border-radius:12px;padding:1.25rem;border:1px solid}
+.verdict-box.ng{background:rgba(255,77,106,.06);border-color:rgba(255,77,106,.25)}
+.verdict-box.ok{background:rgba(76,219,138,.06);border-color:rgba(76,219,138,.25)}
+.verdict-label{font-family:‘JetBrains Mono’,monospace;font-size:.7rem;font-weight:600;letter-spacing:.15em;margin-bottom:.6rem}
+.verdict-box.ng .verdict-label{color:#ff4d6a}
+.verdict-box.ok .verdict-label{color:#4cdb8a}
+.verdict-box p,.verdict-box ul{font-size:.88rem;color:#8fa3c4;line-height:1.8}
+.verdict-box ul{list-style:none}
+.verdict-box.ng ul li::before{content:’✕ ’;color:#ff4d6a;font-weight:700}
+.verdict-box.ok ul li::before{content:’✓ ’;color:#4cdb8a;font-weight:700}
 
 /* ===== CALLOUT ===== */
-.callout {
-background: var(–bg-card);
-border: 1px solid var(–border);
-border-radius: 12px;
-padding: 1.5rem;
-margin: 1.5rem 0;
-position: relative;
-}
-
-.callout.important {
-border-left: 3px solid var(–accent-amber);
-background: rgba(255, 183, 77, 0.04);
-}
-
-.callout.tip {
-border-left: 3px solid var(–accent-cyan);
-background: rgba(0, 212, 255, 0.04);
-}
-
-.callout.danger {
-border-left: 3px solid var(–accent-red);
-background: rgba(255, 77, 106, 0.04);
-}
-
-.callout-label {
-font-family: ‘JetBrains Mono’, monospace;
-font-size: 0.7rem;
-letter-spacing: 0.1em;
-font-weight: 600;
-margin-bottom: 0.5rem;
-display: flex;
-align-items: center;
-gap: 0.4rem;
-}
-
-.callout.important .callout-label { color: var(–accent-amber); }
-.callout.tip .callout-label { color: var(–accent-cyan); }
-.callout.danger .callout-label { color: var(–accent-red); }
-
-.callout p {
-font-size: 0.9rem;
-color: var(–text-secondary);
-}
-
-.callout strong {
-color: var(–text-primary);
-}
-
-/* ===== CHECKLIST ===== */
-.checklist-grid {
-display: grid;
-grid-template-columns: 1fr 1fr;
-gap: 1rem;
-margin: 1.5rem 0;
-}
-
-@media (max-width: 600px) {
-.checklist-grid { grid-template-columns: 1fr; }
-}
-
-.checklist-group {
-background: var(–bg-card);
-border: 1px solid var(–border);
-border-radius: 12px;
-padding: 1.25rem;
-}
-
-.checklist-group-title {
-font-weight: 700;
-font-size: 0.85rem;
-margin-bottom: 0.8rem;
-display: flex;
-align-items: center;
-gap: 0.5rem;
-}
-
-.checklist-group-title .dot {
-width: 8px;
-height: 8px;
-border-radius: 50%;
-background: var(–accent-cyan);
-flex-shrink: 0;
-}
-
-.checklist-group-title .dot.amber { background: var(–accent-amber); }
-
-.checklist-group ul {
-list-style: none;
-}
-
-.checklist-group ul li {
-font-size: 0.88rem;
-color: var(–text-secondary);
-padding: 0.35rem 0;
-padding-left: 1.5rem;
-position: relative;
-border-bottom: 1px solid rgba(255,255,255,0.03);
-}
-
-.checklist-group ul li:last-child { border-bottom: none; }
-
-.checklist-group ul li::before {
-content: ‘☐’;
-position: absolute;
-left: 0;
-color: var(–accent-cyan);
-font-size: 0.85rem;
-}
-
-/* ===== PATIENT CARDS ===== */
-.patient-grid {
-display: grid;
-gap: 1rem;
-}
-
-.patient-card {
-background: var(–bg-card);
-border: 1px solid var(–border);
-border-radius: 12px;
-padding: 1.5rem;
-display: grid;
-grid-template-columns: auto 1fr;
-gap: 1rem;
-align-items: start;
-transition: all 0.3s ease;
-}
-
-.patient-card:hover {
-border-color: rgba(255, 183, 77, 0.3);
-background: var(–bg-card-alt);
-}
-
-.patient-icon {
-width: 48px;
-height: 48px;
-border-radius: 12px;
-display: flex;
-align-items: center;
-justify-content: center;
-font-size: 1.4rem;
-background: rgba(255, 183, 77, 0.08);
-border: 1px solid rgba(255, 183, 77, 0.15);
-flex-shrink: 0;
-}
-
-.patient-title {
-font-weight: 700;
-font-size: 1rem;
-margin-bottom: 0.3rem;
-}
-
-.patient-sub {
-font-size: 0.8rem;
-color: var(–text-muted);
-margin-bottom: 0.6rem;
-}
-
-.patient-signs {
-display: flex;
-flex-wrap: wrap;
-gap: 0.4rem;
-}
-
-.sign-tag {
-font-size: 0.72rem;
-padding: 0.25rem 0.6rem;
-border-radius: 100px;
-background: rgba(255, 183, 77, 0.08);
-border: 1px solid rgba(255, 183, 77, 0.15);
-color: var(–accent-amber);
-font-weight: 500;
-}
+.callout{background:#131f37;border:1px solid rgba(255,255,255,.08);border-radius:12px;padding:1.5rem;margin:1.5rem 0}
+.callout.important{border-left:4px solid #ffb74d;background:rgba(255,183,77,.05)}
+.callout.tip{border-left:4px solid #00d4ff;background:rgba(0,212,255,.05)}
+.callout.danger{border-left:4px solid #ff4d6a;background:rgba(255,77,106,.05)}
+.callout-label{font-family:‘JetBrains Mono’,monospace;font-size:.7rem;letter-spacing:.1em;font-weight:600;margin-bottom:.5rem}
+.callout.important .callout-label{color:#ffb74d}
+.callout.tip .callout-label{color:#00d4ff}
+.callout.danger .callout-label{color:#ff4d6a}
+.callout p{font-size:.9rem;color:#8fa3c4}
+.callout strong{color:#e8edf5}
 
 /* ===== EXAMPLE BOX ===== */
-.example-box {
-background: var(–bg-card);
-border: 1px solid var(–border);
-border-radius: 12px;
-padding: 1.5rem;
-margin: 1.5rem 0;
-}
+.example-box{background:#131f37;border:1px solid rgba(255,255,255,.08);border-radius:12px;padding:1.5rem;margin:1.5rem 0}
+.example-title{font-family:‘JetBrains Mono’,monospace;font-size:.75rem;color:#00b8a9;letter-spacing:.08em;margin-bottom:1rem;font-weight:600}
 
-.example-title {
-font-family: ‘JetBrains Mono’, monospace;
-font-size: 0.75rem;
-color: var(–accent-teal);
-letter-spacing: 0.08em;
-margin-bottom: 1rem;
-font-weight: 600;
-}
+/* ===== TIMELINE VISUAL ===== */
+.timeline-visual{display:flex;align-items:center;padding:1rem 0;overflow-x:auto}
+.timeline-point{display:flex;flex-direction:column;align-items:center;min-width:90px;position:relative;z-index:2}
+.timeline-point .time{font-family:‘JetBrains Mono’,monospace;font-size:.85rem;font-weight:600;color:#00d4ff;margin-bottom:.5rem}
+.timeline-point .dot{width:14px;height:14px;border-radius:50%;background:#00d4ff;border:3px solid #131f37;box-shadow:0 0 0 2px #00d4ff;margin-bottom:.5rem}
+.timeline-point .dot.red{background:#ff4d6a;box-shadow:0 0 0 2px #ff4d6a}
+.timeline-point .label{font-size:.75rem;color:#8fa3c4;text-align:center;max-width:80px;line-height:1.4}
+.timeline-line{flex:1;height:2px;background:linear-gradient(90deg,#00d4ff,#00b8a9);min-width:40px;align-self:center;margin-top:-1.2rem;opacity:.5}
 
-.timeline-visual {
-display: flex;
-align-items: center;
-gap: 0;
-position: relative;
-padding: 1rem 0;
-overflow-x: auto;
-}
+/* ===== CHECKLIST ===== */
+.checklist-grid{display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin:1.5rem 0}
+@media(max-width:600px){.checklist-grid{grid-template-columns:1fr}}
+.checklist-group{background:#131f37;border:1px solid rgba(255,255,255,.08);border-radius:12px;padding:1.25rem}
+.checklist-group-title{font-weight:700;font-size:.85rem;margin-bottom:.8rem;display:flex;align-items:center;gap:.5rem;color:#e8edf5}
+.checklist-group-title .dot{width:8px;height:8px;border-radius:50%;background:#00d4ff;flex-shrink:0}
+.checklist-group-title .dot.amber{background:#ffb74d}
+.checklist-group ul{list-style:none}
+.checklist-group ul li{font-size:.88rem;color:#8fa3c4;padding:.35rem 0;padding-left:1.5rem;position:relative;border-bottom:1px solid rgba(255,255,255,.04)}
+.checklist-group ul li:last-child{border-bottom:none}
+.checklist-group ul li::before{content:‘☐’;position:absolute;left:0;color:#00d4ff;font-size:.85rem}
 
-.timeline-point {
-display: flex;
-flex-direction: column;
-align-items: center;
-min-width: 90px;
-position: relative;
-z-index: 2;
-}
-
-.timeline-point .time {
-font-family: ‘JetBrains Mono’, monospace;
-font-size: 0.85rem;
-font-weight: 600;
-color: var(–accent-cyan);
-margin-bottom: 0.5rem;
-}
-
-.timeline-point .dot {
-width: 14px;
-height: 14px;
-border-radius: 50%;
-background: var(–accent-cyan);
-border: 3px solid var(–bg-card);
-box-shadow: 0 0 0 2px var(–accent-cyan);
-margin-bottom: 0.5rem;
-}
-
-.timeline-point .dot.red {
-background: var(–accent-red);
-box-shadow: 0 0 0 2px var(–accent-red);
-}
-
-.timeline-point .label {
-font-size: 0.75rem;
-color: var(–text-secondary);
-text-align: center;
-max-width: 80px;
-line-height: 1.4;
-}
-
-.timeline-line {
-flex: 1;
-height: 2px;
-background: linear-gradient(90deg, var(–accent-cyan), var(–accent-teal));
-min-width: 40px;
-align-self: center;
-margin-top: -1.2rem;
-opacity: 0.4;
-}
-
-/* ===== SUMMARY ===== */
-.summary-grid {
-display: grid;
-grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-gap: 1rem;
-margin: 1.5rem 0;
-}
-
-.summary-card {
-background: var(–bg-card);
-border: 1px solid var(–border);
-border-radius: 12px;
-padding: 1.25rem;
-text-align: center;
-transition: all 0.3s;
-}
-
-.summary-card:hover {
-transform: translateY(-4px);
-border-color: rgba(0, 212, 255, 0.3);
-box-shadow: 0 12px 40px rgba(0, 0, 0, 0.3);
-}
-
-.summary-icon {
-font-size: 2rem;
-margin-bottom: 0.6rem;
-}
-
-.summary-text {
-font-size: 0.88rem;
-font-weight: 600;
-line-height: 1.6;
-}
-
-.summary-detail {
-font-size: 0.78rem;
-color: var(–text-muted);
-margin-top: 0.3rem;
-}
-
-/* ===== FINAL CTA ===== */
-.final-cta {
-margin-top: 4rem;
-text-align: center;
-padding: 3rem 2rem;
-background: linear-gradient(135deg, rgba(0, 212, 255, 0.05), rgba(0, 184, 169, 0.05));
-border: 1px solid var(–border);
-border-radius: 16px;
-}
-
-.final-cta h3 {
-font-family: ‘Noto Serif JP’, serif;
-font-size: 1.5rem;
-margin-bottom: 0.8rem;
-}
-
-.final-cta p {
-color: var(–text-secondary);
-font-size: 0.95rem;
-}
-
-.final-cta .highlight {
-color: var(–accent-cyan);
-font-weight: 700;
-}
-
-/* ===== FOOTER ===== */
-footer {
-text-align: center;
-padding: 3rem 1rem;
-color: var(–text-muted);
-font-size: 0.75rem;
-border-top: 1px solid var(–border);
-margin-top: 4rem;
-}
-
-/* ===== SCROLL PROGRESS ===== */
-.progress-bar {
-position: fixed;
-top: 0;
-left: 0;
-height: 2px;
-background: linear-gradient(90deg, var(–accent-cyan), var(–accent-teal));
-z-index: 999;
-transition: width 0.1s linear;
-box-shadow: 0 0 10px var(–accent-cyan);
-}
-
-/* ===== PARAGRAPH ===== */
-.prose {
-font-size: 0.92rem;
-color: var(–text-secondary);
-line-height: 2;
-margin: 1rem 0;
-}
-
-.prose strong {
-color: var(–text-primary);
-font-weight: 600;
-}
-
-.prose em {
-color: var(–accent-amber);
-font-style: normal;
-font-weight: 500;
-}
+/* ===== PATIENT CARDS ===== */
+.patient-grid{display:grid;gap:1rem}
+.patient-card{background:#131f37;border:1px solid rgba(255,255,255,.08);border-radius:12px;padding:1.5rem;display:grid;grid-template-columns:auto 1fr;gap:1rem;align-items:start;transition:all .3s}
+.patient-card:hover{border-color:rgba(255,183,77,.25);background:#172544}
+.patient-icon{width:48px;height:48px;border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:1.4rem;background:rgba(255,183,77,.1);border:1px solid rgba(255,183,77,.2);flex-shrink:0}
+.patient-title{font-weight:700;font-size:1rem;margin-bottom:.3rem;color:#e8edf5}
+.patient-sub{font-size:.8rem;color:#5a7099;margin-bottom:.6rem}
+.patient-signs{display:flex;flex-wrap:wrap;gap:.4rem}
+.sign-tag{font-size:.72rem;padding:.25rem .6rem;border-radius:100px;background:rgba(255,183,77,.1);border:1px solid rgba(255,183,77,.2);color:#ffb74d;font-weight:500}
 
 /* ===== RULE BOX ===== */
-.rule-box {
-display: grid;
-grid-template-columns: 1fr 1fr;
-gap: 1rem;
-margin: 1.5rem 0;
-}
+.rule-box{display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin:1.5rem 0}
+@media(max-width:600px){.rule-box{grid-template-columns:1fr}}
+.rule-item{background:#131f37;border:1px solid rgba(255,255,255,.08);border-radius:12px;padding:1.25rem}
+.rule-item-title{font-weight:700;font-size:.85rem;color:#00b8a9;margin-bottom:.5rem}
+.rule-item p{font-size:.88rem;color:#8fa3c4}
+.rule-item .mono{font-family:‘JetBrains Mono’,monospace;color:#00d4ff;font-weight:600}
 
-@media (max-width: 600px) {
-.rule-box { grid-template-columns: 1fr; }
-}
+/* ===== SUMMARY ===== */
+.summary-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:1rem;margin:1.5rem 0}
+.summary-card{background:#131f37;border:1px solid rgba(255,255,255,.08);border-radius:12px;padding:1.25rem;text-align:center;transition:all .3s}
+.summary-card:hover{transform:translateY(-4px);border-color:rgba(0,212,255,.25);box-shadow:0 12px 40px rgba(0,0,0,.4)}
+.summary-icon{font-size:2rem;margin-bottom:.6rem}
+.summary-text{font-size:.88rem;font-weight:600;line-height:1.6;color:#e8edf5}
+.summary-detail{font-size:.78rem;color:#5a7099;margin-top:.3rem}
 
-.rule-item {
-background: var(–bg-card);
-border: 1px solid var(–border);
-border-radius: 12px;
-padding: 1.25rem;
-}
+/* ===== FINAL CTA ===== */
+.final-cta{margin-top:4rem;text-align:center;padding:3rem 2rem;background:rgba(0,212,255,.04);border:1px solid rgba(0,212,255,.15);border-radius:16px}
+.final-cta h3{font-family:‘Noto Serif JP’,‘Hiragino Mincho ProN’,serif;font-size:1.5rem;margin-bottom:.8rem;color:#e8edf5}
+.final-cta p{color:#8fa3c4;font-size:.95rem}
+.final-cta .highlight{color:#00d4ff;font-weight:700}
 
-.rule-item-title {
-font-weight: 700;
-font-size: 0.85rem;
-color: var(–accent-teal);
-margin-bottom: 0.5rem;
-}
-
-.rule-item p {
-font-size: 0.88rem;
-color: var(–text-secondary);
-}
-
-.rule-item .mono {
-font-family: ‘JetBrains Mono’, monospace;
-color: var(–accent-cyan);
-font-weight: 600;
-}
-
+/* ===== FOOTER ===== */
+footer{text-align:center;padding:3rem 1rem;color:#5a7099;font-size:.75rem;border-top:1px solid rgba(255,255,255,.06);margin-top:4rem}
 </style>
-</head>
-<body style="background-color:#0a1628; color:#e8edf5;">
 
-<div class="progress-bar" id="progressBar"></div>
+</head>
+<body style="background-color:#0a1628;color:#e8edf5;">
+
+<div class="progress-bar" id="progressBar" style="width:0"></div>
 
 <!-- HERO -->
 
 <section class="hero" id="top">
-  <div class="hero-grid"></div>
-  <div class="hero-content">
-    <div class="hero-badge">Anesthesiology × Cardiology</div>
-    <h1>カテ室アブレーションにおける<br><span>挿管全身麻酔前の絶飲食管理</span></h1>
-    <p class="hero-sub">麻酔科から循環器内科の先生方へ ―<br><strong>安全な麻酔導入</strong>のための実務ガイド</p>
-    <a href="#s1" class="hero-cta">
-      学習を始める
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 5v14M19 12l-7 7-7-7"/></svg>
-    </a>
-  </div>
+<div class="hero-grid"></div>
+<div class="hero-content">
+<div class="hero-badge">Anesthesiology × Cardiology</div>
+<h1>カテ室アブレーションにおける<br><span>挿管全身麻酔前の絶飲食管理</span></h1>
+<p class="hero-sub">麻酔科から循環器内科の先生方へ ―<br><strong>安全な麻酔導入</strong>のための実務ガイド</p>
+<a href="#s1" class="hero-cta">学習を始める<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 5v14M19 12l-7 7-7-7"/></svg></a>
+</div>
 </section>
 
 <!-- TOC -->
 
 <nav class="toc" id="toc">
-  <div class="toc-inner">
-    <a href="#s1"><span class="num">01</span> なぜ重要か</a>
-    <a href="#s2"><span class="num">02</span> 基本ルール</a>
-    <a href="#s3"><span class="num">03</span> 実務ポイント</a>
-    <a href="#s4"><span class="num">04</span> 要注意患者</a>
-    <a href="#s5"><span class="num">05</span> 現実的問診</a>
-    <a href="#s6"><span class="num">06</span> 実用ルール</a>
-    <a href="#s7"><span class="num">07</span> まとめ</a>
-  </div>
+<div class="toc-inner">
+<a href="#s1"><span class="num">01</span> なぜ重要か</a>
+<a href="#s2"><span class="num">02</span> 基本ルール</a>
+<a href="#s3"><span class="num">03</span> 実務ポイント</a>
+<a href="#s4"><span class="num">04</span> 要注意患者</a>
+<a href="#s5"><span class="num">05</span> 現実的問診</a>
+<a href="#s6"><span class="num">06</span> 実用ルール</a>
+<a href="#s7"><span class="num">07</span> まとめ</a>
+</div>
 </nav>
 
 <!-- MAIN -->
 
 <main>
 
-  <!-- SECTION 1 -->
+<!-- SECTION 1 -->
 
-  <section class="section" id="s1">
-    <div class="section-header">
-      <span class="section-num">01</span>
-      <h2 class="section-title">なぜ絶飲食が重要か</h2>
-    </div>
-
-```
+<section class="section" id="s1">
+<div class="section-header">
+<span class="section-num">01</span>
+<h2 class="section-title">なぜ絶飲食が重要か</h2>
+</div>
 <p class="prose">絶飲食が不十分なまま挿管全身麻酔を導入すると、以下の<strong>重篤な有害事象</strong>のリスクがあります。</p>
 
 <div class="risk-grid">
-
-  <div class="risk-card critical">
-    <div class="risk-num">RISK ①</div>
-    <div class="risk-title"><span class="icon">🫁</span>胃内容物の逆流・誤嚥</div>
-    <div class="risk-body">
-      麻酔導入時は<strong>意識消失＋咽頭反射低下</strong>が起こり、胃内容物が食道→咽頭→気管へ流入します。
-      <span class="arrow-flow">→ 誤嚥性肺炎 → 急性呼吸不全 → ARDS → 死亡リスク</span>
-      <p style="margin-top:0.6rem; font-size:0.82rem; color:var(--accent-red); font-weight:600;">⚠ これが絶飲食管理の最大の目的です</p>
-    </div>
-  </div>
-
-  <div class="risk-card critical">
-    <div class="risk-num">RISK ②</div>
-    <div class="risk-title"><span class="icon">📉</span>導入時の急激な低酸素</div>
-    <div class="risk-body">
-      誤嚥や分泌物増加により気道確保困難が発生し、SpO₂の急低下・挿管困難・緊急対応を要する事態に。
-    </div>
-  </div>
-
-  <div class="risk-card warning">
-    <div class="risk-num">RISK ③</div>
-    <div class="risk-title"><span class="icon">🔧</span>気道確保困難の増悪</div>
-    <div class="risk-body">
-      胃内容物が多いと嘔吐リスクが上昇。迅速導入（RSI）や挿管手技の難易度が跳ね上がります。
-    </div>
-  </div>
-
-  <div class="risk-card warning">
-    <div class="risk-num">RISK ④</div>
-    <div class="risk-title"><span class="icon">🏥</span>カテ室特有のリスク増幅</div>
-    <div class="risk-body">
-      アブレーションは手術室ではなくカテ室で施行されるため：
-      <ul>
-        <li>空間制約</li>
-        <li>人員・機材の制限</li>
-        <li>緊急対応動線の制約</li>
-      </ul>
-      <span class="arrow-flow">→ 誤嚥・低酸素発生時のリカバリーが手術室より困難</span>
-    </div>
-  </div>
-
-  <div class="risk-card caution">
-    <div class="risk-num">RISK ⑤</div>
-    <div class="risk-title"><span class="icon">💧</span>過度な絶飲食のリスク</div>
-    <div class="risk-body">
-      JSAは長時間絶飲食の不利益も明確に指摘しています。
-      <ul>
-        <li>脱水・口渇・不快感</li>
-        <li>静脈確保困難</li>
-        <li>循環動態不安定</li>
-      </ul>
-      <p style="margin-top:0.5rem; font-size:0.82rem; color:var(--accent-amber);">※ 高齢・心不全・利尿薬使用例が多いアブレーション患者では特に影響大</p>
-    </div>
-  </div>
-
+<div class="risk-card critical">
+<div class="risk-num">RISK ①</div>
+<div class="risk-title"><span class="icon">🫁</span>胃内容物の逆流・誤嚥</div>
+<div class="risk-body">
+麻酔導入時は<strong style="color:#e8edf5">意識消失＋咽頭反射低下</strong>が起こり、胃内容物が食道→咽頭→気管へ流入します。
+<span class="arrow-flow">→ 誤嚥性肺炎 → 急性呼吸不全 → ARDS → 死亡リスク</span>
+<p style="margin-top:.6rem;font-size:.82rem;color:#ff4d6a;font-weight:600">⚠ これが絶飲食管理の最大の目的です</p>
 </div>
-```
+</div>
 
-  </section>
+<div class="risk-card critical">
+<div class="risk-num">RISK ②</div>
+<div class="risk-title"><span class="icon">📉</span>導入時の急激な低酸素</div>
+<div class="risk-body">誤嚥や分泌物増加により気道確保困難が発生し、SpO₂の急低下・挿管困難・緊急対応を要する事態に。</div>
+</div>
 
-  <!-- SECTION 2 -->
+<div class="risk-card warning">
+<div class="risk-num">RISK ③</div>
+<div class="risk-title"><span class="icon">🔧</span>気道確保困難の増悪</div>
+<div class="risk-body">胃内容物が多いと嘔吐リスクが上昇。迅速導入（RSI）や挿管手技の難易度が跳ね上がります。</div>
+</div>
 
-  <section class="section" id="s2">
-    <div class="section-header">
-      <span class="section-num">02</span>
-      <h2 class="section-title">基本ルール（JSAガイドライン）</h2>
-    </div>
+<div class="risk-card warning">
+<div class="risk-num">RISK ④</div>
+<div class="risk-title"><span class="icon">🏥</span>カテ室特有のリスク増幅</div>
+<div class="risk-body">
+アブレーションは手術室ではなくカテ室で施行されるため：
+<ul><li>空間制約</li><li>人員・機材の制限</li><li>緊急対応動線の制約</li></ul>
+<span class="arrow-flow">→ 誤嚥・低酸素発生時のリカバリーが手術室より困難</span>
+</div>
+</div>
 
-```
+<div class="risk-card caution">
+<div class="risk-num">RISK ⑤</div>
+<div class="risk-title"><span class="icon">💧</span>過度な絶飲食のリスク</div>
+<div class="risk-body">
+JSAは長時間絶飲食の不利益も明確に指摘しています。
+<ul><li>脱水・口渇・不快感</li><li>静脈確保困難</li><li>循環動態不安定</li></ul>
+<p style="margin-top:.5rem;font-size:.82rem;color:#ffb74d">※ 高齢・心不全・利尿薬使用例が多いアブレーション患者では特に影響大</p>
+</div>
+</div>
+</div>
+</section>
+
+<!-- SECTION 2 -->
+
+<section class="section" id="s2">
+<div class="section-header">
+<span class="section-num">02</span>
+<h2 class="section-title">基本ルール（JSAガイドライン）</h2>
+</div>
 <p class="prose">JSA（日本麻酔科学会）の術前絶飲食ガイドラインを実務的に整理します。</p>
 
 <table class="time-table">
-  <thead>
-    <tr>
-      <th>摂取内容</th>
-      <th>許容リミット</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>水・お茶（清澄水）</td>
-      <td><span class="time-badge">導入 2時間前 まで</span></td>
-    </tr>
-    <tr>
-      <td>牛乳・乳製品</td>
-      <td><span class="time-badge">導入 6時間前 まで</span></td>
-    </tr>
-    <tr>
-      <td>軽い食事</td>
-      <td><span class="time-badge">導入 6時間以上前</span></td>
-    </tr>
-    <tr>
-      <td>脂っこい食事・肉</td>
-      <td><span class="time-badge">導入 8時間以上前</span></td>
-    </tr>
-  </tbody>
+<thead><tr><th>摂取内容</th><th>許容リミット</th></tr></thead>
+<tbody>
+<tr><td>水・お茶（清澄水）</td><td><span class="time-badge">導入 2時間前 まで</span></td></tr>
+<tr><td>牛乳・乳製品</td><td><span class="time-badge">導入 6時間前 まで</span></td></tr>
+<tr><td>軽い食事</td><td><span class="time-badge">導入 6時間以上前</span></td></tr>
+<tr><td>脂っこい食事・肉</td><td><span class="time-badge">導入 8時間以上前</span></td></tr>
+</tbody>
 </table>
 
 <div class="callout important">
-  <div class="callout-label">⚠ IMPORTANT</div>
-  <p><strong>「飲み物なら何でもOK」ではありません。</strong><br>
-  患者説明は<strong>「水かお茶だけOK」</strong>で統一するのが安全です。</p>
+<div class="callout-label">⚠ IMPORTANT</div>
+<p><strong>「飲み物なら何でもOK」ではありません。</strong><br>患者説明は<strong>「水かお茶だけOK」</strong>で統一するのが安全です。</p>
 </div>
 
 <div class="verdict-row">
-  <div class="verdict-box ng">
-    <div class="verdict-label">✕ NG 飲料</div>
-    <ul>
-      <li>カフェオレ</li>
-      <li>飲むヨーグルト</li>
-      <li>ゼリー飲料</li>
-      <li>栄養ドリンク</li>
-    </ul>
-  </div>
-  <div class="verdict-box ok">
-    <div class="verdict-label">✓ OK 飲料</div>
-    <ul>
-      <li>水</li>
-      <li>お茶（緑茶・麦茶等）</li>
-    </ul>
-    <p style="margin-top:0.5rem; font-size:0.8rem; color:var(--text-muted);">※ 糖分・脂肪分を含まない透明な飲料</p>
-  </div>
+<div class="verdict-box ng">
+<div class="verdict-label">✕ NG 飲料</div>
+<ul><li>カフェオレ</li><li>飲むヨーグルト</li><li>ゼリー飲料</li><li>栄養ドリンク</li></ul>
 </div>
-```
+<div class="verdict-box ok">
+<div class="verdict-label">✓ OK 飲料</div>
+<ul><li>水</li><li>お茶（緑茶・麦茶等）</li></ul>
+<p style="margin-top:.5rem;font-size:.8rem;color:#5a7099">※ 糖分・脂肪分を含まない透明な飲料</p>
+</div>
+</div>
+</section>
 
-  </section>
+<!-- SECTION 3 -->
 
-  <!-- SECTION 3 -->
+<section class="section" id="s3">
+<div class="section-header">
+<span class="section-num">03</span>
+<h2 class="section-title">カテ室アブレーションでの実務ポイント</h2>
+</div>
 
-  <section class="section" id="s3">
-    <div class="section-header">
-      <span class="section-num">03</span>
-      <h2 class="section-title">カテ室アブレーションでの実務ポイント</h2>
-    </div>
-
-```
 <div class="callout tip">
-  <div class="callout-label">💡 KEY POINT</div>
-  <p>絶飲食の基準は<strong>穿刺時刻ではなく「麻酔導入時刻」</strong>から逆算してください。</p>
+<div class="callout-label">💡 KEY POINT</div>
+<p>絶飲食の基準は<strong>穿刺時刻ではなく「麻酔導入時刻」</strong>から逆算してください。</p>
 </div>
 
 <div class="example-box">
-  <div class="example-title">▼ 例）13時導入の場合</div>
-  <div class="timeline-visual">
-    <div class="timeline-point">
-      <div class="time">7:00</div>
-      <div class="dot"></div>
-      <div class="label">朝食<br>リミット</div>
-    </div>
-    <div class="timeline-line"></div>
-    <div class="timeline-point">
-      <div class="time">11:00</div>
-      <div class="dot"></div>
-      <div class="label">水分<br>リミット</div>
-    </div>
-    <div class="timeline-line"></div>
-    <div class="timeline-point">
-      <div class="time">13:00</div>
-      <div class="dot red"></div>
-      <div class="label">麻酔<br>導入</div>
-    </div>
-  </div>
+<div class="example-title">▼ 例）13時導入の場合</div>
+<div class="timeline-visual">
+<div class="timeline-point"><div class="time">7:00</div><div class="dot"></div><div class="label">朝食<br>リミット</div></div>
+<div class="timeline-line"></div>
+<div class="timeline-point"><div class="time">11:00</div><div class="dot"></div><div class="label">水分<br>リミット</div></div>
+<div class="timeline-line"></div>
+<div class="timeline-point"><div class="time">13:00</div><div class="dot red"></div><div class="label">麻酔<br>導入</div></div>
+</div>
 </div>
 
-<h3 style="font-size:1rem; margin-top:2rem; margin-bottom:1rem; font-weight:700;">午後症例での典型的ミス</h3>
+<h3 style="font-size:1rem;margin-top:2rem;margin-bottom:1rem;font-weight:700;color:#e8edf5">午後症例での典型的ミス</h3>
 
 <div class="verdict-row">
-  <div class="verdict-box ng">
-    <div class="verdict-label">✕ ミスパターン</div>
-    <ul>
-      <li>朝から完全絶飲食 → 脱水・血圧低下・ライン確保困難</li>
-      <li>午後だから普通に朝食OK → 誤嚥リスク上昇</li>
-    </ul>
-  </div>
-  <div class="verdict-box ok">
-    <div class="verdict-label">✓ 正解パターン</div>
-    <p><strong>軽食を早朝に限定</strong>し、<strong>水分は2時間前まで許可</strong>する。</p>
-  </div>
+<div class="verdict-box ng">
+<div class="verdict-label">✕ ミスパターン</div>
+<ul><li>朝から完全絶飲食 → 脱水・血圧低下・ライン確保困難</li><li>午後だから普通に朝食OK → 誤嚥リスク上昇</li></ul>
 </div>
-```
+<div class="verdict-box ok">
+<div class="verdict-label">✓ 正解パターン</div>
+<p><strong style="color:#e8edf5">軽食を早朝に限定</strong>し、<strong style="color:#e8edf5">水分は2時間前まで許可</strong>する。</p>
+</div>
+</div>
+</section>
 
-  </section>
+<!-- SECTION 4 -->
 
-  <!-- SECTION 4 -->
+<section class="section" id="s4">
+<div class="section-header">
+<span class="section-num">04</span>
+<h2 class="section-title">「時間だけでは危険」な患者</h2>
+</div>
 
-  <section class="section" id="s4">
-    <div class="section-header">
-      <span class="section-num">04</span>
-      <h2 class="section-title">「時間だけでは危険」な患者</h2>
-    </div>
-
-```
 <div class="callout danger">
-  <div class="callout-label">🚨 CRITICAL</div>
-  <p>以下は<strong>絶飲食時間を守っていても誤嚥リスクが高い</strong>患者群です。<br>時間だけで安全と判断しないでください。</p>
+<div class="callout-label">🚨 CRITICAL</div>
+<p>以下は<strong>絶飲食時間を守っていても誤嚥リスクが高い</strong>患者群です。<br>時間だけで安全と判断しないでください。</p>
 </div>
 
 <div class="patient-grid">
-
-  <div class="patient-card">
-    <div class="patient-icon">🩸</div>
-    <div>
-      <div class="patient-title">① 糖尿病（DM）＋胃排出遅延疑い</div>
-      <div class="patient-sub">胃不全麻痺（gastroparesis）の代表原因</div>
-      <div class="patient-signs">
-        <span class="sign-tag">食後もたれ</span>
-        <span class="sign-tag">早期満腹感</span>
-        <span class="sign-tag">悪心あり</span>
-        <span class="sign-tag">血糖不安定</span>
-        <span class="sign-tag">罹病期間長い</span>
-      </div>
-    </div>
-  </div>
-
-  <div class="patient-card">
-    <div class="patient-icon">💊</div>
-    <div>
-      <div class="patient-title">② GLP-1受容体作動薬使用患者</div>
-      <div class="patient-sub">近年特に重要 ― 絶飲食守っても胃内容残存あり得る</div>
-      <div class="patient-signs">
-        <span class="sign-tag">開始直後</span>
-        <span class="sign-tag">増量中</span>
-        <span class="sign-tag">悪心あり</span>
-        <span class="sign-tag">便秘</span>
-        <span class="sign-tag">膨満感</span>
-      </div>
-    </div>
-  </div>
-
-  <div class="patient-card">
-    <div class="patient-icon">🔥</div>
-    <div>
-      <div class="patient-title">③ 強いGERD・逆流症状</div>
-      <div class="patient-sub">逆流しやすい状態</div>
-      <div class="patient-signs">
-        <span class="sign-tag">胸やけ強い</span>
-        <span class="sign-tag">食後逆流あり</span>
-        <span class="sign-tag">食道裂孔ヘルニア</span>
-      </div>
-    </div>
-  </div>
-
-  <div class="patient-card">
-    <div class="patient-icon">👴</div>
-    <div>
-      <div class="patient-title">④ 高齢・嚥下機能低下</div>
-      <div class="patient-sub">誤嚥防御が弱い状態</div>
-      <div class="patient-signs">
-        <span class="sign-tag">誤嚥歴あり</span>
-        <span class="sign-tag">食後むせ</span>
-        <span class="sign-tag">認知機能低下</span>
-      </div>
-    </div>
-  </div>
-
+<div class="patient-card">
+<div class="patient-icon">🩸</div>
+<div>
+<div class="patient-title">① 糖尿病（DM）＋胃排出遅延疑い</div>
+<div class="patient-sub">胃不全麻痺（gastroparesis）の代表原因</div>
+<div class="patient-signs"><span class="sign-tag">食後もたれ</span><span class="sign-tag">早期満腹感</span><span class="sign-tag">悪心あり</span><span class="sign-tag">血糖不安定</span><span class="sign-tag">罹病期間長い</span></div>
 </div>
-```
+</div>
+<div class="patient-card">
+<div class="patient-icon">💊</div>
+<div>
+<div class="patient-title">② GLP-1受容体作動薬使用患者</div>
+<div class="patient-sub">近年特に重要 ― 絶飲食守っても胃内容残存あり得る</div>
+<div class="patient-signs"><span class="sign-tag">開始直後</span><span class="sign-tag">増量中</span><span class="sign-tag">悪心あり</span><span class="sign-tag">便秘</span><span class="sign-tag">膨満感</span></div>
+</div>
+</div>
+<div class="patient-card">
+<div class="patient-icon">🔥</div>
+<div>
+<div class="patient-title">③ 強いGERD・逆流症状</div>
+<div class="patient-sub">逆流しやすい状態</div>
+<div class="patient-signs"><span class="sign-tag">胸やけ強い</span><span class="sign-tag">食後逆流あり</span><span class="sign-tag">食道裂孔ヘルニア</span></div>
+</div>
+</div>
+<div class="patient-card">
+<div class="patient-icon">👴</div>
+<div>
+<div class="patient-title">④ 高齢・嚥下機能低下</div>
+<div class="patient-sub">誤嚥防御が弱い状態</div>
+<div class="patient-signs"><span class="sign-tag">誤嚥歴あり</span><span class="sign-tag">食後むせ</span><span class="sign-tag">認知機能低下</span></div>
+</div>
+</div>
+</div>
+</section>
 
-  </section>
+<!-- SECTION 5 -->
 
-  <!-- SECTION 5 -->
-
-  <section class="section" id="s5">
-    <div class="section-header">
-      <span class="section-num">05</span>
-      <h2 class="section-title">現実的な問診</h2>
-    </div>
-
-```
+<section class="section" id="s5">
+<div class="section-header">
+<span class="section-num">05</span>
+<h2 class="section-title">現実的な問診</h2>
+</div>
 <p class="prose">忙しい現場でも回せる形に絞りました。<strong>「時間」＋「内容」＋「胃排出遅延の兆候」</strong>の3軸で確認します。</p>
 
 <div class="checklist-grid">
-  <div class="checklist-group">
-    <div class="checklist-group-title"><span class="dot"></span>必須 4項目（全例）</div>
-    <ul>
-      <li>最後に食べた時間</li>
-      <li>何を食べたか</li>
-      <li>最後に飲んだ時間</li>
-      <li>何を飲んだか</li>
-    </ul>
-  </div>
-  <div class="checklist-group">
-    <div class="checklist-group-title"><span class="dot amber"></span>追加確認（要注意患者）</div>
-    <ul>
-      <li>糖尿病ありますか</li>
-      <li>食後にもたれますか</li>
-      <li>吐き気ありますか</li>
-      <li>GLP-1使ってますか（最近変更あり？）</li>
-      <li>逆流症状ありますか</li>
-    </ul>
-  </div>
+<div class="checklist-group">
+<div class="checklist-group-title"><span class="dot"></span>必須 4項目（全例）</div>
+<ul><li>最後に食べた時間</li><li>何を食べたか</li><li>最後に飲んだ時間</li><li>何を飲んだか</li></ul>
 </div>
-```
+<div class="checklist-group">
+<div class="checklist-group-title"><span class="dot amber"></span>追加確認（要注意患者）</div>
+<ul><li>糖尿病ありますか</li><li>食後にもたれますか</li><li>吐き気ありますか</li><li>GLP-1使ってますか（最近変更あり？）</li><li>逆流症状ありますか</li></ul>
+</div>
+</div>
+</section>
 
-  </section>
+<!-- SECTION 6 -->
 
-  <!-- SECTION 6 -->
-
-  <section class="section" id="s6">
-    <div class="section-header">
-      <span class="section-num">06</span>
-      <h2 class="section-title">循環器内科としての実用ルール</h2>
-    </div>
-
-```
+<section class="section" id="s6">
+<div class="section-header">
+<span class="section-num">06</span>
+<h2 class="section-title">循環器内科としての実用ルール</h2>
+</div>
 <div class="rule-box">
-  <div class="rule-item">
-    <div class="rule-item-title">■ 標準患者</div>
-    <p>軽食：<span class="mono">6時間前</span>まで<br>水・お茶：<span class="mono">2時間前</span>まで</p>
-  </div>
-  <div class="rule-item">
-    <div class="rule-item-title">■ 要注意患者</div>
-    <p>DM症状あり／GLP-1／GERDなど<br>→ <strong style="color:var(--accent-amber)">麻酔科に事前共有</strong></p>
-  </div>
+<div class="rule-item">
+<div class="rule-item-title">■ 標準患者</div>
+<p>軽食：<span class="mono">6時間前</span>まで<br>水・お茶：<span class="mono">2時間前</span>まで</p>
 </div>
-```
+<div class="rule-item">
+<div class="rule-item-title">■ 要注意患者</div>
+<p>DM症状あり／GLP-1／GERDなど<br>→ <strong style="color:#ffb74d">麻酔科に事前共有</strong></p>
+</div>
+</div>
+</section>
 
-  </section>
+<!-- SECTION 7 -->
 
-  <!-- SECTION 7 -->
+<section class="section" id="s7">
+<div class="section-header">
+<span class="section-num">07</span>
+<h2 class="section-title">まとめ ― 最重要ポイント</h2>
+</div>
 
-  <section class="section" id="s7">
-    <div class="section-header">
-      <span class="section-num">07</span>
-      <h2 class="section-title">まとめ ― 最重要ポイント</h2>
-    </div>
-
-```
 <div class="summary-grid">
-  <div class="summary-card">
-    <div class="summary-icon">🎯</div>
-    <div class="summary-text">絶飲食の目的は<br>誤嚥防止</div>
-  </div>
-  <div class="summary-card">
-    <div class="summary-icon">🏥</div>
-    <div class="summary-text">カテ室は<br>リカバリーが難しい</div>
-    <div class="summary-detail">手術室との環境差を意識</div>
-  </div>
-  <div class="summary-card">
-    <div class="summary-icon">⏱</div>
-    <div class="summary-text">基本は<br>軽食6h・水2h</div>
-    <div class="summary-detail">JSAガイドラインベース</div>
-  </div>
-  <div class="summary-card">
-    <div class="summary-icon">⚠️</div>
-    <div class="summary-text">DM・GLP-1・GERD<br>は別枠で考える</div>
-    <div class="summary-detail">時間だけでは判断できない</div>
-  </div>
+<div class="summary-card"><div class="summary-icon">🎯</div><div class="summary-text">絶飲食の目的は<br>誤嚥防止</div></div>
+<div class="summary-card"><div class="summary-icon">🏥</div><div class="summary-text">カテ室は<br>リカバリーが難しい</div><div class="summary-detail">手術室との環境差を意識</div></div>
+<div class="summary-card"><div class="summary-icon">⏱</div><div class="summary-text">基本は<br>軽食6h・水2h</div><div class="summary-detail">JSAガイドラインベース</div></div>
+<div class="summary-card"><div class="summary-icon">⚠️</div><div class="summary-text">DM・GLP-1・GERD<br>は別枠で考える</div><div class="summary-detail">時間だけでは判断できない</div></div>
 </div>
 
 <div class="final-cta">
-  <h3>判断に迷ったら</h3>
-  <p>時間で切らず、<span class="highlight">麻酔科へ相談</span>してください。</p>
+<h3>判断に迷ったら</h3>
+<p>時間で切らず、<span class="highlight">麻酔科へ相談</span>してください。</p>
 </div>
-```
-
-  </section>
+</section>
 
 </main>
 
 <footer>
-  <p>循環器アブレーション 絶飲食管理ガイド ― 麻酔科から循環器内科の先生方へ</p>
-  <p style="margin-top:0.3rem;">JSA（日本麻酔科学会）術前絶飲食ガイドライン準拠</p>
+<p>循環器アブレーション 絶飲食管理ガイド ― 麻酔科から循環器内科の先生方へ</p>
+<p style="margin-top:.3rem">JSA（日本麻酔科学会）術前絶飲食ガイドライン準拠</p>
 </footer>
 
 <script>
-  // Scroll progress bar
-  window.addEventListener('scroll', () => {
-    const h = document.documentElement;
-    const pct = (h.scrollTop / (h.scrollHeight - h.clientHeight)) * 100;
-    document.getElementById('progressBar').style.width = pct + '%';
-  });
+window.addEventListener('scroll',function(){
+var h=document.documentElement;
+var pct=(h.scrollTop/(h.scrollHeight-h.clientHeight))*100;
+document.getElementById('progressBar').style.width=pct+'%';
+});
 
-  // Intersection Observer for section reveal
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach(e => {
-      if (e.isIntersecting) e.target.classList.add('visible');
-    });
-  }, { threshold: 0.08 });
+var observer=new IntersectionObserver(function(entries){
+entries.forEach(function(e){if(e.isIntersecting)e.target.classList.add('visible')});
+},{threshold:0.08});
+document.querySelectorAll('.section').forEach(function(s){observer.observe(s)});
 
-  document.querySelectorAll('.section').forEach(s => observer.observe(s));
-
-  // Active TOC link
-  const sections = document.querySelectorAll('.section');
-  const tocLinks = document.querySelectorAll('.toc a');
-
-  window.addEventListener('scroll', () => {
-    let current = '';
-    sections.forEach(s => {
-      const top = s.offsetTop - 120;
-      if (scrollY >= top) current = s.id;
-    });
-    tocLinks.forEach(a => {
-      a.classList.toggle('active', a.getAttribute('href') === '#' + current);
-    });
-  });
+var sections=document.querySelectorAll('.section');
+var tocLinks=document.querySelectorAll('.toc a');
+window.addEventListener('scroll',function(){
+var current='';
+sections.forEach(function(s){if(window.scrollY>=s.offsetTop-120)current=s.id});
+tocLinks.forEach(function(a){
+if(a.getAttribute('href')==='#'+current){a.classList.add('active')}else{a.classList.remove('active')}
+});
+});
 </script>
 
 </body>
