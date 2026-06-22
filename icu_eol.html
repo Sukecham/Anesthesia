@@ -1,0 +1,1059 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <meta name="color-scheme" content="light" />
+  <title>ICUの終末期ケア、どう変えるべきか — SCCMが2025年に示した13の提言</title>
+  <style>
+:root {
+  color-scheme: light;
+  --bg: #f6f3ec;
+  --bg-2: #ece7dc;
+  --paper: #fffdf8;
+  --paper-2: #fbf7ef;
+  --ink: #132035;
+  --ink-2: #24324a;
+  --muted: #667085;
+  --muted-2: #7a8494;
+  --line: rgba(29, 42, 65, .12);
+  --line-2: rgba(29, 42, 65, .08);
+  --blue: #173e68;
+  --blue-2: #e4eff8;
+  --teal: #0f6f6c;
+  --teal-2: #e1f2ef;
+  --amber: #9a641e;
+  --amber-2: #f4e5cc;
+  --rose: #8d3f4d;
+  --rose-2: #f1dde2;
+  --accent: var(--blue);
+  --accent-soft: var(--blue-2);
+  --radius-xxl: 34px;
+  --radius-xl: 28px;
+  --radius-lg: 22px;
+  --radius-md: 16px;
+  --radius-sm: 12px;
+  --shadow-lg: 0 34px 90px rgba(22, 33, 52, .14);
+  --shadow-md: 0 18px 45px rgba(22, 33, 52, .10);
+  --shadow-sm: 0 8px 24px rgba(22, 33, 52, .07);
+  --content: 930px;
+  --grid: minmax(0, 280px) minmax(0, var(--content));
+  --page-pad: clamp(16px, 4vw, 48px);
+}
+
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; background: var(--bg); }
+body {
+  margin: 0;
+  color: var(--ink);
+  font-family: -apple-system, BlinkMacSystemFont, "Hiragino Sans", "Hiragino Kaku Gothic ProN", "Yu Gothic", YuGothic, "Noto Sans JP", "Segoe UI", sans-serif;
+  font-feature-settings: "palt" 1;
+  letter-spacing: .018em;
+  line-height: 1.88;
+  background:
+    radial-gradient(circle at 12% -4%, rgba(23, 62, 104, .18), transparent 34rem),
+    radial-gradient(circle at 90% 6%, rgba(15, 111, 108, .14), transparent 30rem),
+    radial-gradient(circle at 50% 100%, rgba(154, 100, 30, .10), transparent 35rem),
+    linear-gradient(180deg, #fbf8f1 0%, var(--bg) 42%, #f7f2e9 100%);
+  overflow-x: hidden;
+}
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  background-image:
+    linear-gradient(rgba(19, 32, 53, .035) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(19, 32, 53, .03) 1px, transparent 1px);
+  background-size: 44px 44px;
+  mask-image: linear-gradient(180deg, rgba(0,0,0,.72), transparent 70%);
+}
+a { color: inherit; }
+.scroll-progress {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 100;
+  width: 0%;
+  height: 4px;
+  background: linear-gradient(90deg, var(--blue), var(--teal), var(--amber), var(--rose));
+  box-shadow: 0 0 22px rgba(23, 62, 104, .32);
+}
+.page {
+  position: relative;
+  z-index: 1;
+  width: min(100%, 1420px);
+  margin: 0 auto;
+  padding: clamp(18px, 4vw, 54px) var(--page-pad) 88px;
+}
+.hero {
+  position: relative;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(260px, 360px);
+  gap: clamp(24px, 5vw, 52px);
+  align-items: end;
+  overflow: hidden;
+  border: 1px solid rgba(23, 62, 104, .16);
+  border-radius: var(--radius-xxl);
+  padding: clamp(28px, 6vw, 76px);
+  background:
+    linear-gradient(135deg, rgba(255, 253, 248, .98), rgba(255, 253, 248, .78)),
+    radial-gradient(circle at 12% 18%, rgba(23, 62, 104, .16), transparent 22rem),
+    radial-gradient(circle at 85% 12%, rgba(15, 111, 108, .13), transparent 18rem),
+    var(--paper);
+  box-shadow: var(--shadow-lg);
+  isolation: isolate;
+}
+.hero::after {
+  content: "";
+  position: absolute;
+  right: -92px;
+  bottom: -128px;
+  width: 420px;
+  height: 420px;
+  border-radius: 999px;
+  border: 54px solid rgba(23, 62, 104, .055);
+  z-index: -1;
+}
+.hero-copy { min-width: 0; }
+.title-kicker {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 10px;
+  margin: 0 0 26px;
+}
+.meta-pill, .pill {
+  display: inline-flex;
+  align-items: center;
+  min-height: 34px;
+  padding: 5px 13px;
+  border: 1px solid rgba(23, 62, 104, .14);
+  border-radius: 999px;
+  color: var(--muted);
+  background: rgba(255, 255, 255, .72);
+  font-size: .88rem;
+  font-weight: 760;
+  line-height: 1.35;
+  white-space: nowrap;
+  box-shadow: 0 7px 18px rgba(23, 62, 104, .045);
+}
+h1, h2, h3, h4 { margin: 0; line-height: 1.42; letter-spacing: .01em; }
+h1 {
+  max-width: 900px;
+  font-size: clamp(2.05rem, 5.45vw, 4.45rem);
+  font-weight: 920;
+  letter-spacing: -.035em;
+  color: #111f33;
+  text-wrap: balance;
+}
+.hero-board {
+  position: relative;
+  display: grid;
+  gap: 14px;
+  align-self: stretch;
+  min-height: 100%;
+  padding: clamp(18px, 3vw, 24px);
+  border: 1px solid rgba(23, 62, 104, .14);
+  border-radius: 26px;
+  background: linear-gradient(180deg, rgba(255,255,255,.76), rgba(255,255,255,.48));
+  backdrop-filter: blur(14px);
+  box-shadow: var(--shadow-sm);
+}
+.hero-board-title {
+  color: var(--muted);
+  font-size: .86rem;
+  font-weight: 820;
+  letter-spacing: .09em;
+  text-transform: uppercase;
+}
+.hero-metrics {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+}
+.metric {
+  min-width: 0;
+  padding: 15px 14px;
+  border: 1px solid rgba(23, 62, 104, .12);
+  border-radius: 18px;
+  background: rgba(255,255,255,.62);
+}
+.metric strong {
+  display: block;
+  color: #132035;
+  font-size: clamp(1.25rem, 2.4vw, 1.8rem);
+  line-height: 1.1;
+  letter-spacing: -.03em;
+}
+.metric span {
+  display: block;
+  margin-top: 6px;
+  color: var(--muted);
+  font-size: .78rem;
+  font-weight: 740;
+  line-height: 1.45;
+}
+.mobile-toc {
+  display: none;
+  margin: 22px 0 0;
+  border: 1px solid var(--line);
+  border-radius: 20px;
+  background: rgba(255, 253, 248, .9);
+  box-shadow: var(--shadow-sm);
+  overflow: hidden;
+}
+.mobile-toc summary {
+  cursor: pointer;
+  padding: 15px 18px;
+  color: var(--ink-2);
+  font-weight: 860;
+  list-style: none;
+}
+.mobile-toc summary::-webkit-details-marker { display: none; }
+.mobile-toc summary::after { content: "＋"; float: right; color: var(--muted); }
+.mobile-toc[open] summary::after { content: "−"; }
+.mobile-toc .mobile-toc-list {
+  display: grid;
+  gap: 0;
+  padding: 4px 12px 14px;
+}
+.mobile-toc a {
+  display: block;
+  padding: 10px 8px;
+  color: var(--muted);
+  text-decoration: none;
+  border-top: 1px solid var(--line-2);
+  font-size: .92rem;
+  line-height: 1.58;
+}
+.content-layout {
+  display: grid;
+  grid-template-columns: var(--grid);
+  gap: clamp(22px, 3vw, 34px);
+  align-items: start;
+  margin-top: 34px;
+}
+.toc {
+  position: sticky;
+  top: 24px;
+  max-height: calc(100vh - 48px);
+  overflow: auto;
+  padding: 18px;
+  border: 1px solid var(--line);
+  border-radius: 24px;
+  background: rgba(255, 253, 248, .78);
+  box-shadow: var(--shadow-sm);
+  backdrop-filter: blur(12px);
+}
+.toc h2 {
+  margin: 0 0 11px;
+  color: #17253a;
+  font-size: .88rem;
+  font-weight: 880;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+}
+.toc-link {
+  display: grid;
+  grid-template-columns: 36px minmax(0, 1fr);
+  gap: 10px;
+  align-items: start;
+  padding: 11px 8px;
+  border-radius: 14px;
+  color: var(--muted);
+  text-decoration: none;
+  transition: background .18s ease, color .18s ease, transform .18s ease;
+}
+.toc-link:hover, .toc-link.is-active {
+  color: var(--ink);
+  background: rgba(23, 62, 104, .075);
+}
+.toc-link:hover { transform: translateX(2px); }
+.toc-link span {
+  display: inline-grid;
+  place-items: center;
+  width: 30px;
+  height: 30px;
+  border: 1px solid rgba(23, 62, 104, .12);
+  border-radius: 999px;
+  background: rgba(255,255,255,.64);
+  color: var(--blue);
+  font-size: .76rem;
+  font-weight: 880;
+  line-height: 1;
+}
+.toc-link em {
+  min-width: 0;
+  font-style: normal;
+  font-size: .9rem;
+  font-weight: 730;
+  line-height: 1.54;
+}
+.article-shell {
+  display: grid;
+  gap: 30px;
+  min-width: 0;
+  max-width: var(--content);
+}
+.section {
+  --accent: var(--blue);
+  --accent-soft: var(--blue-2);
+  position: relative;
+  overflow: hidden;
+  border: 1px solid var(--line);
+  border-radius: var(--radius-xxl);
+  background: rgba(255, 253, 248, .94);
+  box-shadow: var(--shadow-md);
+  scroll-margin-top: 28px;
+}
+.section.teal { --accent: var(--teal); --accent-soft: var(--teal-2); }
+.section.amber { --accent: var(--amber); --accent-soft: var(--amber-2); }
+.section.rose { --accent: var(--rose); --accent-soft: var(--rose-2); }
+.section::after {
+  content: "";
+  position: absolute;
+  right: -120px;
+  top: -120px;
+  width: 260px;
+  height: 260px;
+  border-radius: 999px;
+  background: radial-gradient(circle, color-mix(in srgb, var(--accent) 14%, transparent), transparent 72%);
+  pointer-events: none;
+}
+.section-header {
+  position: relative;
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  gap: 14px;
+  align-items: start;
+  padding: clamp(22px, 4vw, 40px) clamp(20px, 4vw, 44px) 22px;
+  border-bottom: 1px solid var(--line-2);
+  background: linear-gradient(135deg, color-mix(in srgb, var(--accent) 11%, transparent), rgba(255,255,255,0));
+}
+.section-tag {
+  display: inline-grid;
+  place-items: center;
+  width: 42px;
+  height: 42px;
+  border-radius: 14px;
+  color: var(--accent);
+  background: rgba(255,255,255,.68);
+  border: 1px solid color-mix(in srgb, var(--accent) 20%, transparent);
+  font-size: .86rem;
+  font-weight: 920;
+  letter-spacing: -.02em;
+  box-shadow: 0 8px 20px rgba(22,33,52,.055);
+}
+h2 {
+  color: #15243a;
+  font-size: clamp(1.45rem, 3.1vw, 2.24rem);
+  font-weight: 920;
+  letter-spacing: -.018em;
+  text-wrap: balance;
+}
+h3 {
+  color: #1a2941;
+  font-size: clamp(1.15rem, 2.15vw, 1.54rem);
+  font-weight: 890;
+  letter-spacing: -.01em;
+  text-wrap: balance;
+}
+h4 {
+  color: #20304a;
+  font-size: 1.02rem;
+  font-weight: 860;
+}
+.section-body {
+  position: relative;
+  z-index: 1;
+  padding: clamp(22px, 4vw, 44px);
+}
+p {
+  margin: 0 0 1.14em;
+  color: #25334a;
+  font-size: clamp(1.01rem, 1.18vw, 1.08rem);
+  line-height: 1.92;
+}
+p:last-child { margin-bottom: 0; }
+.lead .section-body > p:first-child {
+  color: #16243a;
+  font-size: clamp(1.07rem, 1.45vw, 1.18rem);
+  line-height: 1.95;
+}
+.note-card,
+.result-card,
+.source-card,
+.voice-card {
+  padding: clamp(20px, 3vw, 30px);
+  border: 1px solid color-mix(in srgb, var(--accent, var(--blue)) 17%, transparent);
+  border-radius: var(--radius-lg);
+  background: linear-gradient(135deg, color-mix(in srgb, var(--accent-soft, var(--blue-2)) 70%, white), rgba(255,255,255,.74));
+  box-shadow: var(--shadow-sm);
+}
+.result-card { margin-top: 24px; --accent: var(--teal); --accent-soft: var(--teal-2); }
+.source-card { --accent: var(--amber); --accent-soft: var(--amber-2); }
+.voice-card { --accent: var(--rose); --accent-soft: var(--rose-2); }
+.voice-card h3 { margin-bottom: 14px; }
+.recommendation-stack {
+  display: grid;
+  gap: 20px;
+  margin-top: 22px;
+}
+.recommendation {
+  position: relative;
+  padding: clamp(20px, 3.5vw, 34px);
+  border: 1px solid rgba(29, 42, 65, .115);
+  border-radius: 26px;
+  background:
+    linear-gradient(180deg, rgba(255,255,255,.94), rgba(255,255,255,.70)),
+    var(--paper);
+  box-shadow: 0 14px 38px rgba(22, 33, 52, .075);
+  overflow: hidden;
+  break-inside: avoid;
+}
+.recommendation::before {
+  content: "";
+  position: absolute;
+  inset: 0 auto 0 0;
+  width: 7px;
+  background: linear-gradient(180deg, var(--accent), color-mix(in srgb, var(--accent) 55%, white));
+}
+.recommendation h3 {
+  margin-bottom: 17px;
+  padding-left: 2px;
+}
+.recommendation > p:first-of-type {
+  margin-bottom: 1.15em;
+  padding: 15px 17px;
+  border-left: 4px solid var(--accent);
+  border-radius: 16px;
+  color: #14243b;
+  background: color-mix(in srgb, var(--accent-soft) 66%, white);
+  font-weight: 720;
+  box-shadow: inset 0 0 0 1px rgba(255,255,255,.58);
+}
+.recommendation p + p { margin-top: .15em; }
+.japanese-notes {
+  counter-reset: notes;
+  display: grid;
+  gap: 14px;
+  margin-top: 16px;
+}
+.japanese-notes p {
+  counter-increment: notes;
+  position: relative;
+  min-height: 0;
+  margin: 0;
+  padding: 17px 19px 17px 60px;
+  border: 1px solid rgba(29, 42, 65, .10);
+  border-radius: 18px;
+  background: rgba(255,255,255,.68);
+  box-shadow: 0 8px 22px rgba(22, 33, 52, .05);
+}
+.japanese-notes p::before {
+  content: counter(notes, decimal-leading-zero);
+  position: absolute;
+  left: 18px;
+  top: 18px;
+  display: inline-grid;
+  place-items: center;
+  width: 30px;
+  height: 30px;
+  border-radius: 999px;
+  color: var(--amber);
+  background: var(--amber-2);
+  font-size: .74rem;
+  font-weight: 900;
+}
+.closing .section-body > p:first-child {
+  color: #16243a;
+  font-size: clamp(1.05rem, 1.38vw, 1.16rem);
+}
+.grid-actions {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 18px;
+  margin-top: 24px;
+}
+.action-column {
+  min-width: 0;
+  overflow: hidden;
+  border: 1px solid rgba(29, 42, 65, .11);
+  border-radius: 24px;
+  background: rgba(255,255,255,.68);
+  box-shadow: var(--shadow-sm);
+}
+.action-column > h3 {
+  padding: 18px 19px;
+  border-bottom: 1px solid rgba(29, 42, 65, .08);
+  background: linear-gradient(135deg, color-mix(in srgb, var(--accent) 11%, transparent), rgba(255,255,255,0));
+  font-size: clamp(1.05rem, 1.55vw, 1.16rem);
+}
+.action-item {
+  padding: 18px 19px 20px;
+  border-bottom: 1px solid rgba(29, 42, 65, .075);
+}
+.action-item:last-child { border-bottom: 0; }
+.action-item h4 { margin-bottom: 7px; }
+.action-item p {
+  color: var(--muted);
+  font-size: .965rem;
+  line-height: 1.78;
+}
+.priority-table {
+  width: 100%;
+  margin-top: 26px;
+  border-collapse: separate;
+  border-spacing: 0;
+  overflow: hidden;
+  border: 1px solid rgba(29, 42, 65, .12);
+  border-radius: 24px;
+  background: rgba(255,255,255,.78);
+  box-shadow: var(--shadow-sm);
+  table-layout: fixed;
+}
+.priority-table th,
+.priority-table td {
+  padding: 16px 18px;
+  text-align: left;
+  vertical-align: top;
+  border-bottom: 1px solid rgba(29, 42, 65, .08);
+  color: #26364d;
+  font-size: .98rem;
+  line-height: 1.72;
+  word-break: normal;
+  overflow-wrap: anywhere;
+}
+.priority-table th {
+  color: #14243b;
+  background: linear-gradient(135deg, color-mix(in srgb, var(--accent) 13%, white), rgba(255,255,255,.55));
+  font-weight: 880;
+}
+.priority-table th:first-child, .priority-table td:first-child { width: 86px; }
+.priority-table th:nth-child(2), .priority-table td:nth-child(2) { width: 30%; }
+.priority-table tr:last-child td { border-bottom: 0; }
+.priority-table td:first-child {
+  color: var(--accent);
+  font-weight: 900;
+  white-space: nowrap;
+}
+.article-end-space { height: 16px; }
+:focus-visible {
+  outline: 3px solid color-mix(in srgb, var(--teal) 40%, white);
+  outline-offset: 3px;
+}
+@media (max-width: 1180px) {
+  .hero { grid-template-columns: 1fr; }
+  .content-layout { grid-template-columns: 1fr; }
+  .toc { display: none; }
+  .mobile-toc { display: block; }
+  .article-shell { max-width: none; }
+  .grid-actions { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+@media (max-width: 1180px) and (min-width: 761px) {
+  .grid-actions .action-column:last-child { grid-column: 1 / -1; }
+}
+
+@media (max-width: 760px) {
+  body { line-height: 1.82; }
+  .page { padding-left: 14px; padding-right: 14px; padding-bottom: 64px; }
+  .hero { border-radius: 26px; padding: 26px 20px; }
+  .hero-metrics { grid-template-columns: 1fr 1fr; }
+  .meta-pill { font-size: .82rem; min-height: 31px; }
+  .content-layout { margin-top: 22px; }
+  .article-shell { gap: 22px; }
+  .section { border-radius: 26px; }
+  .section-header {
+    grid-template-columns: 1fr;
+    gap: 10px;
+    padding: 22px 20px 18px;
+  }
+  .section-tag { width: 38px; height: 38px; border-radius: 13px; }
+  .section-body { padding: 22px 20px; }
+  p { font-size: 1rem; line-height: 1.84; }
+  .recommendation { border-radius: 22px; padding: 20px 18px 22px; }
+  .recommendation > p:first-of-type { padding: 14px 15px; }
+  .grid-actions { grid-template-columns: 1fr; }
+  .japanese-notes p { padding-left: 54px; }
+  .japanese-notes p::before { left: 16px; top: 18px; }
+  .priority-table {
+    display: block;
+    border: 0;
+    border-radius: 0;
+    background: transparent;
+    box-shadow: none;
+    table-layout: auto;
+  }
+  .priority-table thead { display: none; }
+  .priority-table tbody { display: grid; gap: 12px; }
+  .priority-table tr {
+    display: block;
+    border: 1px solid rgba(29, 42, 65, .12);
+    border-radius: 18px;
+    background: rgba(255,255,255,.76);
+    box-shadow: 0 8px 22px rgba(22, 33, 52, .055);
+    overflow: hidden;
+  }
+  .priority-table td {
+    display: grid;
+    grid-template-columns: 82px minmax(0, 1fr);
+    gap: 12px;
+    width: auto !important;
+    padding: 12px 14px;
+    border-bottom: 1px solid rgba(29, 42, 65, .075);
+    white-space: normal;
+    overflow-wrap: anywhere;
+    font-size: .96rem;
+  }
+  .priority-table td::before {
+    content: attr(data-label);
+    color: var(--muted);
+    font-size: .78rem;
+    font-weight: 860;
+    letter-spacing: .02em;
+  }
+  .priority-table td:last-child { border-bottom: 0; }
+  .priority-table td:first-child { color: #26364d; }
+}
+@media (max-width: 420px) {
+  h1 { font-size: clamp(1.84rem, 10vw, 2.28rem); }
+  h2 { font-size: 1.38rem; }
+  h3 { font-size: 1.12rem; }
+  .metric { padding: 13px 14px; }
+  .priority-table td { grid-template-columns: 76px minmax(0, 1fr); gap: 10px; }
+}
+
+@supports not (color: color-mix(in srgb, white, black)) {
+  .section-header { background: linear-gradient(135deg, rgba(23, 62, 104, .08), rgba(255,255,255,0)); }
+  .section.teal .section-header { background: linear-gradient(135deg, rgba(15, 111, 108, .08), rgba(255,255,255,0)); }
+  .section.amber .section-header { background: linear-gradient(135deg, rgba(154, 100, 30, .10), rgba(255,255,255,0)); }
+  .section.rose .section-header { background: linear-gradient(135deg, rgba(141, 63, 77, .08), rgba(255,255,255,0)); }
+  .section::after { background: radial-gradient(circle, rgba(23, 62, 104, .10), transparent 72%); }
+  .section.teal::after { background: radial-gradient(circle, rgba(15, 111, 108, .10), transparent 72%); }
+  .section.amber::after { background: radial-gradient(circle, rgba(154, 100, 30, .10), transparent 72%); }
+  .section.rose::after { background: radial-gradient(circle, rgba(141, 63, 77, .10), transparent 72%); }
+  .section-tag { border-color: rgba(23, 62, 104, .20); }
+  .section.teal .section-tag { border-color: rgba(15, 111, 108, .20); }
+  .section.amber .section-tag { border-color: rgba(154, 100, 30, .20); }
+  .section.rose .section-tag { border-color: rgba(141, 63, 77, .20); }
+  .note-card, .result-card { background: linear-gradient(135deg, #e4eff8, rgba(255,255,255,.74)); }
+  .source-card { background: linear-gradient(135deg, #f4e5cc, rgba(255,255,255,.74)); }
+  .voice-card { background: linear-gradient(135deg, #f1dde2, rgba(255,255,255,.74)); }
+  .recommendation > p:first-of-type { background: #e4eff8; }
+  .section.teal .recommendation > p:first-of-type { background: #e1f2ef; }
+  .section.amber .recommendation > p:first-of-type { background: #f4e5cc; }
+  .section.rose .recommendation > p:first-of-type { background: #f1dde2; }
+  .priority-table th { background: #f4efe6; }
+  .action-column > h3 { background: linear-gradient(135deg, rgba(154, 100, 30, .09), rgba(255,255,255,0)); }
+}
+
+@media (max-width: 340px) {
+  .hero-metrics { grid-template-columns: 1fr; }
+}
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after { transition: none !important; }
+}
+@media print {
+  html, body { background: #fff; }
+  body::before, .scroll-progress, .toc, .mobile-toc { display: none !important; }
+  .page { width: 100%; max-width: none; padding: 0; }
+  .hero, .section, .recommendation, .action-column, .priority-table, .note-card, .result-card, .source-card, .voice-card {
+    box-shadow: none !important;
+    break-inside: avoid;
+  }
+  .content-layout { display: block; }
+  .article-shell { max-width: none; }
+  .section { margin-bottom: 18px; }
+}
+</style>
+</head>
+<body>
+  <div class="scroll-progress" aria-hidden="true"></div>
+  <main class="page">
+    <header class="hero">
+      <div class="hero-copy">
+        <div class="title-kicker"><span class="meta-pill">feedme</span><span class="meta-pill">feedme</span><span class="meta-pill">2026年6月16日 11:52</span></div>
+        <h1>ICUの終末期ケア、どう変えるべきか — SCCMが2025年に示した13の提言</h1>
+      </div>
+      <aside class="hero-board" aria-label="記事の構成">
+        <div class="hero-board-title">Reading Map</div>
+        <div class="hero-metrics">
+          <div class="metric"><strong>3</strong><span>領域に整理</span></div>
+          <div class="metric"><strong>13</strong><span>提言</span></div>
+          <div class="metric"><strong>GRADE</strong><span>開発方法</span></div>
+          <div class="metric"><strong>成人ICU</strong><span>対象</span></div>
+        </div>
+      </aside>
+    </header>
+
+    <details class="mobile-toc">
+      <summary>目次</summary>
+      <div class="mobile-toc-list">
+        <a href="#intro">01. はじめに — ICUの終末期ケア、なぜ今、ガイドラインが必要なのか</a>
+<a href="#overview">02. ガイドラインの概要 — どのように作られたか</a>
+<a href="#domain-1">03. 領域1 — ICU終末期ケアに関するコミュニケーションの改善</a>
+<a href="#domain-2">04. 領域2 — ICU患者への終末期ケア/症状管理の改善</a>
+<a href="#domain-3">05. 領域3 — 臨床家、患者、家族、代替意思決定者の教育ニーズへの対応</a>
+<a href="#limits">06. エビデンスの限界 — ガイドラインが示す「わからないこと」</a>
+<a href="#jp-notes">07. 日本語読者への配慮事項</a>
+<a href="#conclusion">08. 結論 — エビデンスはまだ不十分だが、やるべきことは明確になった</a>
+<a href="#actions">09. 各ICUで始められるアクション</a>
+<a href="#source">10. この記事の資料</a>
+<a href="#bonus">11. おまけ</a>
+      </div>
+    </details>
+
+    <div class="content-layout">
+      <aside class="toc" aria-label="目次">
+        <h2>Contents</h2>
+        <nav><a href="#intro" class="toc-link"><span>01</span><em>はじめに — ICUの終末期ケア、なぜ今、ガイドラインが必要なのか</em></a>
+<a href="#overview" class="toc-link"><span>02</span><em>ガイドラインの概要 — どのように作られたか</em></a>
+<a href="#domain-1" class="toc-link"><span>03</span><em>領域1 — ICU終末期ケアに関するコミュニケーションの改善</em></a>
+<a href="#domain-2" class="toc-link"><span>04</span><em>領域2 — ICU患者への終末期ケア/症状管理の改善</em></a>
+<a href="#domain-3" class="toc-link"><span>05</span><em>領域3 — 臨床家、患者、家族、代替意思決定者の教育ニーズへの対応</em></a>
+<a href="#limits" class="toc-link"><span>06</span><em>エビデンスの限界 — ガイドラインが示す「わからないこと」</em></a>
+<a href="#jp-notes" class="toc-link"><span>07</span><em>日本語読者への配慮事項</em></a>
+<a href="#conclusion" class="toc-link"><span>08</span><em>結論 — エビデンスはまだ不十分だが、やるべきことは明確になった</em></a>
+<a href="#actions" class="toc-link"><span>09</span><em>各ICUで始められるアクション</em></a>
+<a href="#source" class="toc-link"><span>10</span><em>この記事の資料</em></a>
+<a href="#bonus" class="toc-link"><span>11</span><em>おまけ</em></a></nav>
+      </aside>
+      <article class="article-shell">
+        
+<section class="section lead" data-section-no="01" id="intro">
+<div class="section-header"><span class="section-tag">01</span>
+<h2>はじめに — ICUの終末期ケア、なぜ今、ガイドラインが必要なのか</h2>
+</div>
+<div class="section-body">
+<p>集中治療室で看取りを迎える患者は、決して珍しい存在ではない。しかし、その実態は必ずしもスムーズではない。実は、最大20%のICU患者が設定された目標が医学的に達成不可能で、治療計画が達成可能な目標と一致していないというデータがある。これは、医療チームと患者・家族の間に、根本的なズレが存在していることを示している。</p>
+<p>2008年のACCMコンセンサス声明から約17年。エビデンスは大きく進歩した。米国集中治療医学会（SCCM）は2025年12月、「成人ICUにおける終末期ケアに関する包括的な臨床実践ガイドライン」 を発表した。これは2008年の声明に代わるもので、GRADE法に基づく13の提言を3つの領域に整理している。</p>
+<p>今回はこのガイドラインを読み解き、ICUではどのような終末期ケアが提供されるべきであるか、考察していく。</p>
+<p>なお、本ガイドラインが対象とするのは、成人ICU患者の終末期ケア である。臓器提供は範囲外とされ、小児、具体的な薬剤投与プロトコル、日本固有のEOLケア慣行、詳細な費用便益分析を対象としていない点に注意が必要である。</p>
+</div>
+</section>
+<section class="section teal" data-section-no="02" id="overview">
+<div class="section-header"><span class="section-tag">02</span>
+<h2>ガイドラインの概要 — どのように作られたか</h2>
+</div>
+<div class="section-body">
+<p>本ガイドラインは、GRADE（Grading of Recommendations Assessment, Development and Evaluation）法に基づいて開発された。2021年、SCCM会員および倫理委員会会員への呼びかけにより、臨床・研究の専門性の多様性、実践環境（都市・郊外・地方）、キャリアステージ、人口統計的多様性、患者・家族の視点の代表を含むパネルが構成された。</p>
+<p>PICO質問は最終的に10問に精査され、3つの領域に整理された。文献検索はデータベース創設から2023年1月31日まで（その後2024年10月8日に更新）に行われた。合意形成の閾値は、有権者パネルの70%のうち80%以上の合意と、厳格な基準が設定された。</p>
+<div class="result-card">
+<p>結果として、条件付き推奨9件、Good Practice Statement（実践上の良い推奨）3件、推奨なし1件、合計13の提言が策定された。</p>
+</div>
+</div>
+</section>
+<section class="section" data-section-no="03" id="domain-1">
+<div class="section-header"><span class="section-tag">03</span>
+<h2>領域1 — ICU終末期ケアに関するコミュニケーションの改善</h2>
+</div>
+<div class="section-body">
+<p>領域1は、終末期ケアに関するコミュニケーションの改善に焦点を当てている。共有意思決定、代替意思決定者の教育、コンサルテーション、制度的ポリシーの4つの提言が含まれる。</p>
+<div class="recommendation-stack">
+<section class="recommendation" data-rec="推奨1.1">
+<h3>推奨1.1 — 構造化ツールを用いた共有意思決定</h3>
+<p>ICUの終末期治療決定において、共有意思決定を促進するための構造化ツールの使用が推奨される（条件付き推奨、中程度確実性のエビデンス）。</p>
+<p>共有意思決定ツールに関する14 RCTのシステマティックレビューでは、これらのツールが患者・家族の満足度とコミュニケーションの質を改善することが示された。また、不安、抑うつ、その他の深刻なメンタルヘルス症状を減少させる可能性もある。</p>
+<p>一方で、治療決定や入院期間には明確な影響がないことも確認されている。望ましくない影響も、検討された研究では確認されていない。</p>
+<p>リソースコストは、コミュニケーションファシリテーターのように大幅な場合から、印刷版意思決定支援ツールのように低コストの場合まで様々である。構造化ツールの多様性が、広範な実装における最も大きな障壁となっている。今後、紙・Webベースの意思決定支援ツールが、標準化可能で比較的安価な手段として、広範な展開の潜在力を秘めていると期待されている。</p>
+<p>理想的なツールは1つとして存在しない点にも留意が必要である。</p>
+</section>
+<section class="recommendation" data-rec="推奨1.2a">
+<h3>推奨1.2a — 代替意思決定者の教育</h3>
+<p>ICUは、判断能力のない患者に代わって意思決定を行う代替意思決定者に対する教育リソースを開発することが推奨される（条件付き推奨、低確実性のエビデンス）。</p>
+<p>共有意思決定の質、コミュニケーション、家族のメンタルヘルス症状（PTSD、不安、抑うつ）の改善、そして代替意思決定者と臨床チーム間の信頼構築が期待される。ただし、エビデンスは小規模研究に基づくものであり、過大評価しないよう注意が必要である。</p>
+<p>文化的・信仰的多様性に関する研究ギャップにも言及されている。意思決定が個人主義的に見なされない文化集団や信仰伝統間で、体系的アプローチがどのように異なるかについては、今後の研究課題である。</p>
+</section>
+<section class="recommendation" data-rec="推奨1.2b">
+<h3>推奨1.2b — 代替意思決定者の標準化された特定プロセス</h3>
+<p>ICUは、判断能力のない患者の法的代替意思決定者を特定・文書化する標準化プロセスを持つべきである（Good Practice Statement）。</p>
+<p>多くのICU患者は判断能力がなく、代替意思決定者に依存している。代替意思決定者を持たない患者は、終末期決定の遅延とICU入室期間の延長をもたらすことが報告されている。</p>
+<p>実装は病院・システムレベルで行うのが最も効果的である。責任者は臨床チーム、ソーシャルワーカー、倫理チーム、法務、リスク管理など、機関によって多様になる。</p>
+</section>
+<section class="recommendation" data-rec="推奨1.3">
+<h3>推奨1.3 — プロアクティブな緩和ケア/倫理コンサルテーション</h3>
+<p>重症ケアから利益を得られなくなったICU患者のゴール・オブ・ケアの定義を支援するため、利用可能な場合、緩和ケア/緩和医学および/または倫理コンサルテーションサービスへのプロアクティブなコンサルテーションが推奨される（条件付き推奨、低確実性のエビデンス）。</p>
+<p>緩和医学および臨床倫理コンサルテーションは、治療制限決定の中程度の増加をもたらし、ICUおよび病院入院期間の小さな減少をもたらす可能性がある。</p>
+<p>ただし、注意すべき点もある。サポート的コンサルテーションが終末期の患者ケアに悪影響を及ぼす小さな可能性がある。例えば、緩和医学の関与が、臨床的に適切であっても、コンサルテーションサービスとの困難な会話が家族を動揺させ、コミュニケーションの質に関する家族評価（満足度スコア）を低下させる場合があるのである。</p>
+<p>リソース影響についても言及されている。臨床家の給与コストは専門性、トレーニング、継続教育の違いにより大幅に異なる。さらに、臨床倫理コンサルテーションおよびスピリチュアルケアコンサルテーションのいずれも、現在保険診療で償還されていない。</p>
+</section>
+<section class="recommendation" data-rec="推奨1.4">
+<h3>推奨1.4 — 非寛容/不適切治療に関する制度的ポリシー</h3>
+<p>ICUにおける非寛容および潜在的に不適切な治療に関する紛争に対処するため、制度的ポリシーの実装が推奨される（条件付き推奨、低確実性のエビデンス）。</p>
+<p>死亡率に影響を与えずに治療数を減少させるという低確実性のエビデンスがある。また、ポリシーは臨床チームをサポートし、バーンアウトとモラルディストレスを減少させる可能性がある（ただし、この点に関するエビデンスは欠如している）。</p>
+<p>公平性の観点からも、ポリシーはすべての患者に公平に適用されるフレームワークによって治療決定を導くことで、公平性を改善する可能性がある。デュー・プロセス要素としては、使用基準、患者・家族の視点の組み込み、セカンドオピニオン、倫理的レビュー、制度的レビューおよび監督が含まれる。</p>
+<p>タイムリミテッドトライアルについても、限られたデータが臨床家・家族ミーティングの改善とICU治療の強度・期間の減少を示す可能性がある。</p>
+</section>
+</div>
+</div>
+</section>
+<section class="section teal" data-section-no="04" id="domain-2">
+<div class="section-header"><span class="section-tag">04</span>
+<h2>領域2 — ICU患者への終末期ケア/症状管理の改善</h2>
+</div>
+<div class="section-body">
+<p>領域2は、WLSTのプロトコル化、文化・スピリチュアルケアの支援、苦痛へのコンサルテーションという3つの提言を含む。</p>
+<div class="recommendation-stack">
+<section class="recommendation" data-rec="推奨2.1">
+<h3>推奨2.1 — 生命維持治療の中止（WLST）のプロトコル化</h3>
+<p>ICUにおける生命維持治療の中止および症状管理について、挿管前、離床中、抜管後の症状評価・管理を含むプロトコル化されたアプローチの使用が推奨される（条件付き推奨、中程度確実性のエビデンス）。</p>
+<p>Campbell and YarandiによるクラスターRCTでは、アルゴリズムアプローチ（WLST）対標準ケアが比較された。呼吸困難症状、WLST後の生存期間、オピオイドおよびベンゾジアゼピン投与量で、プロトコルを支持する中程度確実性のエビデンスが得られた。ただし、この研究は小規模サンプルサイズによる不正確さに制限されており、プロトコル群 n = 48、標準ケア群 n = 120であった。</p>
+<p>また、3つの観察研究が直接抜管対ターミナルウィーニングを検査した。直接抜管は、WLST後の生存期間の短縮、使用される薬剤の低用量、臨床家のジョブストレススコア低減をもたらす可能性がある。一方、ターミナルウィーニングは症状管理スコアを改善する可能性があるという非常に低確実性のエビデンスがある。</p>
+<p>重要な知見として、プロトコルを使用することは、死のプロセスを延長せず、全体的に少ない薬物を使用するという点である。薬物クラス内の1つの薬物が他よりも優れているというエビデンスは存在しない。</p>
+<p>なお、左心室補助装置（LVAD）または体外膜型人工肺（ECMO）患者は、WLSTの一般プロトコルに適合しない可能性がある点に留意が必要である。コストデータは、プロトコル化WLST対標準ケア、直接抜管対ターミナルウィーニングを比較するものは利用不可である。</p>
+</section>
+<section class="recommendation" data-rec="推奨2.2a">
+<h3>推奨2.2a — 患者・家族の文化・スピリチュアル・家族伝統の支援</h3>
+<p>ICU臨床家は、終末期における患者および家族の文化、スピリチュアル、家族伝統を探求し支援すべきである（Good Practice Statement）。</p>
+<p>終末期における患者・家族の信念、価値、ゴール、競合するゴールの優先度（意識 vs 疼痛の適切なコントロールなど）の多様性は、個々の状況のニーズに対応するためプロトコルの修正を必要とする。SCCM家族中心ケアガイドラインがこれらの目的達成に有用な場合もある。</p>
+</section>
+<section class="recommendation" data-rec="推奨2.2b">
+<h3>推奨2.2b — スピリチュアルケアへの半構造化アプローチ</h3>
+<p>導入ミーティング、週次フォローアップ、退院後フォローアップを含む、患者および家族の支援およびスピリチュアルケアニーズへの対処のための半構造化アプローチの使用が推奨される（条件付き推奨、低確実性のエビデンス）。</p>
+<p>Torkeらによる小規模RCTでは、半構造化アプローチが参加を選択した家族の不安、スピリチュアルなウェルビーイング、ケアへの家族満足度を改善する可能性がある。望ましくない影響のエビデンスはなかった。</p>
+<p>ただし、この研究には限界もある。スピリチュアルおよび宗教的ニーズに焦点を当てているものの文化的ニーズは含まれておらず、キリスト教以外の信仰伝統の低い代表率、アジア系およびラテン系参加者の低い代表率が指摘されている。</p>
+<p>コスト影響については、スピリチュアルケアは医療システムのコストセンターであり、収益を請求できないため、不明である。</p>
+</section>
+</div>
+</div>
+</section>
+<section class="section amber" data-section-no="05" id="domain-3">
+<div class="section-header"><span class="section-tag">05</span>
+<h2>領域3 — 臨床家、患者、家族、代替意思決定者の教育ニーズへの対応</h2>
+</div>
+<div class="section-body">
+<p>領域3は、健康格差、多様性配慮、ICUチームの緩和ケア教育、患者・家族への事前教育という4つの教育関連提言を含む。</p>
+<div class="recommendation-stack">
+<section class="recommendation" data-rec="推奨3.1a">
+<h3>推奨3.1a — 健康格差介入のエビデンス不十分</h3>
+<p>ICU終末期ケアに関して、特定の集団における未充足の緩和ケアニーズを特定し軽減するための介入について、推奨を判断するためのエビデンスが不十分である（推奨なし、低確実性のエビデンス）。</p>
+<p>患者固有の人口統計的要因が、ICUでの死の割合、治療制限決定、死前のホスピスサービス使用、効果的な症状管理、ゴールに一致するケアの提供、死と死の質スコアに影響を与えるという低確実性のエビデンスが存在する。</p>
+<p>Coxらによる研究では、黒人家族に対する未充足の緩和ケアニーズの不平等を減少させるように設計されたモバイルアプリベースのプラットフォームの小規模RCTで、白人家族が黒人家族と比較してより大きな利益をもたらす可能性があることが発見されたが、理由は不明である。</p>
+<p>研究ニーズとしては、偏見に歴史的に晒されてきたコミュニティからのICU患者・家族の終末期ケアニーズをどのように特定し満たすかが挙げられる。</p>
+</section>
+<section class="recommendation" data-rec="推奨3.1b">
+<h3>推奨3.1b — 多様性を考慮した患者の緩和ケアニーズへの対応</h3>
+<p>終末期ケアを提供するICU臨床家は、患者の性別、ジェンダーアイデンティティ、セクシュアルアイデンティティ、人種、民族、信仰伝統、出身国、第一言語、社会経済的地位を考慮して、患者の緩和ケアニーズを探求し対処すべきである（Good Practice Statement）。</p>
+</section>
+<section class="recommendation" data-rec="推奨3.2">
+<h3>推奨3.2 — ICUチームメンバーへの緩和ケア教育・トレーニング</h3>
+<p>ICUチームのすべてのメンバーに緩和ケアの教育・トレーニングを提供し、ICUでの終末期ケアを提供する能力を向上させることが推奨される（条件付き推奨、非常に低確実性のエビデンス）。</p>
+<p>2018年国家コンセンサスプロジェクト（NCP）質の緩和ケア臨床実践ガイドライン、ACCM、ICUにおける緩和ケア改善プロジェクト、European Society of Intensive Care Medicineによる、ICUにおける緩和ケア実践の組み込みは賛同されている。</p>
+<p>2018 NCPガイドライン領域7では、「臨床家は、終末期に近い患者に一般的な身体症状を評価・管理する方法を学ぶことで、患者ケアを改善できる。すべての臨床家は、患者および家族と死について話すための知識とスキルを持たなければならない」とされている。</p>
+<p>非ICU集団でのエビデンスでは、緩和ケアは生活の質を改善し、症状の苦痛を減少させ、高い満足度とポジティブな患者体験を駆動し、再入院とコストを減少させることが示されている。</p>
+<p>ICUチームへの教育介入は混合結果をもたらした。ある質改善教育介入はICU入室期間の減少をもたらしたが、患者・家族中心の結果には影響がなかった。一方、緩和ケア認定専門家によるコミュニケーショントレーニングは、予後不良の患者における腎代替療法の導入の有意な減少をもたらした。</p>
+<p>リソースおよび実現可能性の多様性は、ローカライズされた混合モダリティフォーマットが最も効果的であることを示唆している。</p>
+</section>
+<section class="recommendation" data-rec="推奨3.3">
+<h3>推奨3.3 — ICU入室の可能性がある患者・家族・代替意思決定者への教育</h3>
+<p>臨床家は、ICU入室の可能性がある患者・家族・代替意思決定者に対して教育介入を提供し、ICUおよび終末期治療オプション、現実的な治療結果、事前ケアプランニングに関する理解を向上させることが推奨される（条件付き推奨、低確実性のエビデンス）。</p>
+<p>さまざまな教育介入（紙、ビデオ）を検査する15 RCTのエビデンスがある。これらは患者の知識スコアを改善し、意思決定の衝突を減少させ、治療の差し控えまたは中止への決定をもたらす可能性がある。情報提供を受けた患者は、ICU介入を拒否したいと思う可能性が高い。</p>
+<p>心肺蘇生（CPR）拒否への決定の増加や、治療オプションに関する衝突の増加は見られなかった。人種的・民族的マイノリティ集団における文書化されたゴール・オブ・ケア会話の利益を示した研究もある。</p>
+<p>介入は、公平かつ効果的であるために、対象集団に合わせて調整されるべきである（言語、文化、視覚・聴覚資料など）。望ましくない治療（ICU入室、CPR、挿管）の回避は、コスト節約となり、スタッフのモラルディストレスとバーンアウトを減少させる可能性がある。</p>
+</section>
+</div>
+</div>
+</section>
+<section class="section rose" data-section-no="06" id="limits">
+<div class="section-header"><span class="section-tag">06</span>
+<h2>エビデンスの限界 — ガイドラインが示す「わからないこと」</h2>
+</div>
+<div class="section-body">
+<p>本ガイドラインの重要な特徴の一つは、エビデンスの確実性が全体的に低〜非常に低いという点である。これは、エビデンスが弱い＝提言が意味がない、ということではない。GRADE法では、低確実性のエビデンスでも臨床的合理性があれば提言を作成する。</p>
+<p>多くの含まれた研究の小規模サンプルサイズ（Campbell and Yarandi：n = 48/120、Torke et al スピリチュアルケアRCT：小規模）が指摘されている。構造化ツールの多様性が広範な実装における最も大きな障壁である。</p>
+<p>多くの介入のリソース影響、コスト、実現可能性に関するエビデンスが限られている。ICUベースの心理学サービスまたは牧会・スピリチュアルケアを検査した研究も少ない。プロトコル化WLST対標準ケアを比較するコストデータは利用不可であった。</p>
+<p>スピリチュアルケア研究のキリスト教以外の信仰伝統およびアジア系・ラテン系参加者の低い代表率も課題である。支援的コンサルテーションが健康格差の改善に寄与するかどうかも不明である。</p>
+</div>
+</section>
+<section class="section amber" data-section-no="07" id="jp-notes">
+<div class="section-header"><span class="section-tag">07</span>
+<h2>日本語読者への配慮事項</h2>
+</div>
+<div class="section-body">
+<p>日本語の医療専門家が本記事を正しく理解するための留意点を記載する。</p>
+<div class="japanese-notes">
+<p>「終末期ケア（End-of-Life Care）」の定義について、日本語の「終末期」は死が間近であることを意味するが、英語のEOL careはより広い概念（症状管理、意思決定支援、スピリチュアルケアを含む）を指す。</p>
+<p>「代替意思決定者（Substitute Decision-Maker）」について、日本の医療現場では「家族」が事実上の意思決定者となることが多いが、米国では法的に指定された代替意思決定者が存在する。</p>
+<p>「Good Practice Statement」と「推奨」の違いについて、GRADE法では「we recommend（条件付き推奨）」と「Good Practice Statement」は異なる。</p>
+<p>「条件付き推奨（Conditional Recommendation）」は、GRADE用語では「we suggest」であり、必ずしも弱い推奨を意味しない。臨床状況に応じて判断すべきである。</p>
+<p>「スピリチュアルケア」の文化的文脈について、日本語の「スピリチュアル」は宗教と区別されることが多いが、米国では宗教的ケアを含む。</p>
+<p>「モラルディストレス（Moral Distress）」は、日本の医療現場でも認識されつつある概念だが、用語の普及度は低い点に留意が必要である。</p>
+</div>
+</div>
+</section>
+<section class="section teal closing" data-section-no="08" id="conclusion">
+<div class="section-header"><span class="section-tag">08</span>
+<h2>結論 — エビデンスはまだ不十分だが、やるべきことは明確になった</h2>
+</div>
+<div class="section-body">
+<p>SCCMの2025年ガイドラインは、約17年ぶりの包括的な更新である。最大20%のICU患者がゴール不一致という現実を踏まえ、構造化された意思決定支援、代替意思決定者の教育、緩和ケア・倫理コンサルテーションの活用、WLSTのプロトコル化、ICUチームへの緩和ケア教育、患者・家族への事前教育という5つの柱が提示された。</p>
+<p>エビデンスの確実性は全体的に低〜非常に低いという限界がある。しかし、それは「やるべきことが明確になった」とも言える。GRADE法が示す通り、低確実性のエビデンスでも臨床的合理性があれば提言は作成される。</p>
+<p>ICUで看取りに向き合う臨床家にとって、これは単なる指針ではなく、実践の羅針盤となるものである。構造化ツールを導入し、代替意思決定者を標準化し、緩和ケアを早期に呼びかけ、WLSTをプロトコル化し、チームを教育する。これらのアクションは、エビデンスの確実性にかかわらず、終末期ケアの質を体系的に改善する可能性がある。</p>
+<p>ガイドラインは完璧なエビデンスを待つのではなく、今すぐ始められることを求めている。あなたのICUで、何が始められるだろうか。</p>
+</div>
+</section>
+<section class="section amber" data-section-no="09" id="actions">
+<div class="section-header"><span class="section-tag">09</span>
+<h2>各ICUで始められるアクション</h2>
+</div>
+<div class="section-body">
+<div class="grid-actions">
+<section class="action-column">
+<h3>すぐに導入できるもの</h3>
+<div class="action-item">
+<h4>標準化した代理意思決定者の特定・文書化プロセスの整備</h4>
+<p>意思決定能力のない患者について、代理意思決定者を標準化されたプロセスで特定・文書化する</p>
+</div>
+<div class="action-item">
+<h4>患者・家族の文化的・スピリチュアル・家族的伝統の探求と支援</h4>
+<p>終末期に、患者・家族の文化的、スピリチュアル、家族的伝統を積極的に探求し支援する</p>
+</div>
+<div class="action-item">
+<h4>患者の緩和ケアニーズを人口統計学的配慮と共に探求・対応する</h4>
+<p>性別、性同一性、人種、民族、信仰伝統、出身国、主要言語、社会経済的地位を考慮して、患者固有のニーズを探る</p>
+</div>
+</section>
+<section class="action-column">
+<h3>導入を検討できるもの</h3>
+<div class="action-item">
+<h4>構造化ツールを用いた共有意思決定</h4>
+<p>コミュニケーションファシリテーター、構造化ミーティングプラン、紙面/ウェブベースの意思決定支援ツールの使用</p>
+<p>ツールの多様性が実装の最大の課題。低コストな紙面・ウェブベースのツールが推奨</p>
+</div>
+<div class="action-item">
+<h4>代理意思決定者向けの教育リソースの開発</h4>
+<p>ウェブ型・印刷型のツールに基づく教育リソース - 健康リテラシーおよび文化的適切性に応じて変容させる</p>
+</div>
+<div class="action-item">
+<h4>WLST（生命維持治療中止）および症状管理のプロトコル化</h4>
+<p>抜管前・抜管中・抜管後の症状アセスメントと管理を含むプロトコル</p>
+<p>LVADやECMO患者は一般プロトコルに適合しない場合があるため注意</p>
+</div>
+<div class="action-item">
+<h4>スピリチュアルケアニーズへの半構造化アプローチ</h4>
+<p>導入ミーティング、週次フォローアップ、退院後フォローアップを含む</p>
+</div>
+</section>
+<section class="action-column">
+<h3>施設レベルで検討すべきもの</h3>
+<div class="action-item">
+<h4>緩和ケア・倫理コンサルテーションの積極的活用</h4>
+<p>集中治療の恩恵を受けにくくなった患者のケア目標定義を支援</p>
+<p>施設レベルでの資金確保が課題</p>
+</div>
+<div class="action-item">
+<h4>無益な治療に関するコンフリクトへの施設方針の実装</h4>
+<p>使用基準、患者・家族の視点の組み込み、セカンドオピニオン、倫理コンサルテーション、施設レビューおよび監視</p>
+<p>多くの病院ですでに設置されており、実現可能性が示されている</p>
+</div>
+<div class="action-item">
+<h4>ICUチーム全員への緩和ケア教育・訓練</h4>
+<p>終末期に近い患者の身体症状評価・管理、患者・家族と死について話すための知識とスキル</p>
+<p>インタラクティブ手法を用いたコミュニケーションスキル教育が効果的</p>
+</div>
+<div class="action-item">
+<h4>ICU入室リスクのある患者・家族・代行人への事前教育</h4>
+<p>ICUおよび終末期治療オプション、現実的な治療アウトカム、事前ケア計画についての理解を改善</p>
+</div>
+</section>
+</div>
+<table aria-label="優先度" class="comparison-table priority-table">
+<thead>
+<tr>
+<th>優先度</th>
+<th>アクション</th>
+<th>理由</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td data-label="優先度">高</td>
+<td data-label="アクション">代行人の標準化プロセス</td>
+<td data-label="理由">導入コストほぼゼロ、エビデンスは間接的だが明確</td>
+</tr>
+<tr>
+<td data-label="優先度">高</td>
+<td data-label="アクション">文化的・スピリチュアル伝統の探求</td>
+<td data-label="理由">グレード実践宣言、実施に特別なリソース不要</td>
+</tr>
+<tr>
+<td data-label="優先度">中</td>
+<td data-label="アクション">WLSTプロトコル化</td>
+<td data-label="理由">中程度エビデンス、症状管理に直接寄与</td>
+</tr>
+<tr>
+<td data-label="優先度">中</td>
+<td data-label="アクション">構造化ツールの導入</td>
+<td data-label="理由">低コストツールから開始可能</td>
+</tr>
+<tr>
+<td data-label="優先度">低</td>
+<td data-label="アクション">緩和ケア・エシックスコンサルテーション</td>
+<td data-label="理由">米国では報酬なし、日本では保険点数あり</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</section>
+<section class="section" data-section-no="10" id="source">
+<div class="section-header"><span class="section-tag">10</span>
+<h2>この記事の資料</h2>
+</div>
+<div class="section-body">
+<div class="source-card">
+<p>本記事は、Marshall et al. SCCM Clinical Practice Guidelines on Adult End-of-Life Care in the ICU（Critical Care Medicine、2025年12月号；53:e2734-e2746、DOI: 10.1097/CCM.0000000000006856）のみに基づいている。</p>
+</div>
+</div>
+</section>
+<section class="section rose" data-section-no="11" id="bonus">
+<div class="section-header"><span class="section-tag">11</span>
+<h2>おまけ</h2>
+</div>
+<div class="section-body">
+<div class="voice-card">
+<h3>集中治療医の視点</h3>
+<p>高度に構造化されたガイドラインですね。まだまだ再現性があるエビデンスは不十分な状況ですが、医療提供者にとって何をすべきか、研究者は何に取り組むべきかが、わかりやすく記述されています。</p>
+<p>このようなことを各施設において多職種で取り組むことは、成果物として「仕組みができる」というだけでなく、そのプロセスで生じるよい「組織文化」「組織風土」を獲得することに繋がります。</p>
+<p>各施設で実施されている取り組みやツールがすぐに共有できるようになるといいなぁと思っています。</p>
+</div>
+</div>
+</section>
+<div aria-hidden="true" class="article-end-space"></div>
+
+      </article>
+    </div>
+  </main>
+  <script>
+(() => {
+  const progress = document.querySelector('.scroll-progress');
+  const links = [...document.querySelectorAll('.toc-link')];
+  const sections = links.map(link => document.querySelector(link.getAttribute('href'))).filter(Boolean);
+
+  const updateProgress = () => {
+    const doc = document.documentElement;
+    const scrollTop = window.scrollY || doc.scrollTop;
+    const scrollHeight = doc.scrollHeight - window.innerHeight;
+    const width = scrollHeight > 0 ? (scrollTop / scrollHeight) * 100 : 0;
+    progress.style.width = `${width}%`;
+  };
+
+  const observer = 'IntersectionObserver' in window ? new IntersectionObserver(entries => {
+    const visible = entries
+      .filter(entry => entry.isIntersecting)
+      .sort((a, b) => Math.abs(a.boundingClientRect.top) - Math.abs(b.boundingClientRect.top))[0];
+    if (!visible) return;
+    links.forEach(link => link.classList.toggle('is-active', link.getAttribute('href') === `#${visible.target.id}`));
+  }, { rootMargin: '-20% 0px -65% 0px', threshold: [0, .1, .25] }) : null;
+
+  sections.forEach(section => observer && observer.observe(section));
+  updateProgress();
+  window.addEventListener('scroll', updateProgress, { passive: true });
+  window.addEventListener('resize', updateProgress);
+})();
+</script>
+</body>
+</html>
